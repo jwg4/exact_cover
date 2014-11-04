@@ -1,0 +1,11 @@
+build
+*.[oa]
+*.exe
+*.pyc
+*.html
+*~
+.*~
+.*sw[op]
+foo*
+
+
