@@ -48,7 +48,7 @@ Suppose X = {0,1,2,3,4}, and suppose S = {A,B,C,D}, where
 
     A = {0, 3}
     B = {0, 1, 2}
-    C = {2, 3}
+    C = {1, 2}
     D = {4}.
 
 Here we can just eyeball these sets and conclude that S* = {A,C,D} forms an
