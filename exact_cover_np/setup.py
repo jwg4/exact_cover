@@ -2,8 +2,8 @@ from distutils.core import setup, Extension
 import numpy
 
 # define the extension module
-deps_dir = "/home/moy/build/sudoku/src/"
-src_dir = "/home/moy/build/sudoku/exact_cover_np/"
+deps_dir = "../src/"
+src_dir = "./"
 exact_cover_np = Extension('exact_cover_np',
                            sources=[src_dir + 'exact_cover_np.c',
                                     deps_dir + 'dlx.c',

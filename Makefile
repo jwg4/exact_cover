@@ -93,6 +93,7 @@ $(TEST_DIR)/test_quad_linked_list: $(OBJ_DIR)/quad_linked_list.o $(TEST_DIR)/tes
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 $(OBJ_DIR)/quad_linked_list.o: $(SRC_DIR)/quad_linked_list.c
+	mkdir -pv $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
 run_test_quad_linked_list: $(TEST_DIR)/test_quad_linked_list
@@ -104,6 +105,7 @@ $(TEST_DIR)/test_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 $(OBJ_DIR)/sparse_matrix.o: $(SRC_DIR)/sparse_matrix.c
+	mkdir -pv $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
 run_test_sparse_matrix: $(TEST_DIR)/test_sparse_matrix
