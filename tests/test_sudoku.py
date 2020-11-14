@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import logging
 import sudoku
 import io
 import numpy as np
@@ -12,6 +13,8 @@ def check(con_matrix):
             if con_matrix[i][j] == 1:
                 sum += 2**j
     return sum
+
+logging.basicConfig(level=logging.INFO)
 
 sudo = sudoku.Sudoku(4)
 sudo.read(io.StringIO("1,0,0,0\n0,0,3,0\n0,2,0,0\n0,0,0,4\n"), False)    # 4 in bottom-right essential (tests overflow)
@@ -71,6 +74,6 @@ assert(sol is None)
 # sudo = sudoku.Sudoku(3)
 # sudo.read(io.StringIO("1,2\n3,4\n"), False)
 
-print("Passed all tests!")
+logging.info("Passed all tests!")
 
 

@@ -21,6 +21,7 @@
 # 
 #---------------------------------------------------------------------
 
+import logging
 import math
 import numpy as np
 import pandas as pd
@@ -138,7 +139,9 @@ class Sudoku:
         #     translate again into a sparse matrix in get_exact_cover.  This duplicates
         #     some work, but it allows get_exact_cover to be a more generally applicable
         #     function.
+        logging.debug(self._constraint_matrix)
         cover = ec.get_exact_cover(self._constraint_matrix)
+        logging.debug(cover)
         solution = None
         if cover != [] and ((cover[0] != 0) or (cover[1] != 0)):  # an array of 0's implies no solution.
             solution = Sudoku(self._size)
