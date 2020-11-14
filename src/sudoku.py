@@ -143,7 +143,7 @@ class Sudoku:
         cover = ec.get_exact_cover(self._constraint_matrix)
         logging.debug(cover)
         solution = None
-        if cover != [] and ((cover[0] != 0) or (cover[1] != 0)):  # an array of 0's implies no solution.
+        if cover.size > 0 and ((cover[0] != 0) or (cover[1] != 0)):  # an array of 0's implies no solution.
             solution = Sudoku(self._size)
             solution._sudo = self._translate_exact_cover_into_sudoku(cover)
         return solution
