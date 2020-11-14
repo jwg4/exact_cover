@@ -128,7 +128,7 @@ exact_cover:
 	cd $(PY_DIR) ; python setup.py build_ext ; cd -
 
 install_exact_cover: exact_cover
-	cd $(PY_DIR) ; python setup.py install --user ; cd -
+	cd $(PY_DIR) ; python setup.py install ; cd -
 
 run_test_sudoku: install_exact_cover
 	PYTHONPATH=$(SRC_DIR) python $(TEST_DIR)/test_sudoku.py
