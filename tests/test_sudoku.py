@@ -6,7 +6,7 @@ import numpy as np
 import sys
 
 def check(con_matrix):
-    sum = 0L
+    sum = 0
     for i in range(len(con_matrix)):
         for j in range(len(con_matrix[i])):
             if con_matrix[i][j] == 1:
@@ -71,6 +71,6 @@ assert(sol is None)
 # sudo = sudoku.Sudoku(3)
 # sudo.read(StringIO.StringIO("1,2\n3,4\n"), False)
 
-print "Passed all tests!"
+print("Passed all tests!")
 
 

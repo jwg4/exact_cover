@@ -65,7 +65,7 @@ class Sudoku:
         self._constraint_matrix = self._translate_into_constraint_matrix()
         self._calculate_hardness()
         if want_rating:
-            print "Rating: " + self._hardness
+            print("Rating: " + self._hardness)
 
     def _calculate_hardness(self):
         # Roughly, the fewer choices the player has, the easier the puzzle.
