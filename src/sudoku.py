@@ -129,7 +129,7 @@ class Sudoku:
 
     def _translate_exact_cover_into_sudoku(self, cover):
         cover.sort()
-        return np.array(map(lambda x: (x % self._size) + 1, cover)).reshape(self._size, self._size)
+        return np.fromiter(map(lambda x: (x % self._size) + 1, cover), int).reshape(self._size, self._size)
 
     def solve(self):
         # NOTES:
