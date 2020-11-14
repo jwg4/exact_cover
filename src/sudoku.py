@@ -101,7 +101,7 @@ class Sudoku:
         cell_con_col = (0*self._size**2) + (row * self._size) + col
         row_con_col  = (1*self._size**2) + (row * self._size) + entry - 1
         col_con_col  = (2*self._size**2) + (col * self._size) + entry - 1
-        box_con_col  = (3*self._size**2) + self._size*(self._base*(row/self._base) + (col/self._base)) + entry - 1
+        box_con_col  = (3*self._size**2) + self._size*(self._base*(row//self._base) + (col//self._base)) + entry - 1
         # print row, col, entry, ":", con_row, cell_con_col, row_con_col, col_con_col, box_con_col
         constraints[con_row][cell_con_col] = 1
         constraints[con_row][row_con_col]  = 1
