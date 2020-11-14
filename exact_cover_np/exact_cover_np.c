@@ -69,13 +69,52 @@ static PyMethodDef ExactCoverMethods[] =
      {NULL, NULL, 0, NULL}
 };
 
+struct module_state {
+	PyObject *error;
+};
+
+static int exact_cover_np_traverse(PyObject *m, visitproc visit, void *arg) {
+	Py_VISIT(((struct module_state*)PyModule_GetState(m))->error);
+	return 0;
+}
+
+static int exact_cover_np_clear(PyObject *m) {
+	Py_CLEAR(((struct module_state*)PyModule_GetState(m))->error);
+	return 0;
+}
+
+static struct PyModuleDef moduledef = {
+	PyModuleDef_HEAD_INIT,
+	"exact_cover_np",
+	NULL,
+	sizeof(struct module_state),
+	ExactCoverMethods,
+	NULL,
+	exact_cover_np_traverse,
+	exact_cover_np_clear,
+	NULL
+};
+
+
 /* module initialization */
 PyMODINIT_FUNC
-initexact_cover_np(void)
+PyInit_exact_cover_np(void)
 {
-     (void) Py_InitModule("exact_cover_np", ExactCoverMethods);
+     PyObject *module = PyModule_Create(&moduledef);
+
+     if (module == NULL)
+	 return NULL;
+
+     struct module_state *st = (struct module_state*)PyModule_GetState(module);
+     st->error = PyErr_NewException("exact_cover_np.Error", NULL, NULL);
+     if (st->error == NULL) {
+	     Py_DECREF(module);
+	     return NULL;
+     }
      /* IMPORTANT: this must be called */
      import_array();
+
+     return module;
 }
 
 
