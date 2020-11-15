@@ -1,6 +1,10 @@
 Finding Exact Covers in NumPy (and Solving Sudoku!)
 ===================================================
 
+## Python 3 port
+This is a port of Moy's work to Python 3. It will no longer work with Python 2. The changes to the Python code might be compatible but the changes to the C++ code (Python module initialization) are not.
+
+You can probably get this working on Python 3 if you're happy to build it yourself, but the full packaging is a work in progress.
 
 Summary
 -------
