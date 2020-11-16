@@ -12,6 +12,13 @@ def test_exact_cover():
     np.testing.assert_array_equal(actual, expected)
 
 
+def test_exact_cover_no_dtype():
+    data = np.array([[1, 0, 0], [0, 1, 0], [0, 1, 1], [0, 0, 1]])
+    expected = np.array([0, 1, 3])
+    actual = get_exact_cover(data)
+    np.testing.assert_array_equal(actual, expected)
+
+
 def test_exact_cover_no_solution():
     data = np.array([[1, 0, 0], [0, 1, 0], [0, 1, 0], [0, 0, 0]], dtype=np.int32)
     expected = np.array([])
