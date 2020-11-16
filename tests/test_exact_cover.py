@@ -12,6 +12,14 @@ def test_exact_cover():
     np.testing.assert_array_equal(actual, expected)
 
 
+def test_exact_cover_no_solution():
+    data = np.array([[1, 0, 0], [0, 1, 0], [0, 1, 0], [0, 0, 0]], dtype=np.int32)
+    expected = np.array([])
+    actual = get_exact_cover(data)
+    np.testing.assert_array_equal(actual, expected)
+
+
+
 @mark.skip("Don't worry about this edge case yet")
 def test_simple_exact_cover():
     """
