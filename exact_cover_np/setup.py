@@ -19,6 +19,7 @@ setup(
     version = "0.1",
     license = 'GPL v2 or above',
     author = 'Moy Easwaran',
+    modules = [sudoku_solver],
     ext_modules = [exact_cover_np]
 )
 
