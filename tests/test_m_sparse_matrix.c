@@ -2,15 +2,13 @@
 #include "../src/sparse_matrix.h"
 
 
-/* Tests are functions that return void, and take a single void*
- * parameter.  We'll get to what that parameter is later. */
 static MunitResult
-test_get_simple_result(const MunitParameter params[], void* data) {
+test_make_simple_matrix(const MunitParameter params[], void* data) {
   (void) params;
   (void) data;
 
   int row_count = 1;
-  int col_count = 1;
+  int col_count = 3;
   int array[] = {1, 1, 1};
 
   list l = create_sparse(row_count, col_count, array);
@@ -19,18 +17,102 @@ test_get_simple_result(const MunitParameter params[], void* data) {
   return MUNIT_OK;
 }
 
+static MunitResult
+test_check_details_of_simple_matrix(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
+
+  int row_count = 1;
+  int col_count = 3;
+  int array[] = {1, 1, 1};
+
+  list l = create_sparse(row_count, col_count, array);
+
+  munit_assert_ptr_not_equal(get_right(l), l);
+  munit_assert_ptr_not_equal(get_right(get_right(l)), l);
+  munit_assert_ptr_not_equal(get_right(get_right(get_right(l))), l);
+  munit_assert_ptr_equal(get_right(get_right(get_right(get_right(l)))), l);
+
+  for (list col_head = get_right(l); col_head != l; col_head = get_right(col_head)){
+	  munit_assert_ptr_not_equal(get_down(col_head), col_head);
+	  munit_assert_ptr_equal(get_down(get_down(col_head)), col_head);
+
+	  munit_assert_int(col_head->data->data, ==, 1);
+	  //munit_assert_int(get_down(col_head)->data->data, ==, 1);
+
+  }
+
+  return MUNIT_OK;
+}
+
+static MunitResult
+test_choose_column_with_min_data(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
+
+  int row_count = 1;
+  int col_count = 3;
+  int array[] = {1, 1, 1};
+
+  list l = create_sparse(row_count, col_count, array);
+
+  list min_col = choose_column_with_min_data(l, 1);
+  munit_assert_not_null(min_col);
+  // We don't know which column we get but we know it's data value.
+  munit_assert_int(min_col->data->data, ==, 1);
+
+  return MUNIT_OK;
+}
+
+static MunitResult
+test_choose_column_with_min_data_2(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
+
+  int row_count = 1;
+  int col_count = 3;
+  int array[] = {0, 1, 1};
+
+  list l = create_sparse(row_count, col_count, array);
+
+  list min_col = choose_column_with_min_data(l, 1);
+  munit_assert_not_null(min_col);
+  munit_assert_ptr_equal(min_col, get_right(l));
+  munit_assert_int(min_col->data->data, ==, 0);
+
+  return MUNIT_OK;
+}
+
+static MunitResult
+test_choose_column_with_min_data_empty_table(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
+
+  int row_count = 1;
+  int col_count = 0;
+  int array[] = {};
+
+  list l = create_sparse(row_count, col_count, array);
+
+  list min_col = choose_column_with_min_data(l, 1);
+  munit_assert_not_null(min_col);
+  munit_assert_ptr_equal(min_col, l);
+  munit_assert_int(min_col->data->data, ==, 0);
+
+  return MUNIT_OK;
+}
+
+
+
 
 /* Creating a test suite is pretty simple.  First, you'll need an
  * array of tests: */
 static MunitTest test_suite_tests[] = {
-  {
-    (char*) "Very simple exact cover problem",
-    test_get_simple_result,
-    NULL,
-    NULL,
-    MUNIT_TEST_OPTION_NONE,
-    NULL
-  },
+  { (char*) "simple_matrix_gets_created", test_make_simple_matrix, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "simple_matrix_makes_sense", test_check_details_of_simple_matrix, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "column_with_min_data", test_choose_column_with_min_data, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "column_with_min_data_2", test_choose_column_with_min_data_2, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "column_with_min_data_empty_table", test_choose_column_with_min_data_empty_table, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
