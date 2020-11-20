@@ -28,7 +28,6 @@ def test_exact_cover_no_solution():
 
 
 
-@mark.skip("Don't worry about this edge case yet")
 def test_simple_exact_cover():
     """
         ArthurKantor's 1st test case
