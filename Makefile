@@ -50,9 +50,7 @@ c_tests: note \
 
 tests: c_tests py_tests
 
-py_tests: note_install_exact_cover install_exact_cover \
-	note_sudoku run_test_sudoku \
-	test_exact_cover
+py_tests: test_exact_cover
 
 note:
 	@echo "**********************************************************************"
@@ -79,11 +77,6 @@ note_dlx:
 note_install_exact_cover:
 	@echo "**********************************************************************"
 	@echo "* Build and install NumPy exact cover module.                        *"
-	@echo "**********************************************************************"
-
-note_sudoku:
-	@echo "**********************************************************************"
-	@echo "* Test sudoku.py.                                                    *"
 	@echo "**********************************************************************"
 
 #-----------------------------------------------------------------------------------------
@@ -152,9 +145,6 @@ install_exact_cover: exact_cover
 
 test_exact_cover: install_exact_cover
 	pytest
-
-run_test_sudoku: install_exact_cover
-	PYTHONPATH=$(SRC_DIR) python $(TEST_DIR)/test_sudoku.py
 
 #-----------------------------------------------------------------------------------------
 
