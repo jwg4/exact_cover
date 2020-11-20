@@ -111,9 +111,7 @@ test_choose_column_with_min_data_empty_table(const MunitParameter params[], void
   list l = create_sparse(row_count, col_count, array);
 
   list min_col = choose_column_with_min_data(l, 1);
-  munit_assert_not_null(min_col);
-  munit_assert_ptr_equal(min_col, l);
-  munit_assert_int(min_col->data->data, ==, 0);
+  munit_assert_null(min_col);
 
   return MUNIT_OK;
 }
