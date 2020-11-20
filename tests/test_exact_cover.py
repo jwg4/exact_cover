@@ -39,7 +39,6 @@ def test_simple_exact_cover():
     np.testing.assert_array_equal(actual, expected)
 
 
-@mark.skip("Don't kill the test process with a segfault")
 def test_single_row_exact_cover():
     """
         ArthurKantor's 2nd test case
