@@ -3,7 +3,7 @@
 
 
 static MunitResult
-test_get_simple_result(const MunitParameter params[], void* data) {
+test_get_one_row_result(const MunitParameter params[], void* data) {
   (void) params;
   (void) data;
 
@@ -91,7 +91,7 @@ static MunitTest test_suite_tests[] = {
 /* Now we'll actually declare the test suite.  You could do this in
  * the main function, or on the heap, or whatever you want. */
 static const MunitSuite test_suite = {
-  (char*) "my tests",
+  (char*) "test_search_for_cover/",
   test_suite_tests,
   NULL,
   1,
