@@ -76,7 +76,7 @@ list choose_column_with_min_data(list sparse_matrix, int max) {
     int min = max;
     list col = sparse_matrix, min_col = NULL;
     while ((col = get_right(col)) != sparse_matrix) {
-        if (get_data(col)->data < min) {
+        if (get_data(col)->data < min || (get_data(col)->data == min && min_col == NULL)) {
             min_col = col;
             min = get_data(col)->data;
         }
