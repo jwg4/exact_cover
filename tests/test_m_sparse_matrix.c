@@ -46,6 +46,22 @@ test_check_details_of_simple_matrix(const MunitParameter params[], void* data) {
 }
 
 static MunitResult
+test_check_details_empty_table(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
+
+  int row_count = 1;
+  int col_count = 0;
+  int array[] = {};
+
+  list l = create_sparse(row_count, col_count, array);
+  munit_assert_ptr_equal(l, get_right(l));
+
+  return MUNIT_OK;
+}
+
+
+static MunitResult
 test_choose_column_with_min_data(const MunitParameter params[], void* data) {
   (void) params;
   (void) data;
@@ -105,11 +121,10 @@ test_choose_column_with_min_data_empty_table(const MunitParameter params[], void
 
 
 
-/* Creating a test suite is pretty simple.  First, you'll need an
- * array of tests: */
 static MunitTest test_suite_tests[] = {
   { (char*) "simple_matrix_gets_created", test_make_simple_matrix, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { (char*) "simple_matrix_makes_sense", test_check_details_of_simple_matrix, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "empty_matrix_makes_sense", test_check_details_empty_table, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { (char*) "column_with_min_data", test_choose_column_with_min_data, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { (char*) "column_with_min_data_2", test_choose_column_with_min_data_2, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { (char*) "column_with_min_data_empty_table", test_choose_column_with_min_data_empty_table, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
