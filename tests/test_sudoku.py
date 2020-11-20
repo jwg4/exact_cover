@@ -76,3 +76,40 @@ def test_solving_impossible_sudoku():
     sol = sudo.solve()
     assert(sol is None)
 
+
+def test_solving_easy_sudoku_from_csv():
+    sudo = sudoku.Sudoku(9)
+    with open("examples/insight.csv", "r") as f:
+        sudo.read(f, True)
+    sol = sudo.solve()
+    assert(sol._sudo.tolist() == [
+        [1,3,5,2,9,7,8,6,4],
+        [9,8,2,4,1,6,7,5,3],
+        [7,6,4,3,8,5,1,9,2],
+        [2,1,8,7,3,9,6,4,5],
+        [5,9,7,8,6,4,2,3,1],
+        [6,4,3,1,5,2,9,7,8],
+        [4,2,6,5,7,1,3,8,9],
+        [3,5,9,6,2,8,4,1,7],
+        [8,7,1,9,4,3,5,2,6]
+    ])
+    assert(sudo._hardness == "Easy")
+
+
+def test_solving_very_hard_sudoku_from_csv():
+    sudo = sudoku.Sudoku(9)
+    with open("examples/very-hard.csv", "r") as f:
+        sudo.read(f, True)
+    sol = sudo.solve()
+    assert(sol._sudo.tolist() == [
+        [8,1,9,2,7,5,4,3,6],
+        [7,4,3,9,8,6,5,2,1],
+        [6,2,5,1,3,4,7,8,9],
+        [9,5,2,6,1,8,3,7,4],
+        [3,8,1,4,2,7,6,9,5],
+        [4,6,7,3,5,9,2,1,8],
+        [5,7,4,8,9,2,1,6,3],
+        [1,9,6,7,4,3,8,5,2],
+        [2,3,8,5,6,1,9,4,7]
+    ])
+    assert(sudo._hardness == "Very hard")
