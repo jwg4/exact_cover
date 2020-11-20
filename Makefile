@@ -52,7 +52,8 @@ tests: c_tests py_tests
 
 py_tests: note_install_exact_cover install_exact_cover \
 	note_sudoku run_test_sudoku \
-	note_examples run_examples
+	note_examples run_examples \
+	test_exact_cover
 
 note:
 	@echo "**********************************************************************"
@@ -155,6 +156,9 @@ exact_cover:
 install_exact_cover: exact_cover
 	cd $(PY_DIR) ; python setup.py install ; cd -
 
+test_exact_cover: install_exact_cover
+	pytest
+
 run_test_sudoku: install_exact_cover
 	PYTHONPATH=$(SRC_DIR) python $(TEST_DIR)/test_sudoku.py
 
@@ -162,12 +166,12 @@ run_examples:
 	@echo Example 1, input:
 	@cat $(EXAMPLES_DIR)/insight.csv
 	@echo Output:
-	@python $(SRC_DIR)/sudoku.py -r < $(EXAMPLES_DIR)/insight.csv
+	@python $(PY_DIR)/sudoku_solver/sudoku.py -r < $(EXAMPLES_DIR)/insight.csv
 	@echo
 	@echo Example 2, input:
 	@cat $(EXAMPLES_DIR)/very-hard.csv
 	@echo Output:
-	@python $(SRC_DIR)/sudoku.py -r < $(EXAMPLES_DIR)/very-hard.csv
+	@python $(PY_DIR)/sudoku_solver/sudoku.py -r < $(EXAMPLES_DIR)/very-hard.csv
 
 #-----------------------------------------------------------------------------------------
 
