@@ -4,6 +4,7 @@
 
 #include "debug.h"
 #include "dlx.h"
+#include "munit.h"
 
 #define VSIZE 729
 #define HSIZE 324
@@ -28,8 +29,8 @@ void print_array(int rows, int columns, int array[rows*columns]) {
     }
 }
 
-
-int main() {
+static MunitResult
+test_simple_example(const MunitParameter params[], void* data) {
     int matrix[6*7] =  // Knuth's example
             {
               0, 0, 1, 0, 1, 1, 0,
@@ -42,13 +43,32 @@ int main() {
 
     int *solution = malloc(VSIZE * sizeof(*solution));
     int result = dlx_get_exact_cover(6,7,matrix,solution);
-    // list sparse_matrix = create_sparse(6, 7, matrix);
-    // int result = search(sparse_matrix, 0, 6, solution);
-    assert(result == 3);
-    assert(solution[0] == 3);
-    assert(solution[1] == 0);
-    assert(solution[2] == 4);
+    munit_assert(result == 3);
+    munit_assert(solution[0] == 3);
+    munit_assert(solution[1] == 0);
+    munit_assert(solution[2] == 4);
 
+    return MUNIT_OK;
+}
+
+
+static MunitTest test_suite_tests[] = {
+  { (char*) "example_from_Knuth_paper", test_simple_example, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
+};
+
+
+static const MunitSuite test_suite = {
+  (char*) "legacy_dlx_tests",
+  test_suite_tests,
+  NULL,
+  1,
+  MUNIT_SUITE_OPTION_NONE
+};
+
+int main(int argc, char* argv[MUNIT_ARRAY_PARAM(argc + 1)]) {
+
+    int *solution = malloc(VSIZE * sizeof(*solution));
     int matrix2[6*7] =
             {
               1, 0, 1, 1, 1, 1, 1,
@@ -58,7 +78,7 @@ int main() {
               0, 1, 0, 0, 0, 0, 1,
               0, 0, 0, 1, 1, 0, 1
             };
-    result = dlx_get_exact_cover(6,7,matrix2,solution);
+    int result = dlx_get_exact_cover(6,7,matrix2,solution);
     // sparse_matrix = create_sparse(6, 7, matrix2);
     // result = search(sparse_matrix, 0, 6, solution);
     assert(result == 0);
@@ -110,6 +130,9 @@ int main() {
 
     DEBUG_PRINT(0, "Passed all tests!\n");
     free(solution);
+
+    return munit_suite_main(&test_suite, (void*) "µnit", argc, argv);
+
     return 0;
 }
 

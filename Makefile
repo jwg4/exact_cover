@@ -109,8 +109,12 @@ $(TEST_DIR)/test_m_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o
 run_test_m_dlx: $(TEST_DIR)/test_m_dlx
 	$^
 
+run_munit_test_dlx: $(TEST_DIR)/test_dlx
+	$^
+
 run_munit: run_test_m_sparse_matrix \
-	run_test_m_dlx
+	run_test_m_dlx \
+	run_munit_test_dlx
 
 #-----------------------------------------------------------------------------------------
 
@@ -126,7 +130,7 @@ run_test_sparse_matrix: $(TEST_DIR)/test_sparse_matrix
 
 #-----------------------------------------------------------------------------------------
 
-$(TEST_DIR)/test_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(TEST_DIR)/test_dlx.c
+$(TEST_DIR)/test_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_dlx.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 $(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c
