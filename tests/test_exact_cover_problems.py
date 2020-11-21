@@ -7,17 +7,17 @@ from hypothesis.strategies import composite, permutations
 from exact_cover_np import get_exact_cover
 
 
-@given(
-    integers(min_value=0, max_value=10).flatmap(
-        lambda n: lists(
-            lists(booleans(), min_size=n, max_size=n), min_size=1, max_size=30
-        )
-    )
-)
+@composite
+def exact_cover_problem(draw):
+    width = draw(integers(min_value=1, max_value=15))
+    data = draw(lists(lists(booleans(), min_size=width, max_size=width), min_size=1, max_size=30))
+    return np.array(data, dtype=np.int32)
+
+
+@given(exact_cover_problem())
 def test_exact_cover(array_data):
     rowcount = len(array_data)
-    data = np.array(array_data, dtype=np.int32)
-    actual = get_exact_cover(data)
+    actual = get_exact_cover(array_data)
     assert actual.size <= rowcount
     assert all(actual < rowcount)
 
@@ -37,8 +37,7 @@ def array_with_exact_cover(draw):
 @given(array_with_exact_cover())
 def test_exact_cover_with_solution(array_data):
     rowcount = len(array_data)
-    data = np.array(array_data, dtype=np.int32)
-    actual = get_exact_cover(data)
+    actual = get_exact_cover(array_data)
     assert actual.size > 0
     assert actual.size <= rowcount
     assert all(actual < rowcount)
