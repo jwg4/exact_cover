@@ -97,8 +97,6 @@ test_correct_zeroing_out_2(const MunitParameter params[], void* data) {
   return MUNIT_OK;
 }
 
-/* Creating a test suite is pretty simple.  First, you'll need an
- * array of tests: */
 static MunitTest test_suite_tests[] = {
   { (char*) "one_row_problem", test_get_one_row_result, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { (char*) "two_row_problem", test_get_two_row_result, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
@@ -109,8 +107,6 @@ static MunitTest test_suite_tests[] = {
 };
 
 
-/* Now we'll actually declare the test suite.  You could do this in
- * the main function, or on the heap, or whatever you want. */
 static const MunitSuite test_suite = {
   (char*) "test_search_for_cover/",
   test_suite_tests,
