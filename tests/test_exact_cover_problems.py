@@ -41,3 +41,5 @@ def test_exact_cover_with_solution(array_data):
     assert actual.size > 0
     assert actual.size <= rowcount
     assert all(actual < rowcount)
+    check_cover = array_data[actual, :].sum(axis=0)
+    assert all(check_cover == 1)
