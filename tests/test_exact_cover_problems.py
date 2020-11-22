@@ -56,15 +56,37 @@ def test_exact_cover_with_solution(array_data):
 
 @composite
 def exact_cover_problem_with_empty_col(draw):
-    width = draw(integers(min_value=1, max_value=15))
-    data = draw(lists(lists(booleans(), min_size=width, max_size=width), min_size=1, max_size=30))
-    array = np.array(data, dtype=np.int32)
+    array = draw(exact_cover_problem())
+    height, width = array.shape
     col = draw(integers(min_value=0, max_value=width-1))
     array[:, col] = 0
     return array
 
 
-@given(exact_cover_problem_with_empty_col())
+@composite
+def exact_cover_problem_with_abc(draw):
+    """
+        A simple way of making cases without solution.
+        col_a and col_b are never covered by the same row.
+        col_c is only covered by rows which cover col_a OR col_b.
+        Thus, to cover col_a and col_b, we would have to cover col_c twice.
+
+        If col_a == col_b, col_b == col_c or col_a == col_c, 
+        we get a grid with an empty column. So we don't have to 
+        filter out those cases, since we just want a problem
+        without a solution.
+    """
+    array = draw(exact_cover_problem())
+    height, width = array.shape
+    col_a = draw(integers(min_value=0, max_value=width-1))
+    col_b = draw(integers(min_value=0, max_value=width-1))
+    col_c = draw(integers(min_value=0, max_value=width-1))
+    array[:, col_a] = array[:, col_a] * (1 - array[:, col_b])
+    array[:, col_c] = array[:, col_a] & array[:, col_b]
+    return array
+
+
+@given(one_of(exact_cover_problem_with_empty_col(), exact_cover_problem_with_abc()))
 def test_exact_cover_without_solution(array_data):
     rowcount = len(array_data)
     actual = get_exact_cover(array_data)
