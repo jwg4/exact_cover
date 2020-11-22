@@ -2,7 +2,7 @@ import numpy as np
 
 from hypothesis import given
 from hypothesis.strategies import integers, lists, booleans
-from hypothesis.strategies import composite, permutations
+from hypothesis.strategies import composite, one_of, permutations
 
 from exact_cover_np import get_exact_cover
 
@@ -34,7 +34,16 @@ def array_with_exact_cover(draw):
     return np.array(shuffled_data, dtype=np.int32)
 
 
-@given(array_with_exact_cover())
+@composite
+def array_with_trivial_solution(draw):
+    array = draw(exact_cover_problem())
+    height, width = array.shape
+    row = draw(integers(min_value=0, max_value=height-1))
+    array[row] = 1
+    return array
+
+
+@given(one_of(array_with_trivial_solution(), array_with_exact_cover()))
 def test_exact_cover_with_solution(array_data):
     rowcount = len(array_data)
     actual = get_exact_cover(array_data)
