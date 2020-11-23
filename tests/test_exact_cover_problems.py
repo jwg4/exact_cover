@@ -1,6 +1,6 @@
 import numpy as np
 
-from hypothesis import given
+from hypothesis import given, example
 from hypothesis.strategies import integers, lists, booleans
 from hypothesis.strategies import composite, one_of, permutations
 
@@ -43,6 +43,8 @@ def array_with_trivial_solution(draw):
     return array
 
 
+@example(np.array([[1, 1, 1]], dtype=np.int32))
+@example(np.array([[1, 0, 0], [0, 1, 1]], dtype=np.int32))
 @given(one_of(array_with_trivial_solution(), array_with_exact_cover()))
 def test_exact_cover_with_solution(array_data):
     rowcount = len(array_data)
