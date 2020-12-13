@@ -15,10 +15,11 @@ exact_cover_np = Extension('exact_cover_np',
 setup(
     name = 'exact_cover_np',
     description = "Use Donald Knuth's Algorithm X to calculate an exact cover of a set.",
-    url = ("https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X"),
-    version = "0.1",
+    url = ("http://github.com/jwg4/exact_cover_np"),
+    version = "0.2",
     license = 'GPL v2 or above',
     author = 'Moy Easwaran',
+    maintainer = 'jwg4',
     packages = ['sudoku_solver'],
     ext_modules = [exact_cover_np]
 )

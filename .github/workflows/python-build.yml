@@ -7,6 +7,7 @@ on:
   push:
     branches: 
       - master
+      - fix_build
 
 jobs:
   build:
@@ -21,7 +22,7 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
+        python -m pip install --upgrade pip wheel setuptools
         pip install -r build_requirements.txt
     - name: Build wheel
       run: |
