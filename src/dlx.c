@@ -50,10 +50,10 @@ int dlx_get_exact_cover(int rows, int cols, int matrix[rows*cols], int *solution
     solution_length = search(sparse_matrix, 0, rows, solution);
     destroy_entire_grid(sparse_matrix);
 
-    do {
-        solution[--rows] = 0;  // Zero out everything at or above position i.  Caller
+    while (rows > solution_length) {
+        solution[--rows] = 0;  // Zero out everything above position i.  Caller
                                // can use this to determine if there is a solution.
-    } while (rows > solution_length);
+    };
 
     return solution_length;
 }

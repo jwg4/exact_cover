@@ -1,4 +1,4 @@
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 import numpy
 
 # define the extension module
@@ -19,6 +19,7 @@ setup(
     version = "0.1",
     license = 'GPL v2 or above',
     author = 'Moy Easwaran',
+    packages = ['sudoku_solver'],
     ext_modules = [exact_cover_np]
 )
 

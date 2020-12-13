@@ -42,13 +42,15 @@ VALG_FLAGS = -q --leak-check=yes
 
 #-----------------------------------------------------------------------------------------
 
-tests: note \
+c_tests: note \
 	note_quad_linked_list run_test_quad_linked_list \
 	note_sparse_matrix run_test_sparse_matrix \
 	note_dlx run_test_dlx \
-	note_install_exact_cover install_exact_cover \
-	note_sudoku run_test_sudoku \
-	note_examples run_examples
+	run_munit
+
+tests: c_tests py_tests
+
+py_tests: test_exact_cover
 
 note:
 	@echo "**********************************************************************"
@@ -77,16 +79,6 @@ note_install_exact_cover:
 	@echo "* Build and install NumPy exact cover module.                        *"
 	@echo "**********************************************************************"
 
-note_sudoku:
-	@echo "**********************************************************************"
-	@echo "* Test sudoku.py.                                                    *"
-	@echo "**********************************************************************"
-
-note_examples:
-	@echo "**********************************************************************"
-	@echo "* Run examples (including Insight example).                          *"
-	@echo "**********************************************************************"
-
 #-----------------------------------------------------------------------------------------
 
 $(TEST_DIR)/test_quad_linked_list: $(OBJ_DIR)/quad_linked_list.o $(TEST_DIR)/test_quad_linked_list.c
@@ -98,6 +90,31 @@ $(OBJ_DIR)/quad_linked_list.o: $(SRC_DIR)/quad_linked_list.c
 
 run_test_quad_linked_list: $(TEST_DIR)/test_quad_linked_list
 	$(VALG) $(VALG_FLAGS) $^
+
+#-----------------------------------------------------------------------------------------
+
+$(OBJ_DIR)/munit.o: $(TEST_DIR)/munit.c
+	mkdir -pv $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
+
+$(TEST_DIR)/test_m_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_m_sparse_matrix.c
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
+
+run_test_m_sparse_matrix: $(TEST_DIR)/test_m_sparse_matrix
+	$^
+
+$(TEST_DIR)/test_m_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_m_dlx.c
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
+
+run_test_m_dlx: $(TEST_DIR)/test_m_dlx
+	$^
+
+run_munit_test_dlx: $(TEST_DIR)/test_dlx
+	$^
+
+run_munit: run_test_m_sparse_matrix \
+	run_test_m_dlx \
+	run_munit_test_dlx
 
 #-----------------------------------------------------------------------------------------
 
@@ -113,7 +130,7 @@ run_test_sparse_matrix: $(TEST_DIR)/test_sparse_matrix
 
 #-----------------------------------------------------------------------------------------
 
-$(TEST_DIR)/test_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(TEST_DIR)/test_dlx.c
+$(TEST_DIR)/test_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_dlx.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 $(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c
@@ -130,19 +147,8 @@ exact_cover:
 install_exact_cover: exact_cover
 	cd $(PY_DIR) ; python setup.py install ; cd -
 
-run_test_sudoku: install_exact_cover
-	PYTHONPATH=$(SRC_DIR) python $(TEST_DIR)/test_sudoku.py
-
-run_examples:
-	@echo Example 1, input:
-	@cat $(EXAMPLES_DIR)/insight.csv
-	@echo Output:
-	@python $(SRC_DIR)/sudoku.py -r < $(EXAMPLES_DIR)/insight.csv
-	@echo
-	@echo Example 2, input:
-	@cat $(EXAMPLES_DIR)/very-hard.csv
-	@echo Output:
-	@python $(SRC_DIR)/sudoku.py -r < $(EXAMPLES_DIR)/very-hard.csv
+test_exact_cover: install_exact_cover
+	pytest
 
 #-----------------------------------------------------------------------------------------
 
