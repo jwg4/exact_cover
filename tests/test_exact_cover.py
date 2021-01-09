@@ -2,7 +2,7 @@ import numpy as np
 
 from pytest import mark
 
-from exact_cover_np import get_exact_cover
+from exact_cover import get_exact_cover
 from .polyomino_data import polyomino_problem
 
 

@@ -4,7 +4,7 @@ from hypothesis import given, example
 from hypothesis.strategies import integers, lists, booleans
 from hypothesis.strategies import composite, one_of, permutations
 
-from exact_cover_np import get_exact_cover
+from exact_cover import get_exact_cover
 
 
 @composite
