@@ -24,7 +24,6 @@
 import logging
 import math
 import numpy as np
-import pandas as pd
 import sys
 import exact_cover_np as ec
 import getopt

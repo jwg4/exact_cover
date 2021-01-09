@@ -12,7 +12,6 @@ numpy = "^1.19.4"
 [tool.poetry.dev-dependencies]
 hypothesis = "^5.41.3"
 pytest = "^6.1.2"
-pandas = "^1.2.0"
 
 [tool.poetry.build]
 script = "build.py"
