@@ -12,6 +12,7 @@ numpy = "^1.19.4"
 [tool.poetry.dev-dependencies]
 hypothesis = "^5.41.3"
 pytest = "^6.1.2"
+flake8 = "^3.8.4"
 
 [tool.poetry.build]
 script = "build.py"

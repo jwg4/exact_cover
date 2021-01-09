@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 #---------------------------------------------------------------------
 # 
 # Author: Moy Easwaran, 2014-11-03
@@ -20,6 +19,7 @@
 # <https://en.wikipedia.org/wiki/Exact_cover#Sudoku>.
 # 
 #---------------------------------------------------------------------
+# flake8: noqa
 
 import logging
 import math
