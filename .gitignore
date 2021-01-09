@@ -12,3 +12,6 @@ foo*
 .hypothesis/
 poetry.lock
 dist/
+setup.py
+exact_cover.egg-info/
+*.so
