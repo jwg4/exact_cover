@@ -25,7 +25,6 @@
 ROOT_DIR = .
 
 CC = gcc
-VALG = valgrind
 
 SRC_DIR = $(ROOT_DIR)/src
 OBJ_DIR = $(ROOT_DIR)/obj
@@ -37,7 +36,6 @@ PY_DIR = $(ROOT_DIR)/exact_cover_np
 
 CFLAGS = -g -Wall -Wstrict-prototypes -I $(INCLUDES_DIR)
 CFLAGS += -O0 -DDEBUG_LEVEL=0
-VALG_FLAGS = -q --leak-check=yes
 
 
 #-----------------------------------------------------------------------------------------
@@ -89,7 +87,7 @@ $(OBJ_DIR)/quad_linked_list.o: $(SRC_DIR)/quad_linked_list.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
 run_test_quad_linked_list: $(TEST_DIR)/test_quad_linked_list
-	$(VALG) $(VALG_FLAGS) $^
+	$^
 
 #-----------------------------------------------------------------------------------------
 
@@ -126,7 +124,7 @@ $(OBJ_DIR)/sparse_matrix.o: $(SRC_DIR)/sparse_matrix.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
 run_test_sparse_matrix: $(TEST_DIR)/test_sparse_matrix
-	$(VALG) $(VALG_FLAGS) $^
+	$^
 
 #-----------------------------------------------------------------------------------------
 
@@ -137,7 +135,7 @@ $(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
 run_test_dlx: $(TEST_DIR)/test_dlx
-	$(VALG) $(VALG_FLAGS) $^
+	$^
 
 #-----------------------------------------------------------------------------------------
 
