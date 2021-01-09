@@ -2,12 +2,11 @@ name: Run Python tests
 on: pull_request
 
 jobs:
-  ci:
+  testing:
     strategy:
       fail-fast: false
       matrix:
         python-version: [3.6, 3.7, 3.8]
-        poetry-version: [1.0]
         os: [ubuntu-18.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -18,6 +17,6 @@ jobs:
       - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
         with:
-          poetry-version: ${{ matrix.poetry-version }}
+          poetry-version: 1.1.4
       - name: Test package
         run: poetry run pytest
