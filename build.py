@@ -3,8 +3,8 @@ from setuptools import Extension
 import numpy
 
 # define the extension module
-deps_dir = "../src/"
-src_dir = "./"
+deps_dir = "src/"
+src_dir = "exact_cover/"
 exact_cover = Extension('exact_cover',
                            sources=[src_dir + 'exact_cover_np.c',
                                     deps_dir + 'dlx.c',
