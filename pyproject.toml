@@ -6,12 +6,12 @@ authors = ["Moy Easwaran"]
 license = "GNU General Public License v2.0"
 
 [tool.poetry.dependencies]
-python = "3.6,3.7,3.8"
-numpy = "1.19.4"
+python = "^3.6"
+numpy = "^1.19.4"
 
 [tool.poetry.dev-dependencies]
-hypothesis = "5.41.3"
-pytest = "6.1.2"
+hypothesis = "^5.41.3"
+pytest = "^6.1.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
