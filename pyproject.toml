@@ -13,6 +13,9 @@ numpy = "^1.19.4"
 hypothesis = "^5.41.3"
 pytest = "^6.1.2"
 
+[tool.poetry.build]
+script = "build.py"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
