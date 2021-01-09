@@ -1,6 +1,8 @@
 from setuptools import Extension
 
 import numpy
+import pytest
+
 
 # define the extension module
 deps_dir = "src/"
@@ -18,3 +20,8 @@ def build(setup_kwargs):
             "ext_modules": [exact_cover],
         }
     )
+
+
+def test():
+    pytest.main()
+

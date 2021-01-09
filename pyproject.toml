@@ -16,6 +16,9 @@ pytest = "^6.1.2"
 [tool.poetry.build]
 script = "build.py"
 
+[tool.poetry.scripts]
+test = 'build:test'
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
