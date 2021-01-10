@@ -85,7 +85,7 @@ static int exact_cover_clear(PyObject *m) {
 
 static struct PyModuleDef moduledef = {
 	PyModuleDef_HEAD_INIT,
-	"ext",
+	"exact_cover",
 	NULL,
 	sizeof(struct module_state),
 	ExactCoverMethods,
@@ -98,7 +98,7 @@ static struct PyModuleDef moduledef = {
 
 /* module initialization */
 PyMODINIT_FUNC
-PyInit_ext(void)
+PyInit_exact_cover(void)
 {
      PyObject *module = PyModule_Create(&moduledef);
 

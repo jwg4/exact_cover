@@ -7,7 +7,7 @@ import pytest
 # define the extension module
 src_dir = "src/"
 exact_cover = Extension(
-    'exact_cover.ext',
+    'exact_cover',
     sources=[
         src_dir + 'exact_cover.c',
         src_dir + 'dlx.c',
