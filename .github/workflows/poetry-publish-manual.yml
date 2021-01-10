@@ -1,0 +1,30 @@
+name: Deploy version to pypi
+on:
+  push:
+    branches: 
+      - master
+      - streamline_process
+
+jobs:
+  publish:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.7, 3.8]
+        os: [ubuntu-18.04, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install poetry
+        run: pip install poetry
+      - name: Install requirements
+        run: poetry install
+      - name: Build package
+        run: poetry build -f wheel
+      - name: Test package
+        run: poetry run pytest
+      - name: publish to pypi
+        run: poetry publish -r testpypi -u __token__ -p ${{ secrets.PYPI_TEST_TOKEN }}
