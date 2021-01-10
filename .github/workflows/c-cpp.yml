@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Tests for C code
 
 on:
   push:
