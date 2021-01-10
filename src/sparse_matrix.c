@@ -18,7 +18,7 @@
  */
 
 
-list create_sparse (int row_count, int col_count, int matrix[row_count*col_count]) {
+list create_sparse (int row_count, int col_count, int matrix[]) {
     list sparse_matrix = create_headers_list(col_count);
     if (not_empty(sparse_matrix))
         sparse_matrix = populate_sparse_matrix(sparse_matrix, row_count, col_count, matrix);
@@ -48,7 +48,7 @@ list create_headers_list(int col_count) {
 
 // Assumptions:
 // sparse_matrix is not NULL
-list populate_sparse_matrix(list sparse_matrix, int row_count, int col_count, int matrix[row_count*col_count]) {
+list populate_sparse_matrix(list sparse_matrix, int row_count, int col_count, int matrix[]) {
     int row_num, col_num;
     list col, row_list;
     node_ptr new_node;
