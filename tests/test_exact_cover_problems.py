@@ -4,13 +4,19 @@ from hypothesis import given, example
 from hypothesis.strategies import integers, lists, booleans
 from hypothesis.strategies import composite, one_of, permutations
 
-from exact_cover_np import get_exact_cover
+from exact_cover import get_exact_cover
 
 
 @composite
 def exact_cover_problem(draw):
     width = draw(integers(min_value=1, max_value=15))
-    data = draw(lists(lists(booleans(), min_size=width, max_size=width), min_size=1, max_size=30))
+    data = draw(
+            lists(
+                lists(booleans(), min_size=width, max_size=width),
+                min_size=1,
+                max_size=30
+            )
+        )
     return np.array(data, dtype=np.int32)
 
 
@@ -25,9 +31,20 @@ def test_exact_cover(array_data):
 @composite
 def array_with_exact_cover(draw):
     width = draw(integers(min_value=1, max_value=15))
-    dummy_data = draw(lists(lists(booleans(), min_size=width, max_size=width), min_size=1, max_size=30))
+    dummy_data = draw(
+        lists(
+            lists(booleans(), min_size=width, max_size=width),
+            min_size=1, max_size=30
+        )
+    )
     cover_size = draw(integers(min_value=1, max_value=10))
-    cover = draw(lists(integers(min_value=0, max_value=cover_size - 1), min_size=width, max_size=width))
+    cover = draw(
+        lists(
+            integers(min_value=0, max_value=cover_size - 1),
+            min_size=width,
+            max_size=width
+        )
+    )
     cover_data = [[a == i for a in cover] for i in range(0, cover_size)]
     data = cover_data + dummy_data
     shuffled_data = draw(permutations(data))
@@ -73,8 +90,8 @@ def exact_cover_problem_with_abc(draw):
         col_c is only covered by rows which cover col_a OR col_b.
         Thus, to cover col_a and col_b, we would have to cover col_c twice.
 
-        If col_a == col_b, col_b == col_c or col_a == col_c, 
-        we get a grid with an empty column. So we don't have to 
+        If col_a == col_b, col_b == col_c or col_a == col_c,
+        we get a grid with an empty column. So we don't have to
         filter out those cases, since we just want a problem
         without a solution.
     """
@@ -88,8 +105,10 @@ def exact_cover_problem_with_abc(draw):
     return array
 
 
-@given(one_of(exact_cover_problem_with_empty_col(), exact_cover_problem_with_abc()))
+@given(one_of(
+    exact_cover_problem_with_empty_col(),
+    exact_cover_problem_with_abc()
+))
 def test_exact_cover_without_solution(array_data):
-    rowcount = len(array_data)
     actual = get_exact_cover(array_data)
     assert actual.size == 0

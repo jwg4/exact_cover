@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "exact_cover"
+version = "0.1.0"
+description = "Solve exact cover problems"
+authors = ["Moy Easwaran"]
+license = "GNU General Public License v2.0"
+
+[tool.poetry.dependencies]
+python = "^3.7.1"
+numpy = "^1.19.4"
+
+[tool.poetry.dev-dependencies]
+hypothesis = "^5.41.3"
+pytest = "^6.1.2"
+flake8 = "^3.8.4"
+
+[tool.poetry.build]
+script = "build.py"
+
+[tool.poetry.scripts]
+test = 'build:test'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

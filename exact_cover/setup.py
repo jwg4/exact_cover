@@ -1,3 +1,4 @@
+# flake8: noqa
 from setuptools import setup, Extension
 import numpy
 
