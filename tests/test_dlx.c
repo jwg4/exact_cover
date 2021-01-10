@@ -100,7 +100,7 @@ test_large_example_from_csv(const MunitParameter params[], void* data) {
     int *solution = malloc(VSIZE * sizeof(*solution));
 
     int matrix4[64*64];
-    char filename[] = "tests/con4.csv";
+    char filename[] = "tests/files/con4.csv";
     read_csv(filename, 64, 64, matrix4);
     result = dlx_get_exact_cover(64,64,matrix4,solution);
     munit_assert(result == 16);
@@ -119,7 +119,7 @@ test_large_example_from_csv_2(const MunitParameter params[], void* data) {
     int *solution = malloc(VSIZE * sizeof(*solution));
 
     int matrix5[VSIZE*HSIZE];
-    char filename2[] = "tests/con2.csv";
+    char filename2[] = "tests/files/con2.csv";
     read_csv(filename2, VSIZE, HSIZE, matrix5);
     result = dlx_get_exact_cover(VSIZE,HSIZE,matrix5,solution);
     munit_assert(result == 81);
