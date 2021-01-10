@@ -2,7 +2,7 @@ import io
 
 import numpy as np
 
-from .sudoku_solver import sudoku
+from .helpers import sudoku
 
 
 def check(con_matrix):
