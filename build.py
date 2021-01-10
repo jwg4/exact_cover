@@ -10,7 +10,7 @@ src_dir = "exact_cover/"
 exact_cover = Extension(
     'exact_cover',
     sources=[
-        src_dir + 'exact_cover_np.c',
+        src_dir + 'exact_cover.c',
         deps_dir + 'dlx.c',
         deps_dir + 'sparse_matrix.c',
         deps_dir + 'quad_linked_list.c'
