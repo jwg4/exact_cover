@@ -3,7 +3,7 @@ name: Tests for C code
 on:
   push:
     branches: 
-      - master
+      - main
   pull_request:
     branches: '**'
 

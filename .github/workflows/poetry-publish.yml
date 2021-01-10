@@ -2,7 +2,7 @@ name: Deploy wheels to pypi
 on:
   push:
     branches: 
-      - master
+      - main
 
 jobs:
   publish:
