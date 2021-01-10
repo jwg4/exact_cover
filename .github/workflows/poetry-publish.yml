@@ -3,7 +3,6 @@ on:
   push:
     branches: 
       - master
-      - streamline_process
 
 jobs:
   publish:
@@ -27,4 +26,4 @@ jobs:
       - name: Test package
         run: poetry run pytest
       - name: publish to pypi
-        run: poetry publish -r testpypi -u __token__ -p ${{ secrets.PYPI_TEST_TOKEN }}
+        run: poetry publish -u __token__ -p ${{ secrets.PYPI_TOKEN }}
