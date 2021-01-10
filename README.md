@@ -1,12 +1,9 @@
-Finding Exact Covers in NumPy (and Solving Sudoku!)
-===================================================
+Finding Exact Covers in NumPy
+=============================
 
-## Python 3 port
-This is a port of Moy's work to Python 3. It will no longer work with Python 2. The changes to the Python code might be compatible but the changes to the C++ code (Python module initialization) are not.
+This is a Python 3 package to solve exact cover problems using Numpy. It is based on https://github.com/moygit/exact_cover_np by Moy Easwaran. Jack Grahl ported it to Python 3, fixed some bugs and made lots of small improvements to the packaging.
 
-There is a wheel for Linux/x86 at https://github.com/jwg4/exact_cover_np/suites/1659981839/artifacts/30853501
-
-You can probably get this working for other platforms if you're happy to build it yourself, but the full packaging is a work in progress.
+The original package by Moy was designed to solve sudoku. Now this package is only designed to solve exact cover problems given as boolean arrays. It can be used to solve sudoku and a variety of combinatorial problems. However the code to reduce a sudoku to an exact cover problem is no longer part of this project. It will be published separately in the future.
 
 Summary
 -------
@@ -34,19 +31,6 @@ As a bonus feature for the Sudoku piece, we also calculate an
 approximate rating of the puzzle (easy, medium, hard, or very hard).
 
 
-How to Try It
--------------
-
-- `git clone https://github.com/moygit/exact_cover_np.git`
-- `cd exact_cover_np`
-- `make` will build everything, install the Python module
-  `exact_cover_np`, and run all the tests.  It'll also show you some
-  examples.
-- To solve Sudoku, say: `sudoku.py < filename.csv`, where `filename.csv`
-  contains the puzzle as a list of comma-separated values with 0's
-  denoting the blank entries.
-
-
 How to Use It (Example)
 -----------------------
 
@@ -62,7 +46,7 @@ exact cover: each element of X is in one of these sets (i.e. is
 "covered" by one of these sets), and no element of X is in more than
 one.
 
-We'd use `exact_cover_np` to solve the problem as follows:
+We'd use `exact_cover` to solve the problem as follows:
 using 1 to denote that a particular member of X is in a subset and 0 to
 denote that it's not, we can represent the sets as
 
@@ -71,10 +55,10 @@ denote that it's not, we can represent the sets as
     C = 0,1,1,0,0    # etc.
     D = 0,0,0,0,1
 
-Now we can call `exact_cover_np`:
+Now we can call `exact_cover`:
 
     >>> import numpy as np
-    >>> import exact_cover_np as ec
+    >>> import exact_cover as ec
     >>> S = np.array([[1,0,0,1,0],[1,1,1,0,0],[0,1,1,0,0],[0,0,0,0,1]], dtype='int32')
     >>> ec.get_exact_cover(S)
     array([0, 2, 3], dtype=int32)
@@ -86,7 +70,7 @@ and the 3rd row (i.e. D) together form an exact cover.
 Implementation Overview
 -----------------------
 
-The NumPy module (`exact_cover_np`) is implemented in four pieces:
+The NumPy module (`exact_cover`) is implemented in four pieces:
 
 - The lowest level is `quad_linked_list`, which implements a circular
   linked-list with left-, right-, up-, and down-links.
@@ -97,9 +81,12 @@ The NumPy module (`exact_cover_np`) is implemented in four pieces:
   in either direction).
 - Sparse matrices are used in `dlx` to implement Knuth's Dancing
   Links version of his Algorithm X, which calculates exact covers.
-- `exact_cover_np` provides the glue code letting us invoke
+- `exact_cover` provides the glue code letting us invoke
   `dlx` on NumPy arrays.
-- And finally, `sudoku.py` is the example application.
 
+Acknowledgement
+---------------
+
+Thanks very much to Moy Easwaran (https://github.com/moygit) for his inspiring work!
 
 
