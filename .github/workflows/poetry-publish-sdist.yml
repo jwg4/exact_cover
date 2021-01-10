@@ -1,4 +1,4 @@
-name: Deploy version to pypi
+name: Deploy sdist to pypi
 on:
   push:
     branches: 
