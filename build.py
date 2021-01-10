@@ -5,17 +5,16 @@ import pytest
 
 
 # define the extension module
-deps_dir = "src/"
-src_dir = "exact_cover/"
+src_dir = "src/"
 exact_cover = Extension(
     'exact_cover',
     sources=[
         src_dir + 'exact_cover.c',
-        deps_dir + 'dlx.c',
-        deps_dir + 'sparse_matrix.c',
-        deps_dir + 'quad_linked_list.c'
+        src_dir + 'dlx.c',
+        src_dir + 'sparse_matrix.c',
+        src_dir + 'quad_linked_list.c'
     ],
-    include_dirs=[deps_dir, numpy.get_include()]
+    include_dirs=[src_dir, numpy.get_include()]
 )
 
 
