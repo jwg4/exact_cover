@@ -20,6 +20,7 @@ flake8 = "^3.8.4"
 
 [tool.poetry.build]
 script = "build.py"
+generate-setup-file = false
 
 [tool.poetry.scripts]
 test = 'build:test'
