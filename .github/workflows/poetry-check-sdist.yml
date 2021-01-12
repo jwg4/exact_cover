@@ -1,4 +1,4 @@
-name: Run Python tests
+name: Check sdist builds and works
 on: pull_request
 
 jobs:
