@@ -17,7 +17,9 @@ jobs:
         run: pip install poetry
       - name: make a clean sdist
         run: |
-            poetry build --format sdist
+            poetry build --format sdist -vvv
+            ls
+            ls dist/
       - name: do a clean install
         run: |
             virtualenv venv
