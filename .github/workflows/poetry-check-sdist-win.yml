@@ -1,4 +1,4 @@
-name: Check sdist builds and works
+name: Check sdist builds and works (Windows)
 on: pull_request
 
 jobs:
@@ -7,8 +7,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [3.7, 3.8]
-        os: [ubuntu-18.04, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -18,11 +17,10 @@ jobs:
         run: pip install poetry
       - name: make a clean sdist
         run: |
-            rm -rf dist
             poetry build --format sdist
       - name: do a clean install
         run: |
             virtualenv venv
-            venv/bin/pip install dist/exact_cover-*.tar.gz
-            venv/bin/pip install pytest
-            venv/bin/python -m pytest tests/test_exact_cover.py
+            venv/scripts/pip install dist/exact_cover-*.tar.gz
+            venv/scripts/pip install pytest
+            venv/scripts/python -m pytest tests/test_exact_cover.py
