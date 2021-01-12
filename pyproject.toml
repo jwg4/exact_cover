@@ -8,6 +8,10 @@ maintainers = ["Jack Grahl <jack.grahl@gmail.com>"]
 homepage = "https://github.com/jwg4/exact_cover"
 repository = "https://github.com/jwg4/exact_cover"
 license = "GPL-2.0-only"
+include = [
+    {path = "src/*.c", format = "sdist"},
+    {path = "src/*.h", format = "sdist"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.7.1"
