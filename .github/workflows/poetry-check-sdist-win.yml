@@ -23,6 +23,8 @@ jobs:
       - name: do a clean install
         run: |
             virtualenv venv
+            ls
+            ls dist/
             venv/scripts/pip install dist/exact_cover-*.tar.gz
             venv/scripts/pip install pytest
             venv/scripts/python -m pytest tests/test_exact_cover.py
