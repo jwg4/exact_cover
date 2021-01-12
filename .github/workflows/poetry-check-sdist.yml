@@ -18,7 +18,6 @@ jobs:
         run: pip install poetry
       - name: make a clean sdist
         run: |
-            rm -rf dist
             poetry build --format sdist
       - name: do a clean install
         run: |
