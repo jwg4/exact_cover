@@ -1,0 +1,27 @@
+name: Check sdist builds and works (Windows)
+on: pull_request
+
+jobs:
+  testing:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.7, 3.8]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install poetry
+        run: pip install poetry
+      - name: make a clean sdist
+        run: |
+            poetry build --format sdist
+      - name: do a clean install
+        run: |
+            virtualenv venv
+            $filename = ls dist/ | Select-Object -ExpandProperty Name
+            venv/scripts/pip install "dist/$filename"
+            venv/scripts/pip install pytest
+            venv/scripts/python -m pytest tests/test_exact_cover.py
