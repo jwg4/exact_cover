@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exact_cover"
-version = "0.4.0"
+version = "0.4.1"
 description = "Solve exact cover problems"
 readme = "README.md"
 authors = ["Moy Easwaran"]
@@ -28,6 +28,7 @@ script = "build.py"
 
 [tool.poetry.scripts]
 test = 'run_tests:test'
+doctest = 'run_tests:run_doctest'
 
 [build-system]
 requires = ["setuptools", "numpy>=1.19.4,<2.0", "poetry-core>=1.0.0"]

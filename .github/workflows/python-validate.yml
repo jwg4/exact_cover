@@ -24,3 +24,5 @@ jobs:
       run: poetry install
     - name: Lint with flake8
       run: poetry run flake8
+    - name: Check examples in README
+      run: poetry run doctest

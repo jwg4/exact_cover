@@ -2,7 +2,7 @@ import io
 
 import numpy as np
 
-from .sudoku_solver import sudoku
+from .helpers import sudoku
 
 
 def check(con_matrix):
@@ -159,7 +159,7 @@ def test_solving_impossible_sudoku():
 
 def test_solving_easy_sudoku_from_csv():
     sudo = sudoku.Sudoku(9)
-    with open("examples/insight.csv", "r") as f:
+    with open("tests/files/insight.csv", "r") as f:
         sudo.read(f, True)
     sol = sudo.solve()
     assert sol._sudo.tolist() == [
@@ -178,7 +178,7 @@ def test_solving_easy_sudoku_from_csv():
 
 def test_solving_very_hard_sudoku_from_csv():
     sudo = sudoku.Sudoku(9)
-    with open("examples/very-hard.csv", "r") as f:
+    with open("tests/files/very-hard.csv", "r") as f:
         sudo.read(f, True)
     sol = sudo.solve()
     assert sol._sudo.tolist() == [

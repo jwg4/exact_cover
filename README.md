@@ -66,7 +66,7 @@ Now we can call `exact_cover`:
     >>> import exact_cover as ec
     >>> S = np.array([[1,0,0,1,0],[1,1,1,0,0],[0,1,1,0,0],[0,0,0,0,1]], dtype='int32')
     >>> ec.get_exact_cover(S)
-    array([0, 2, 3], dtype=int32)
+    array([0, 2, 3])
 
 This is telling us that the 0th row (i.e. A), the 2nd row (i.e. C),
 and the 3rd row (i.e. D) together form an exact cover.
