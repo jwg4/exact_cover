@@ -48,3 +48,10 @@ def test_complex_exact_cover_problem():
     data = np.array(polyomino_problem, dtype=np.int32)
     actual = get_exact_cover(data)
     assert actual.shape == (13, )
+
+
+def test_hard_but_supposedly_solvable():
+    data = np.genfromtxt("tests/files/cylinder.csv", dtype=np.int32, delimiter=",")
+    assert data.shape == (644, 208)
+    actual = get_exact_cover(data)
+    assert actual.shape == (52, )
