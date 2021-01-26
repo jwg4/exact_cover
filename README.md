@@ -89,6 +89,17 @@ The NumPy module (`exact_cover`) is implemented in four pieces:
 - `exact_cover` provides the glue code letting us invoke
   `dlx` on NumPy arrays.
 
+Repository
+----------
+
+- build/ The location where files are built.
+- dist/ The location for fully prepared files.
+- exact_cover/ The build tool 'poetry', seems to need this folder with a dummy python file so it doesn't worry about there not being any package.
+- obj/ Where the compiled C code is going to be output.
+- src/ The C sources.
+- tests/ Tests for both the Python package and the C code.
+- tools/ Code used in analysing and working with the library. This is not distributed with the package.
+
 Acknowledgement
 ---------------
 
