@@ -10,7 +10,7 @@ def cut(a):
         If it can't find such a row, it raises.
     """
     sq = (np.sum(a, 0) == 1).nonzero()[0][0]
-    shape = a[a[:, sq] == 1,:]
+    shape = a[a[:, sq] == 1, :]
     print(shape.nonzero())
     d = a[:, shape[0] != 1]
     dd = d[np.sum(d, 1) == 4, :]
