@@ -2,11 +2,11 @@ Finding Exact Covers in NumPy (and Solving Sudoku!)
 ===================================================
 
 ## Python 3 port
-This is a port of Moy's work to Python 3. It will no longer work with Python 2. The changes to the Python code might be compatible but the changes to the C++ code (Python module initialization) are not.
+~~This is a port of Moy's work to Python 3. It will no longer work with Python 2. The changes to the Python code might be compatible but the changes to the C++ code (Python module initialization) are not.~~
 
-There is a wheel for Linux/x86 at https://github.com/jwg4/exact_cover_np/suites/1659981839/artifacts/30853501
+~~There is a wheel for Linux/x86 at https://github.com/jwg4/exact_cover_np/suites/1659981839/artifacts/30853501~~
 
-You can probably get this working for other platforms if you're happy to build it yourself, but the full packaging is a work in progress.
+~~You can probably get this working for other platforms if you're happy to build it yourself, but the full packaging is a work in progress.~~
 
 # Update: use the new version of this package: 'exact_cover'
 
