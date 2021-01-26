@@ -51,7 +51,10 @@ def test_complex_exact_cover_problem():
 
 
 def test_no_solution():
-    data = np.genfromtxt("tests/files/cylinder.csv", dtype=np.int32, delimiter=",")
+    data = np.genfromtxt(
+        "tests/files/cylinder.csv",
+        dtype=np.int32, delimiter=","
+    )
     assert data.shape == (644, 208)
     actual = get_exact_cover(data)
     assert actual.shape == (0, )
