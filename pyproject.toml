@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exact_cover"
-version = "0.4.2"
+version = "0.4.3-alpha.0"
 description = "Solve exact cover problems"
 readme = "README.md"
 authors = ["Moy Easwaran"]
@@ -11,6 +11,9 @@ license = "GPL-2.0-only"
 include = [
     {path = "src/*.c", format = "sdist"},
     {path = "src/*.h", format = "sdist"}
+]
+packages = [
+    { include = "exact_cover" }
 ]
 
 [tool.poetry.dependencies]
