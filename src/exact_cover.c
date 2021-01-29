@@ -35,10 +35,10 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
     PyArrayObject *in_array;
     npy_intp      *dims;
     char          *in_array_data;
-    int           rows, cols, result;
+    int           rows, cols, result, is_debug;
 
     /*  Parse single numpy array argument */
-    if (!PyArg_ParseTuple(args, "O!", &PyArray_Type, &in_array)) return NULL;
+    if (!PyArg_ParseTuple(args, "O!|p", &PyArray_Type, &in_array, &is_debug)) return NULL;
 
     /*  Check that we got a 2-dimensional array of dtype='bool'. */
     if (not_2d_int_array(in_array)) return NULL;
