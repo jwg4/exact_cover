@@ -14,7 +14,7 @@
  */
 
 
-int search(list sparse_matrix, int k, int max, int *solution) {
+int search(list sparse_matrix, int k, int max, int *solution, int is_debug) {
     list col, row, next;
     int result = 0;
 
@@ -27,12 +27,15 @@ int search(list sparse_matrix, int k, int max, int *solution) {
     if (get_data(col)->data == 0) return 0;
 
     // Main algorithm:
+    if (is_debug != 0){
+        print_column(col, 0);
+    }
     cover_column(col);
     for (row = col; (row = get_down(row)) != col; ) {
         solution[k] = get_data(row)->data;  // save the row number
         for (next = row; (next = get_right(next)) != row; )
             cover_column(get_data(next)->list_data);
-        result = search(sparse_matrix, k+1, max, solution);
+        result = search(sparse_matrix, k+1, max, solution, 0);
         // If result > 0 we're done, but we should still clean up.
         for (next = row; (next = get_left(next)) != row; )
             uncover_column(get_data(next)->list_data);
@@ -42,12 +45,12 @@ int search(list sparse_matrix, int k, int max, int *solution) {
     return result;
 }
 
-int dlx_get_exact_cover(int rows, int cols, char matrix[], int *solution) {
+int dlx_get_exact_cover(int rows, int cols, char matrix[], int *solution, int is_debug) {
     list sparse_matrix;
     int solution_length;
 
     sparse_matrix = create_sparse(rows, cols, matrix);
-    solution_length = search(sparse_matrix, 0, rows, solution);
+    solution_length = search(sparse_matrix, 0, rows, solution, is_debug);
     destroy_entire_grid(sparse_matrix);
 
     while (rows > solution_length) {
