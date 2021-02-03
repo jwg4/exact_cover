@@ -43,7 +43,6 @@ CFLAGS += -O0 -DDEBUG_LEVEL=0
 c_tests: note \
 	note_quad_linked_list run_test_quad_linked_list \
 	note_sparse_matrix run_test_sparse_matrix \
-	note_dlx run_test_dlx \
 	run_munit
 
 tests: c_tests py_tests
@@ -131,17 +130,6 @@ $(OBJ_DIR)/sparse_matrix.o: $(SRC_DIR)/sparse_matrix.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
 run_test_sparse_matrix: $(TEST_DIR)/test_sparse_matrix
-	$^
-
-#-----------------------------------------------------------------------------------------
-
-$(TEST_DIR)/test_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_dlx.c
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
-
-$(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
-
-run_test_dlx: $(TEST_DIR)/test_dlx
 	$^
 
 #-----------------------------------------------------------------------------------------
