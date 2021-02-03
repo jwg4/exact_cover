@@ -56,10 +56,10 @@ test_large_example_from_csv(const MunitParameter params[], void* data) {
     int result;
     int *solution = malloc(VSIZE * sizeof(*solution));
 
-    int matrix4[64*64];
-    char filename[] = "tests/files/con4.csv";
-    read_csv(filename, 64, 64, matrix4);
-    result = dlx_get_exact_cover(64,64,matrix4,solution, 1);
+    int matrix4[538*2359];
+    char filename[] = "tests/files/problem_0003.csv";
+    read_csv(filename, 2359, 538, matrix4);
+    result = dlx_get_exact_cover(2359,538,matrix4,solution, 1);
     munit_assert(result == 16);
     munit_assert(solution[0] == 0);
     munit_assert(solution[1] == 26);
