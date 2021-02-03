@@ -132,6 +132,10 @@ $(OBJ_DIR)/sparse_matrix.o: $(SRC_DIR)/sparse_matrix.c
 run_test_sparse_matrix: $(TEST_DIR)/test_sparse_matrix
 	$^
 
+$(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c
+	mkdir -pv $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
+
 #-----------------------------------------------------------------------------------------
 
 exact_cover:
