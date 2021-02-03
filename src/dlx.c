@@ -28,7 +28,7 @@ int search(list sparse_matrix, int k, int max, int *solution, int is_debug) {
 
     // Main algorithm:
     if (is_debug != 0){
-        print_column(col, 0);
+        print_sparse_matrix_transpose(sparse_matrix, 0);
     }
     cover_column(col);
     for (row = col; (row = get_down(row)) != col; ) {
