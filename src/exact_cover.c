@@ -54,7 +54,7 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
 
     /*  Calculate the exact cover. */
     int nd = 1, *solution = malloc(rows * sizeof(*solution));
-    result = dlx_get_exact_cover(rows, cols, in_array_data, solution);
+    result = dlx_get_exact_cover(rows, cols, in_array_data, solution, is_debug);
 
     dims = malloc(nd * sizeof(*dims));
     dims[0] = result;
