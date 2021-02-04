@@ -28,10 +28,9 @@ int search(list sparse_matrix, int k, int max, int *solution, int is_debug) {
 
     // Main algorithm:
     if (is_debug != 0){
-        print_sparse_matrix_transpose(sparse_matrix, 0);
-    }
-    for (int i = 0; i < k; i++){
-        printf("%d|", solution[i]);
+        for (int i = 0; i < k; i++){
+            printf("%d|", solution[i]);
+        }
     }
     printf("\n");
 
@@ -40,7 +39,7 @@ int search(list sparse_matrix, int k, int max, int *solution, int is_debug) {
         solution[k] = get_data(row)->data;  // save the row number
         for (next = row; (next = get_right(next)) != row; )
             cover_column(get_data(next)->list_data);
-        result = search(sparse_matrix, k+1, max, solution, 0);
+        result = search(sparse_matrix, k+1, max, solution, is_debug);
         // If result > 0 we're done, but we should still clean up.
         for (next = row; (next = get_left(next)) != row; )
             uncover_column(get_data(next)->list_data);
