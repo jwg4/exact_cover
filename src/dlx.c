@@ -30,6 +30,11 @@ int search(list sparse_matrix, int k, int max, int *solution, int is_debug) {
     if (is_debug != 0){
         print_sparse_matrix_transpose(sparse_matrix, 0);
     }
+    for (int i = 0; i < k; i++){
+        printf("%d|", solution[i]);
+    }
+    printf("\n");
+
     cover_column(col);
     for (row = col; (row = get_down(row)) != col; ) {
         solution[k] = get_data(row)->data;  // save the row number
