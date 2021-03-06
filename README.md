@@ -24,7 +24,7 @@ Some of the code from the old package has been repackaged. If you want to solve 
 - https://pypi.org/project/xudoku/
 - https://github.com/jwg4/xudoku
 #### polyomino
-### If you want to solve polyomino tiling problems, that code is at:
+If you want to solve polyomino tiling problems, that code is at:
 - https://pypi.org/project/polyomino/
 - https://github.com/jwg4/polyomino
 
