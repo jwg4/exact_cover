@@ -1,8 +1,13 @@
+import logging
+
 import numpy as np
 
 from exact_cover import get_exact_cover
 
 
 def run_debug():
+    logging.basicConfig(level=logging.DEBUG)
     data = np.genfromtxt("tests/files/part_reduced.csv", dtype=np.int32)
-    get_exact_cover(data, True)
+    logging.info(data.shape)
+    solution = get_exact_cover(data, True)
+    logging.info(solution)
