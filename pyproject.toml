@@ -28,8 +28,8 @@ black = "^21.4b2"
 script = "build.py"
 
 [tool.poetry.scripts]
-test = 'run_tests:test'
-doctest = 'run_tests:run_doctest'
+test = 'tools.run_tests:test'
+doctest = 'tools.run_tests:run_doctest'
 debug = 'tools.debug:run_debug'
 
 [build-system]
