@@ -8,4 +8,4 @@ def test():
 
 
 def run_doctest():
-    doctest.testfile("README.md")
+    doctest.testfile("../README.md")
