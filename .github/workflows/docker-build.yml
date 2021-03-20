@@ -1,0 +1,38 @@
+name: Create docker images
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build --tag t-tetromino/minimal:$(date +%s) docker_config/
+  detect_files:
+    if: contains( github.event.head_commit.message, '[build')
+    name: Detect files
+    runs-on: ubuntu-latest
+    outputs:
+        tag: ${{ steps.set-name.outputs.tag }}
+    steps:
+    - uses: actions/checkout@v2
+    - id: set-name
+      name: Get tag prefix for images
+      run: |
+        cd search/
+        python3 -m helpers.tag_name
+  build_images:
+    needs: [build, detect_files]
+    if: contains( github.event.head_commit.message, '[build')
+    name: Build Docker images
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: build image
+      run: |
+          az login --service-principal -u ${{ secrets.ACR_SP_NAME }} -p ${{ secrets.ACR_SP_PASSWORD }} --tenant ${{ secrets.ACR_TENANT }}
+          az acr build -r ${{ secrets.ACR_REGISTRY }} -f $GITHUB_WORKSPACE/search/docker_config/Dockerfile -t ${{ secrets.ACR_REPOSITORY }}/basic_search:${{ needs.detect_files.outputs.tag }}_debug $GITHUB_WORKSPACE/search/docker_config/
