@@ -8,6 +8,6 @@ COPY data/debug_data .
 COPY tools/__init__.py .
 COPY tools/debug.py .
 
-RUN poetry install --no-virtualenv --no-dev
+RUN poetry install --no-dev
 
 RUN poetry debug
