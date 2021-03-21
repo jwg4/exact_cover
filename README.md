@@ -32,12 +32,6 @@ Dancing Links for efficient backtracking.  Please see
 [Knuth's paper](http://arxiv.org/pdf/cs/0011047v1)
 for details.
 
-As an example, we use this NumPy module to
-[solve Sudoku](https://en.wikipedia.org/wiki/Exact_cover#Sudoku).
-As a bonus feature for the Sudoku piece, we also calculate an
-approximate rating of the puzzle (easy, medium, hard, or very hard).
-
-
 How to Use It (Example)
 -----------------------
 
