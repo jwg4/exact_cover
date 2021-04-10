@@ -28,3 +28,18 @@ def reduce(a):
             return a
         print(b.shape)
         a = b
+
+
+def create_numpy_array(a):
+    """
+    >>> create_numpy_array([[0, 1], [1, 0]])
+    numpy.array([[0, 1], [1, 0]])
+    """
+    return np.array(a)
+
+
+def split_problem(a):
+    """
+    Create several subproblems from a single problem.
+    """
+    return a 
