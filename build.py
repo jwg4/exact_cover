@@ -5,8 +5,8 @@ import numpy
 
 # define the extension module
 src_dir = "src/"
-exact_cover = Extension(
-    'exact_cover',
+exact_cover_impl = Extension(
+    'exact_cover_impl',
     sources=[
         src_dir + 'exact_cover.c',
         src_dir + 'dlx.c',
@@ -20,6 +20,7 @@ exact_cover = Extension(
 def build(setup_kwargs):
     setup_kwargs.update(
         {
-            "ext_modules": [exact_cover],
+            "packages": ["exact_cover"],
+            "ext_modules": [exact_cover_impl],
         }
     )
