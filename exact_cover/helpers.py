@@ -38,7 +38,7 @@ def create_numpy_array(a):
     return np.array(a)
 
 
-def split_problem(a):
+def split_problem(a, n):
     """
     Create several subproblems from a single problem.
     """
