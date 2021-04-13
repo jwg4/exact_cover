@@ -42,4 +42,4 @@ def split_problem(a, n):
     """
     Create several subproblems from a single problem.
     """
-    return a 
+    return a

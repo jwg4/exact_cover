@@ -15,3 +15,5 @@ def test_split_problem():
     a = np.array(d)
     result = split_problem(a, 2)
     assert len(result) >= 2 
+    for sub in result:
+        assert isinstance(sub, np.array)
