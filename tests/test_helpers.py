@@ -14,6 +14,7 @@ def test_split_problem():
     d = [[0, 1, 0], [1, 1, 1], [1, 1, 1]]
     a = np.array(d)
     result = split_problem(a, 2)
-    assert len(result) >= 2 
+    assert len(result) >= 2
     for sub in result:
-        assert isinstance(sub, np.array)
+        assert isinstance(sub, np.ndarray)
+        assert sub.shape == a.shape
