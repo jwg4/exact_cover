@@ -5,7 +5,11 @@ from hypothesis import given
 from exact_cover.helpers import reduce, split_problem
 from exact_cover.error import NoSolution, CannotSplitFurther
 
-from .test_exact_cover_problems import all_problems, array_with_solution, array_without_solution
+from .test_exact_cover_problems import (
+    all_problems,
+    array_with_solution,
+    array_without_solution,
+)
 
 
 def test_reduce():

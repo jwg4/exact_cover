@@ -2,12 +2,12 @@ import numpy as np
 
 
 def cut(a):
-    """ Reduces a problem by finding a column
-        which can only be covered in one way,
-        and removing it along with any row which
-        touches it.
+    """Reduces a problem by finding a column
+    which can only be covered in one way,
+    and removing it along with any row which
+    touches it.
 
-        If it can't find such a row, it raises.
+    If it can't find such a row, it raises.
     """
     sq = (np.sum(a, 0) == 1).nonzero()[0][0]
     shape = a[a[:, sq] == 1, :]
@@ -19,7 +19,7 @@ def cut(a):
 
 def reduce(a):
     """
-        Call cut() on an array as many times as is possible.
+    Call cut() on an array as many times as is possible.
     """
     while True:
         try:
@@ -43,6 +43,6 @@ def split_problem(a, n):
     Create several subproblems from a single problem.
     """
     m = np.argmax(a.sum(axis=0))
-    x = a[:,m]
+    x = a[:, m]
     for v in a[x == 1]:
         yield np.concatenate((a[x == 0], [v]))
