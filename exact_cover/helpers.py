@@ -38,15 +38,11 @@ def create_numpy_array(a):
     return np.array(a)
 
 
-def _get_column_with_many_1s(a):
-    m = np.argmax(a.sum(axis=0))[0]
-    return a[:,m]
-
-
 def split_problem(a, n):
     """
     Create several subproblems from a single problem.
     """
-    x = _get_column_with_many_1s(a)
+    m = np.argmax(a.sum(axis=0))
+    x = a[:,m]
     for v in a[x == 1]:
         yield np.concatenate((a[x == 0], [v]))
