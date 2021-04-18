@@ -4,7 +4,7 @@ from hypothesis import given
 
 from exact_cover.helpers import reduce, split_problem
 
-from .test_exact_cover_problems import all_problems
+from .test_exact_cover_problems import all_problems, array_with_solution
 
 
 def test_reduce():
@@ -24,7 +24,7 @@ def test_split_problem():
         assert sub.shape == (1, 3)
 
 
-@given(all_problems)
+@given(array_with_solution)
 def test_split_problem(a):
     result = list(split_problem(a, 2))
     assert len(result) >= 2
