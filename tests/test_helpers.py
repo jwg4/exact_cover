@@ -34,4 +34,3 @@ def test_split_problem(a):
         x_1, y_1 = sub.shape
         assert x_1 < x
         assert y_1 == y
-        assert sub.shape == (1, 3)
