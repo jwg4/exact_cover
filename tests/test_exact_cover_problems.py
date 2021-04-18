@@ -115,3 +115,6 @@ array_without_solution = one_of(exact_cover_problem_with_empty_col(), exact_cove
 def test_exact_cover_without_solution(array_data):
     actual = get_exact_cover(array_data)
     assert actual.size == 0
+
+
+all_problems = one_of(exact_cover_problem(), array_with_solution, array_without_solution)
