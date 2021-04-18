@@ -60,9 +60,12 @@ def array_with_trivial_solution(draw):
     return array
 
 
+array_with_solution = one_of(array_with_trivial_solution(), array_with_exact_cover())
+
+
 @example(np.array([[1, 1, 1]], dtype=np.int32))
 @example(np.array([[1, 0, 0], [0, 1, 1]], dtype=np.int32))
-@given(one_of(array_with_trivial_solution(), array_with_exact_cover()))
+@given(array_with_solution)
 def test_exact_cover_with_solution(array_data):
     rowcount = len(array_data)
     actual = get_exact_cover(array_data)
@@ -105,10 +108,10 @@ def exact_cover_problem_with_abc(draw):
     return array
 
 
-@given(one_of(
-    exact_cover_problem_with_empty_col(),
-    exact_cover_problem_with_abc()
-))
+array_without_solution = one_of(exact_cover_problem_with_empty_col(), exact_cover_problem_with_abc())
+
+
+@given(array_without_solution)
 def test_exact_cover_without_solution(array_data):
     actual = get_exact_cover(array_data)
     assert actual.size == 0
