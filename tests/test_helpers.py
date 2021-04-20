@@ -48,8 +48,8 @@ def test_split_problem():
 
 @given(all_problems)
 def test_split_arbitrary_problem(a):
-    result = list(split_problem(a, 2))
     try:
+        result = list(split_problem(a, 2))
         assert len(result) >= 2
         x, y = a.shape
         for sub in result:
