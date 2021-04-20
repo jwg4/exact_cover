@@ -1,5 +1,7 @@
 import numpy as np
 
+from .error import NoSolution
+
 
 def cut(a):
     """Reduces a problem by finding a column
@@ -44,5 +46,7 @@ def split_problem(a, n):
     """
     m = np.argmax(a.sum(axis=0))
     x = a[:, m]
+    if not a[x == 1].any():
+        raise NoSolution
     for v in a[x == 1]:
         yield np.concatenate((a[x == 0], [v]))
