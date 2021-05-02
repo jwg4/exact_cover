@@ -48,5 +48,9 @@ def split_problem(a, n):
     x = a[:, m]
     if not a[x == 1].any():
         raise NoSolution
-    for v in a[x == 1]:
-        yield np.concatenate((a[x == 0], [v]))
+    k = a.shape[0]
+    for i in range(0, k):
+        if a[i, m]:
+            aa = a.copy()
+            aa[(x == 0) | np.identity(k, bool)[i], :] = 0
+            yield aa
