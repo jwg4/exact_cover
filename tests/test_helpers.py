@@ -48,7 +48,6 @@ def test_split_problem():
 
 @given(all_problems)
 def test_split_arbitrary_problem(a):
-    assume(max(np.sum(a, axis=0)) > 1)
     try:
         result = list(split_problem(a, 2))
         assert len(result) >= 2

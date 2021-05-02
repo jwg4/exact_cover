@@ -1,6 +1,6 @@
 import numpy as np
 
-from .error import NoSolution
+from .error import NoSolution, CannotSplitFurther
 
 
 def cut(a):
@@ -48,6 +48,8 @@ def split_problem(a, n):
     x = a[:, m]
     if not a[x == 1].any():
         raise NoSolution
+    if np.sum(x) < 2:
+        raise CannotSplitFurther
     k = a.shape[0]
     for i in range(0, k):
         if a[i, m]:
