@@ -1,6 +1,6 @@
 import numpy as np
 
-from hypothesis import given, assume
+from hypothesis import given
 from hypothesis.strategies import integers
 
 from exact_cover.helpers import reduce, split_problem
