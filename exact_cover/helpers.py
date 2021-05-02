@@ -1,3 +1,5 @@
+from collections import deque
+
 import numpy as np
 
 from .error import NoSolution, CannotSplitFurther
@@ -44,6 +46,14 @@ def split_problem(a, n):
     """
     Create several subproblems from a single problem.
     """
+    queue = deque([a])
+    while len(queue) < n:
+        for sub in _split_problem_once(queue.popleft()):
+            queue.append(sub)
+    return list(queue)
+
+
+def _split_problem_once(a):
     m = np.argmax(a.sum(axis=0))
     x = a[:, m]
     if not a[x == 1].any():
