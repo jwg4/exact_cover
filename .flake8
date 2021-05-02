@@ -5,4 +5,5 @@ exclude =
     dist,
     obj,
     __pycache__,
+    .pytest_cache,
     venv
