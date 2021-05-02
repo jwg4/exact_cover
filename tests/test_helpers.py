@@ -1,6 +1,7 @@
 import numpy as np
 
 from hypothesis import given, assume
+from hypothesis.strategies import integers
 
 from exact_cover.helpers import reduce, split_problem
 from exact_cover.error import NoSolution, CannotSplitFurther
@@ -54,6 +55,18 @@ def test_split_arbitrary_problem(a):
         for sub in result:
             assert isinstance(sub, np.ndarray)
             assert sub.shape == a.shape
+    except NoSolution:
+        assert True
+    except CannotSplitFurther:
+        assert True
+
+
+@given(all_problems, integers(2, 15))
+def test_correct_number_of_splits(a, n):
+    try:
+        result = list(split_problem(a, n))
+        assert len(result) >= n
+        assert len(result) < n * a.shape[0]
     except NoSolution:
         assert True
     except CannotSplitFurther:
