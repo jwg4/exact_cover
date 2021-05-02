@@ -43,7 +43,7 @@ def test_split_problem():
     assert len(result) >= 2
     for sub in result:
         assert isinstance(sub, np.ndarray)
-        assert sub.shape == (1, 3)
+        assert sub.shape == a.shape
 
 
 @given(all_problems)
@@ -52,12 +52,9 @@ def test_split_arbitrary_problem(a):
     try:
         result = list(split_problem(a, 2))
         assert len(result) >= 2
-        x, y = a.shape
         for sub in result:
             assert isinstance(sub, np.ndarray)
-            x_1, y_1 = sub.shape
-            assert x_1 < x
-            assert y_1 == y
+            assert sub.shape == a.shape
     except NoSolution:
         assert True
     except CannotSplitFurther:
