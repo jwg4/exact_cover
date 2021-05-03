@@ -83,7 +83,7 @@ def test_solution_to_split_problem_solves_original_problem(a, n):
         result = list(split_problem(a, n))
         for sub in result:
             s = get_exact_cover(sub)
-            if s:
+            if s.size > 0:
                 assert is_solution(s, sub)
                 assert is_solution(s, a)
     except NoSolution:
