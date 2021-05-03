@@ -66,3 +66,9 @@ def _split_problem_once(a):
             aa = a.copy()
             aa[(x == 0) | np.identity(k, bool)[i], :] = 0
             yield aa
+
+
+def is_solution(solution, problem):
+    cover = problem[solution, :]
+    count = np.sum(cover, axis=1)
+    return min(count) == max(count) == 1

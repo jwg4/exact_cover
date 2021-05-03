@@ -3,7 +3,8 @@ import numpy as np
 from hypothesis import given, settings
 from hypothesis.strategies import integers
 
-from exact_cover.helpers import reduce, split_problem
+from exact_cover import get_exact_cover
+from exact_cover.helpers import reduce, split_problem, is_solution
 from exact_cover.error import NoSolution, CannotSplitFurther
 
 from .test_exact_cover_problems import (
@@ -73,3 +74,9 @@ def test_correct_number_of_splits(a, n):
         assert True
     except CannotSplitFurther:
         assert True
+
+
+@given(array_with_solution)
+def test_is_solution(a):
+    s = get_exact_cover(a)
+    assert is_solution(s, a)
