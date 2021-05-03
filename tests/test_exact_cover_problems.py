@@ -3,6 +3,7 @@ import numpy as np
 from hypothesis import given, example
 from hypothesis.strategies import integers, lists, booleans
 from hypothesis.strategies import composite, one_of, permutations
+from hypothesis.strategies import just
 
 from exact_cover import get_exact_cover
 
@@ -57,7 +58,11 @@ def array_with_trivial_solution(draw):
     return array
 
 
-array_with_solution = one_of(array_with_trivial_solution(), array_with_exact_cover())
+large_problems_with_solution = one_of(
+    just(np.genfromtxt("tests/files/pentominos_chessboard.csv", dtype=np.int32, delimiter=",")),
+)
+
+array_with_solution = one_of(array_with_trivial_solution(), array_with_exact_cover(), large_problems_with_solution)
 
 
 @example(np.array([[1, 1, 1]], dtype=np.int32))
@@ -105,8 +110,15 @@ def exact_cover_problem_with_abc(draw):
     return array
 
 
+large_problems_without_solution = one_of(
+    just(np.genfromtxt("tests/files/cylinder.csv", dtype=np.int32, delimiter=",")),
+    just(np.genfromtxt("tests/files/reduced.csv", dtype=np.int32, delimiter=",")),
+    just(np.genfromtxt("tests/files/part_reduced.csv", dtype=np.int32, delimiter=",")),
+)
+
+
 array_without_solution = one_of(
-    exact_cover_problem_with_empty_col(), exact_cover_problem_with_abc()
+    exact_cover_problem_with_empty_col(), exact_cover_problem_with_abc(), large_problems_without_solution
 )
 
 
