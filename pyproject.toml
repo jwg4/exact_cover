@@ -33,3 +33,6 @@ doctest = 'run_tests:run_doctest'
 [build-system]
 requires = ["setuptools", "numpy>=1.19.4,<2.0", "poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+exclude = "polyomino_data"
