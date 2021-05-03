@@ -12,6 +12,10 @@ The original package by Moy was designed to solve sudoku. Now this package is on
  - https://pypi.org/project/xudoku/
  - https://github.com/jwg4/xudoku
 
+Another project, 'polyomino' by Jack Grahl uses this algorithm to solve polyomino tiling problems. It can be found at:
+ - https://pypi.org/project/polyomino/
+ - https://github.com/jwg4/polyomino
+
 Summary
 -------
 
