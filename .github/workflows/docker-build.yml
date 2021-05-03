@@ -1,0 +1,12 @@
+name: Create docker images
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: jwg4/docker-python-poetry@v1a0
+    - name: Build the Docker image
+      run: docker build --tag exact_cover/debug:$(date +%s) .

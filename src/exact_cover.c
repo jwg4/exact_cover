@@ -35,10 +35,10 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
     PyArrayObject *in_array;
     PyObject      *out_array;
     npy_intp      *dims;
-    int           *in_array_data, rows, cols, result;
+    int           *in_array_data, rows, cols, result, is_debug;
 
     /*  Parse single numpy array argument */
-    if (!PyArg_ParseTuple(args, "O!", &PyArray_Type, &in_array)) return NULL;
+    if (!PyArg_ParseTuple(args, "O!|p", &PyArray_Type, &in_array, &is_debug)) return NULL;
 
     /*  Construct the output array, like the input array */
     out_array = PyArray_NewLikeArray(in_array, NPY_ANYORDER, NULL, 0);
@@ -54,7 +54,7 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
 
     /*  Calculate the exact cover. */
     int nd = 1, *solution = malloc(rows * sizeof(*solution));
-    result = dlx_get_exact_cover(rows, cols, in_array_data, solution);
+    result = dlx_get_exact_cover(rows, cols, in_array_data, solution, is_debug);
 
     dims = malloc(nd * sizeof(*dims));
     dims[0] = result;

@@ -25,6 +25,6 @@ jobs:
     - name: Lint with flake8
       run: poetry run flake8
     - name: Lint with black
-      run: poetry run black --check exact_cover/ tests/ build.py run_tests.py
+      run: poetry run black --check exact_cover/ tests/ tools/ build.py
     - name: Check examples in README
       run: poetry run doctest
