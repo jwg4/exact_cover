@@ -1,0 +1,9 @@
+[flake8]
+max-line-length = 88
+exclude = 
+    build,
+    dist,
+    obj,
+    __pycache__,
+    .pytest_cache,
+    venv

@@ -25,4 +25,5 @@ jobs:
             virtualenv venv
             venv/bin/pip install dist/exact_cover-*.tar.gz
             venv/bin/pip install pytest
+            venv/bin/pip install hypothesis
             venv/bin/python -m pytest tests/test_exact_cover.py

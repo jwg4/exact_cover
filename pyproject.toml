@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exact_cover"
-version = "0.5.0"
+version = "0.6.0"
 description = "Solve exact cover problems"
 readme = "README.md"
 authors = ["Moy Easwaran"]
@@ -22,6 +22,7 @@ setuptools = "^51.1.2"
 hypothesis = "^5.41.3"
 pytest = "^6.1.2"
 flake8 = "^3.8.4"
+black = "^21.4b2"
 
 [tool.poetry.build]
 script = "build.py"
@@ -33,3 +34,6 @@ doctest = 'run_tests:run_doctest'
 [build-system]
 requires = ["setuptools", "numpy>=1.19.4,<2.0", "poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+exclude = "polyomino_data"
