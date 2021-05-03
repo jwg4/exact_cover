@@ -80,3 +80,9 @@ def test_correct_number_of_splits(a, n):
 def test_is_solution(a):
     s = get_exact_cover(a)
     assert is_solution(s, a)
+
+
+@given(array_with_solution)
+def test_is_solution_fails_for_proper_subset(a):
+    s = get_exact_cover(a)
+    assert not is_solution(s[:-1], a)
