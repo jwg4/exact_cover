@@ -22,6 +22,7 @@ setuptools = "^51.1.2"
 hypothesis = "^5.41.3"
 pytest = "^6.1.2"
 flake8 = "^3.8.4"
+black = "^21.4b2"
 
 [tool.poetry.build]
 script = "build.py"
