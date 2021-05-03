@@ -62,7 +62,11 @@ large_problems_with_solution = one_of(
     just(np.genfromtxt("tests/files/pentominos_chessboard.csv", dtype=np.int32)),
 )
 
-array_with_solution = one_of(array_with_trivial_solution(), array_with_exact_cover(), large_problems_with_solution)
+array_with_solution = one_of(
+    array_with_trivial_solution(),
+    array_with_exact_cover(),
+    large_problems_with_solution,
+)
 
 
 @example(np.array([[1, 1, 1]], dtype=np.int32))
@@ -118,7 +122,9 @@ large_problems_without_solution = one_of(
 
 
 array_without_solution = one_of(
-    exact_cover_problem_with_empty_col(), exact_cover_problem_with_abc(), large_problems_without_solution
+    exact_cover_problem_with_empty_col(),
+    exact_cover_problem_with_abc(),
+    large_problems_without_solution,
 )
 
 
