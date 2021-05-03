@@ -76,6 +76,22 @@ def test_correct_number_of_splits(a, n):
         assert True
 
 
+@given(all_problems, integers(2, 30))
+@settings(deadline=None)
+def test_solution_to_split_problem_solves_original_problem(a, n):
+    try:
+        result = list(split_problem(a, n))
+        for sub in result:
+            s = get_exact_cover(sub)
+            if s:
+                assert is_solution(s, sub)
+                assert is_solution(s, a)
+    except NoSolution:
+        assert True
+    except CannotSplitFurther:
+        assert True
+
+
 @given(array_with_solution)
 def test_is_solution(a):
     s = get_exact_cover(a)
