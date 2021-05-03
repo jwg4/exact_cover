@@ -1,6 +1,6 @@
 import numpy as np
 
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis.strategies import integers
 
 from exact_cover.helpers import reduce, split_problem
@@ -48,6 +48,7 @@ def test_split_problem():
 
 
 @given(all_problems)
+@settings(deadline=None)
 def test_split_arbitrary_problem(a):
     try:
         result = list(split_problem(a, 2))
@@ -62,6 +63,7 @@ def test_split_arbitrary_problem(a):
 
 
 @given(all_problems, integers(2, 30))
+@settings(deadline=None)
 def test_correct_number_of_splits(a, n):
     try:
         result = list(split_problem(a, n))
