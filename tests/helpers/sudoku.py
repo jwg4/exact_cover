@@ -133,7 +133,7 @@ class Sudoku:
                 if real_entry == 0:
                     possible_entries = range(1, self._size + 1)
                 else:
-                    # If we already have an entry then leave out all the otherrpossibilities.
+                    # If we already have an entry then leave out all the other possibilities.
                     possible_entries = range(real_entry, real_entry + 1)
                 for entry in possible_entries:
                     self._set_constraint_row(constraints, row, col, entry)
