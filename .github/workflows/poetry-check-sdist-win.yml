@@ -24,5 +24,5 @@ jobs:
             $filename = ls dist/ | Select-Object -ExpandProperty Name
             venv/scripts/pip install "dist/$filename"
             venv/scripts/pip install pytest
-            venv/bin/pip install hypothesis
+            venv/scripts/pip install hypothesis
             venv/scripts/python -m pytest tests/test_exact_cover.py
