@@ -1,7 +1,10 @@
 import numpy as np
 
+from hypothesis import given
+
 from exact_cover import get_exact_cover
 from .helpers.polyomino_data import polyomino_problem
+from .test_exact_cover_problems import large_problems_without_solution
 
 
 def test_exact_cover():
@@ -44,22 +47,7 @@ def test_complex_exact_cover_problem():
     assert actual.shape == (13,)
 
 
-def test_no_solution():
-    data = np.genfromtxt("tests/files/cylinder.csv", dtype=np.int32, delimiter=",")
-    assert data.shape == (644, 208)
-    actual = get_exact_cover(data)
-    assert actual.shape == (0,)
-
-
-def test_reduced_no_solution():
-    data = np.genfromtxt("tests/files/reduced.csv", dtype=np.int32)
-    assert data.shape == (2, 60)
-    actual = get_exact_cover(data)
-    assert actual.shape == (0,)
-
-
-def test_part_reduced_no_solution():
-    data = np.genfromtxt("tests/files/part_reduced.csv", dtype=np.int32)
-    assert data.shape == (478, 172)
+@given(large_problems_without_solution)
+def test_no_solution(data):
     actual = get_exact_cover(data)
     assert actual.shape == (0,)
