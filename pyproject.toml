@@ -33,7 +33,7 @@ doctest = 'tools.run_tests:run_doctest'
 debug = 'tools.debug:run_debug'
 
 [build-system]
-requires = ["setuptools", "numpy>=1.19.4,<2.0", "poetry-core>=1.0.0"]
+requires = ["setuptools>=51.1.2,<52.0", "numpy>=1.19.4,<2.0", "poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
