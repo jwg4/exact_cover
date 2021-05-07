@@ -4,21 +4,6 @@
 # Exact Cover with application to Sudoku, ver 0.1
 # License: GPL v2 or above (https://www.gnu.org/licenses/gpl-2.0.html)
 # 
-# This NumPy module uses Donald Knuth's Algorithm X to find exact
-# covers of sets.  For details on Algorithm X please see either
-# <https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X>
-# or
-# <http://arxiv.org/pdf/cs/0011047v1>.
-#
-# Specifically, we use the Knuth/Hitotsumatsu/Noshita method of
-# Dancing Links for efficient backtracking.  Please see Knuth's
-# paper above for details.
-# 
-# As an example, we use this NumPy module to solve Sudoku.
-# 
-#---------------------------------------------------------------------
-# P.S.  I'm not an expert on Make, so please forgive any Makefile
-#  		ugliness.
 #---------------------------------------------------------------------
 
 
