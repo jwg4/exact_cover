@@ -87,13 +87,13 @@ $(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c
 #-----------------------------------------------------------------------------------------
 
 exact_cover:
-	cd $(PY_DIR) ; python setup.py build_ext ; cd -
+	poetry run python build.py build_ext
 
 install_exact_cover: exact_cover
-	cd $(PY_DIR) ; python setup.py install ; cd -
+	poetry run python build.py install
 
 test_exact_cover: install_exact_cover
-	pytest
+	poetry run test
 
 #-----------------------------------------------------------------------------------------
 
