@@ -40,7 +40,6 @@ $(OBJ_DIR)/quad_linked_list.o: $(SRC_DIR)/quad_linked_list.c
 run_test_quad_linked_list: $(TEST_DIR)/test_quad_linked_list
 	$^
 
-#-----------------------------------------------------------------------------------------
 
 $(OBJ_DIR)/munit.o: $(TEST_DIR)/munit.c
 	mkdir -pv $(OBJ_DIR)
@@ -68,7 +67,6 @@ run_munit: run_test_m_sparse_matrix \
 	run_test_m_dlx \
 	run_munit_test_dlx
 
-#-----------------------------------------------------------------------------------------
 
 $(TEST_DIR)/test_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(TEST_DIR)/test_sparse_matrix.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
@@ -84,7 +82,6 @@ $(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c
 	mkdir -pv $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
-#-----------------------------------------------------------------------------------------
 
 exact_cover:
 	poetry run python build.py build_ext
@@ -95,7 +92,6 @@ install_exact_cover: exact_cover
 test_exact_cover: install_exact_cover
 	poetry run test
 
-#-----------------------------------------------------------------------------------------
 
 clean:
 	rm -rf $(OBJ_DIR)/*.o $(PY_DIR)/build $(PY_DIR)/exact_cover_np.so \
