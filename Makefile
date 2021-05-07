@@ -23,45 +23,12 @@ CFLAGS = -g -Wall -Wstrict-prototypes -I $(INCLUDES_DIR)
 CFLAGS += -O0 -DDEBUG_LEVEL=0
 
 
-#-----------------------------------------------------------------------------------------
-
-c_tests: note \
-	note_quad_linked_list run_test_quad_linked_list \
-	note_sparse_matrix run_test_sparse_matrix \
-	run_munit
+c_tests: run_test_quad_linked_list run_test_sparse_matrix run_munit
 
 tests: c_tests py_tests
 
 py_tests: test_exact_cover
 
-note:
-	@echo "**********************************************************************"
-	@echo "* NOTE: THE DEFAULT MAKE TARGET IS 'make tests'.                     *"
-	@echo "* THIS WILL ALSO BUILD ALL COMPONENTS AND INSTALL THE NUMPY MODULE.  *"
-	@echo "**********************************************************************"
-	@echo
-
-note_quad_linked_list:
-	@echo "**********************************************************************"
-	@echo "* Test quad_linked_list.                                             *"
-	@echo "**********************************************************************"
-
-note_sparse_matrix:
-	@echo "**********************************************************************"
-	@echo "* Test sparse matrix.                                                *"
-	@echo "**********************************************************************"
-
-note_dlx:
-	@echo "**********************************************************************"
-	@echo "* Test dlx (Knuth's algorithm X implemented using Dancing Links.     *"
-	@echo "**********************************************************************"
-
-note_install_exact_cover:
-	@echo "**********************************************************************"
-	@echo "* Build and install NumPy exact cover module.                        *"
-	@echo "**********************************************************************"
-
-#-----------------------------------------------------------------------------------------
 
 $(TEST_DIR)/test_quad_linked_list: $(OBJ_DIR)/quad_linked_list.o $(TEST_DIR)/test_quad_linked_list.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
