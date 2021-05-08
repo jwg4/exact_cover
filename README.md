@@ -88,13 +88,34 @@ The NumPy module (`exact_cover`) is implemented in four pieces:
   Links version of his Algorithm X, which calculates exact covers.
 - `exact_cover` provides the glue code letting us invoke
   `dlx` on NumPy arrays.
+- The package now has some pure Python modules for helper functions, with the main algorithm in the C-only package `exact_cover_impl`.
+
+How to develop
+--------------
+
+The package uses poetry and most of the setup for development uses that tool.
+
+To install locally (as an editable package):
+`poetry install`
+
+To build:
+`poetry build`
+
+To run tests:
+`poetry run test` or `poetry run doctest`
+
+To open a Python shell with the package available:
+`poetry run python`
+
+The exception is running the C unit tests:
+`make c_tests`
 
 Repository
 ----------
 
 - build/ The location where files are built.
 - dist/ The location for fully prepared files.
-- exact_cover/ The build tool 'poetry', seems to need this folder with a dummy python file so it doesn't worry about there not being any package.
+- exact_cover/ The Python code.
 - obj/ Where the compiled C code is going to be output.
 - src/ The C sources.
 - tests/ Tests for both the Python package and the C code.
