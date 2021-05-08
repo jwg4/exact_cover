@@ -1,4 +1,3 @@
-#include "debug.h"
 #include <assert.h>
 
 #include "munit.h"
@@ -8,27 +7,7 @@
 
 #define HSIZE 9
 #define VSIZE 15
-#define ARRAYSIZE(x)  (sizeof(x)/sizeof(*(x)))
  
-void read_csv(char filename[], int rows, int cols, int array[rows*cols]) {
-    FILE *file = fopen(filename, "r");
-    int i, j;
-    char buffer[cols*5], *ptr;
-    for ( i = 0; fgets(buffer, sizeof buffer, file); ++i )
-       for ( j = 0, ptr = buffer; j < cols; ++j, ++ptr )
-          array[(i*cols)+j] = (int)strtol(ptr, &ptr, 10);
-    fclose(file);
-}
-
-void print_array(int rows, int columns, int array[rows*columns]) {
-    int j, k;
-    for (j = 0; j < rows; ++j) {
-       for ( k = 0; k < columns; ++k )
-          printf("%d,", array[(j*columns)+k]);
-       printf("\b\n");
-    }
-}
-
 
 static MunitResult test_matrix(const MunitParameter params[], void* data)
 {
@@ -66,7 +45,6 @@ static MunitResult test_matrix(const MunitParameter params[], void* data)
     munit_assert_int(get_data(get_left(get_left(sparse_matrix)))->data, ==, 1);     // sum for 2nd-last column
 
     uncover_column(column);
-    // print_sparse_matrix_transpose(sparse_matrix, VSIZE);
     munit_assert_int(get_data(get_right(sparse_matrix))->data, ==, 8);              // sum for first column
     munit_assert_int(get_data(get_left(sparse_matrix))->data, ==, 5);               // sum for last column
     munit_assert_int(get_data(get_right(get_right(sparse_matrix)))->data, ==, 9);   // sum for second column
@@ -94,4 +72,3 @@ static const MunitSuite test_suite = {
 int main(int argc, char* argv[MUNIT_ARRAY_PARAM(argc + 1)]) {
   return munit_suite_main(&test_suite, (void*) "µnit", argc, argv);
 }
-                            
