@@ -22,12 +22,7 @@ PY_DIR = $(ROOT_DIR)/exact_cover_np
 CFLAGS = -g -Wall -Wstrict-prototypes -I $(INCLUDES_DIR)
 CFLAGS += -O0 -DDEBUG_LEVEL=0
 
-
 c_tests: run_test_quad_linked_list run_test_sparse_matrix run_munit
-
-tests: c_tests py_tests
-
-py_tests: test_exact_cover
 
 
 $(TEST_DIR)/test_quad_linked_list: $(OBJ_DIR)/quad_linked_list.o $(TEST_DIR)/test_quad_linked_list.c
@@ -81,16 +76,6 @@ run_test_sparse_matrix: $(TEST_DIR)/test_sparse_matrix
 $(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c
 	mkdir -pv $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
-
-
-exact_cover:
-	poetry run python build.py build_ext
-
-install_exact_cover: exact_cover
-	poetry run python build.py install
-
-test_exact_cover: install_exact_cover
-	poetry run test
 
 
 clean:
