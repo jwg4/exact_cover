@@ -43,7 +43,7 @@ run_test_%: $(TEST_DIR)/test_%
 $(TEST_DIR)/test_quad_linked_list: $(OBJ_DIR)/quad_linked_list.o $(TEST_DIR)/test_quad_linked_list.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
-$(TEST_DIR)/test_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(TEST_DIR)/test_sparse_matrix.c
+$(TEST_DIR)/test_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(TEST_DIR)/test_sparse_matrix.c $(OBJ_DIR)/munit.o
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 
