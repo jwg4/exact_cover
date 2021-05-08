@@ -60,6 +60,10 @@ $(TEST_DIR)/test_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 
+all:
+	echo "Make is used only for building and running C tests."
+	echo "To build, install or test the Python package, use poetry."
+
 clean:
 	rm -rf $(OBJ_DIR)/*.o $(PY_DIR)/build $(PY_DIR)/exact_cover_np.so \
 		$(TEST_DIR)/test_dlx $(TEST_DIR)/test_quad_linked_list $(TEST_DIR)/test_sparse_matrix \
