@@ -22,23 +22,21 @@ PY_DIR = $(ROOT_DIR)/exact_cover_np
 CFLAGS = -g -Wall -Wstrict-prototypes -I $(INCLUDES_DIR)
 CFLAGS += -O0 -DDEBUG_LEVEL=0
 
+
 c_tests: run_test_quad_linked_list run_test_sparse_matrix run_munit
 
 
-$(OBJ_DIR)/munit.o: $(TEST_DIR)/munit.c
+$(OBJ_DIR):
 	mkdir -pv $(OBJ_DIR)
+
+
+$(OBJ_DIR)/quad_linked_list.o: $(SRC_DIR)/quad_linked_list.c $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
-$(OBJ_DIR)/quad_linked_list.o: $(SRC_DIR)/quad_linked_list.c
-	mkdir -pv $(OBJ_DIR)
+$(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
-$(OBJ_DIR)/dlx.o: $(SRC_DIR)/dlx.c
-	mkdir -pv $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
-
-$(OBJ_DIR)/sparse_matrix.o: $(SRC_DIR)/sparse_matrix.c
-	mkdir -pv $(OBJ_DIR)
+$(OBJ_DIR)/sparse_matrix.o: $(SRC_DIR)/sparse_matrix.c $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
 
@@ -53,6 +51,10 @@ $(TEST_DIR)/test_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_
 
 run_test_sparse_matrix: $(TEST_DIR)/test_sparse_matrix
 	$^
+
+
+$(OBJ_DIR)/munit.o: $(TEST_DIR)/munit.c $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
 
 $(TEST_DIR)/test_m_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_m_sparse_matrix.c
