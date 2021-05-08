@@ -100,9 +100,11 @@ Repository
 - tests/ Tests for both the Python package and the C code.
 - tools/ Code used in analysing and working with the library. This is not distributed with the package.
 
-Acknowledgement
----------------
+Acknowledgements
+----------------
 
 Thanks very much to Moy Easwaran (https://github.com/moygit) for his inspiring work!
+
+Munit aka µnit (https://nemequ.github.io/munit/) is a wonderful unit testing framework for C code.
 
 
