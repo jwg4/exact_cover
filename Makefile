@@ -47,6 +47,9 @@ $(TEST_DIR)/test_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 
+$(OBJ_DIR)/munit.o: $(TEST_DIR)/munit.c $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
+
 $(TEST_DIR)/test_m_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_m_sparse_matrix.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
