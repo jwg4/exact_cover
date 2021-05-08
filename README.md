@@ -1,7 +1,8 @@
 Finding Exact Covers in NumPy
 =============================
 
-[![PyPI version](https://badge.fury.io/py/exact-cover.svg)](https://badge.fury.io/py/exact-cover)
+[![PyPi version](https://pypip.in/v/exact_cover/badge.png)](https://crate.io/packages/exact_cover/)
+[![PyPi downloads](https://pypip.in/d/exact_cover/badge.png)](https://crate.io/packages/exact_cover/)
 ![Deploy wheels to pypi](https://github.com/jwg4/exact_cover/workflows/Deploy%20wheels%20to%20pypi/badge.svg)
 ![Run Python tests](https://github.com/jwg4/exact_cover/workflows/Run%20Python%20tests/badge.svg)
 
