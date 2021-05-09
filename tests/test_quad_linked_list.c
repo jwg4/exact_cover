@@ -5,16 +5,39 @@
 #include "quad_linked_list.h"
 
 
+static MunitResult test_new_list_is_empty(const MunitParameter params[], void* data)
+{
+    list my_list = create_empty_list();
+    
+    munit_assert(is_empty(my_list));
+    return MUNIT_OK;
+}
+
+static MunitResult test_add_one_item(const MunitParameter params[], void* data)
+{
+    int item1 = 1;
+    list my_list = create_empty_list();
+    
+    my_list = insert_horizontally(my_list, create_node(create_data(item1, NULL)));
+    munit_assert(not_empty(my_list));
+    return MUNIT_OK;
+}
+
+static MunitResult test_can_retrieve_one_item(const MunitParameter params[], void* data)
+{
+    int item1 = 1;
+    list my_list = create_empty_list();
+   
+    my_list = insert_horizontally(my_list, create_node(create_data(item1, NULL)));
+    munit_assert(get_data(my_list)->data == 1);
+    return MUNIT_OK;
+}
+
 static MunitResult test_quad_linked_list(const MunitParameter params[], void* data)
 {
     int item1 = 1, item2 = 2, item3 = 3;
     list save_list, my_list = create_empty_list();
-    // New list should be empty:
     
-    // Horizontal tests:
-    //DEBUG_PRINT(1, "Starting horizontal tests.\n");
-
-    //DEBUG_PRINT(1, "Check: emptiness.\n");
     munit_assert(is_empty(my_list));
     my_list = insert_horizontally(my_list, create_node(create_data(item3, NULL)));
     // Inserted one item; list should not be empty:
@@ -191,6 +214,9 @@ static MunitResult test_quad_linked_list(const MunitParameter params[], void* da
 }
 
 static MunitTest test_suite_tests[] = {
+  { (char*) "create empty list", test_new_list_is_empty, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "add one item", test_add_one_item, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "retrieve one item", test_can_retrieve_one_item, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { (char*) "test_linked_list_manipulation", test_quad_linked_list, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
