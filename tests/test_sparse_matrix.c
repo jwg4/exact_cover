@@ -9,6 +9,38 @@
 #define VSIZE 15
  
 
+static MunitResult test_choose_column_with_min_data(const MunitParameter params[], void* data)
+{
+    int matrix[VSIZE*HSIZE] =
+        {
+ // sums: 8, 9, 8,11, 7,10, 8, 5, 5
+          0, 1, 0, 1, 0, 0, 0, 1, 0,
+          1, 1, 1, 1, 1, 1, 1, 0, 1,
+          1, 0, 0, 1, 0, 1, 1, 1, 0,
+          1, 0, 1, 1, 0, 1, 1, 1, 0,
+          1, 1, 1, 1, 0, 0, 0, 1, 1,
+          1, 0, 1, 1, 1, 0, 1, 1, 1,
+          0, 1, 0, 1, 1, 1, 1, 0, 0,
+          0, 1, 0, 0, 1, 0, 0, 0, 0,
+          1, 1, 1, 0, 0, 0, 1, 0, 0,
+          0, 1, 1, 1, 1, 1, 1, 0, 1,
+          1, 1, 1, 0, 0, 1, 1, 0, 0,
+          0, 1, 0, 1, 1, 1, 0, 0, 1,
+          0, 0, 0, 1, 1, 1, 0, 0, 0,
+          0, 0, 0, 0, 0, 1, 0, 0, 0,
+          1, 0, 1, 1, 0, 1, 0, 0, 0
+        };
+
+    list sparse_matrix = create_sparse(VSIZE, HSIZE, matrix);
+    list column;
+
+    // The min value is guaranteed to be less than VSIZE + 1
+    column = choose_column_with_min_data(sparse_matrix, VSIZE + 1);
+    munit_assert_int(get_data(column)->data, ==, 5);
+
+    return MUNIT_OK;
+}
+
 static MunitResult test_matrix(const MunitParameter params[], void* data)
 {
     int matrix[VSIZE*HSIZE] =
@@ -34,9 +66,6 @@ static MunitResult test_matrix(const MunitParameter params[], void* data)
     list sparse_matrix = create_sparse(VSIZE, HSIZE, matrix);
     list column;
 
-    column = choose_column_with_min_data(sparse_matrix, VSIZE + 1); // VSIZE + 1 is an arbitrary number >= min
-    munit_assert_int(get_data(column)->data, ==, 5);                            // should have sum for 2nd-last column
-
     column = get_right(sparse_matrix);
     cover_column(column);
     munit_assert_int(get_data(get_right(sparse_matrix))->data, ==, 5);              // sum for first column
@@ -56,6 +85,7 @@ static MunitResult test_matrix(const MunitParameter params[], void* data)
 
 static MunitTest test_suite_tests[] = {
   { (char*) "test_covering_and_uncovering", test_matrix, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "test_choose_column_with_min_data", test_choose_column_with_min_data, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
