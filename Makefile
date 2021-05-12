@@ -64,5 +64,5 @@ all:
 
 clean:
 	rm -rf $(OBJ_DIR)/*.o $(PY_DIR)/build $(PY_DIR)/exact_cover_np.so \
-		$(TEST_DIR)/test_dlx $(TEST_DIR)/test_quad_linked_list $(TEST_DIR)/test_sparse_matrix \
+		$(TEST_DIR)/test_dlx $(TEST_DIR)/test_quad_linked_list $(TEST_DIR)/test_sparse_matrix $(TEST_DIR)/test_legacy_dlx $(TEST_DIR)/test_sparse_matrix_2 \
 		$(SRC_DIR)/*.pyc
