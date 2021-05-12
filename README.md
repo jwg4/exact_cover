@@ -26,7 +26,8 @@ S* is a bunch of subsets of X whose union is X, and which have
 empty intersection with each other.  (Example below; more details [on
 wikipedia](https://en.wikipedia.org/wiki/Exact_cover).)
 
-This NumPy module uses Donald Knuth's Algorithm X to find
+This NumPy module uses Donald Knuth's Algorithm X
+(also known as Dancing Links) to find
 exact covers of sets.
 For details on Algorithm X please see either
 [the Wikipedia page](https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X)
@@ -36,8 +37,8 @@ Dancing Links for efficient backtracking.  Please see
 [Knuth's paper](http://arxiv.org/pdf/cs/0011047v1)
 for details.
 
-How to Use It (Example)
------------------------
+How to Use It
+-------------
 
 Suppose X = {0,1,2,3,4}, and suppose S = {A,B,C,D}, where
 
@@ -89,20 +90,44 @@ The NumPy module (`exact_cover`) is implemented in four pieces:
 - `exact_cover` provides the glue code letting us invoke
   `dlx` on NumPy arrays.
 
+The package now has some pure Python modules for helper functions, with the main algorithm in the C-only package `exact_cover_impl`.
+
+How to develop
+--------------
+
+The package uses poetry and most of the setup for development uses that tool.
+
+To install locally (as an editable package):
+`poetry install`
+
+To build:
+`poetry build`
+
+To run tests:
+`poetry run test` or `poetry run doctest`
+
+To open a Python shell with the package available:
+`poetry run python`
+
+The exception is running the C unit tests:
+`make c_tests`
+
 Repository
 ----------
 
 - build/ The location where files are built.
 - dist/ The location for fully prepared files.
-- exact_cover/ The build tool 'poetry', seems to need this folder with a dummy python file so it doesn't worry about there not being any package.
+- exact_cover/ The Python code.
 - obj/ Where the compiled C code is going to be output.
 - src/ The C sources.
 - tests/ Tests for both the Python package and the C code.
 - tools/ Code used in analysing and working with the library. This is not distributed with the package.
 
-Acknowledgement
----------------
+Acknowledgements
+----------------
 
 Thanks very much to Moy Easwaran (https://github.com/moygit) for his inspiring work!
+
+Munit aka µnit (https://nemequ.github.io/munit/) is a wonderful unit testing framework for C code.
 
 

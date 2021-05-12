@@ -1,157 +1,129 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-
-#include "debug.h"
-#include "dlx.h"
 #include "munit.h"
-
-#define VSIZE 729
-#define HSIZE 324
+#include "../src/dlx.h"
 
 
-void read_csv(char filename[], int rows, int cols, int array[rows*cols]) {
-    FILE *file = fopen(filename, "r");
-    int i, j;
-    char buffer[cols*5], *ptr;
-    for ( i = 0; fgets(buffer, sizeof buffer, file); ++i )
-       for ( j = 0, ptr = buffer; j < cols; ++j, ++ptr )
-          array[(i*cols)+j] = (int)strtol(ptr, &ptr, 10);
-    fclose(file);
-}
+static MunitResult
+test_get_one_row_result(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
 
-void print_array(int rows, int columns, int array[rows*columns]) {
-    int j, k;
-    for (j = 0; j < rows; ++j) {
-       for ( k = 0; k < columns; ++k )
-          printf("%d,", array[(j*columns)+k]);
-       printf("\b\n");
-    }
+  int row_count = 1;
+  int col_count = 3;
+  int array[] = {1, 1, 1};
+  int solution[] = {0};
+
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  munit_assert(length == 1);
+
+  return MUNIT_OK;
 }
 
 static MunitResult
-test_simple_example(const MunitParameter params[], void* data) {
-    int matrix[6*7] =  // Knuth's example
-            {
-              0, 0, 1, 0, 1, 1, 0,
-              1, 0, 0, 1, 0, 0, 1,
-              0, 1, 1, 0, 0, 1, 0,
-              1, 0, 0, 1, 0, 0, 0,
-              0, 1, 0, 0, 0, 0, 1,
-              0, 0, 0, 1, 1, 0, 1
-            };
+test_get_two_row_result(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
 
-    int *solution = malloc(VSIZE * sizeof(*solution));
-    int result = dlx_get_exact_cover(6,7,matrix,solution);
-    munit_assert(result == 3);
-    munit_assert(solution[0] == 3);
-    munit_assert(solution[1] == 0);
-    munit_assert(solution[2] == 4);
+  int row_count = 2;
+  int col_count = 3;
+  int array[] = {1, 0, 0, 0, 1, 1};
+  int solution[] = {0, 0};
 
-    return MUNIT_OK;
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  munit_assert(length == 2);
+  munit_assert_int(solution[0], ==, 0);
+  munit_assert_int(solution[1], ==, 1);
+
+  return MUNIT_OK;
 }
 
 
 static MunitResult
-test_simple_negative_example(const MunitParameter params[], void* data) {
-    int *solution = malloc(VSIZE * sizeof(*solution));
-    int matrix2[6*7] =
-            {
-              1, 0, 1, 1, 1, 1, 1,
-              1, 0, 0, 1, 0, 0, 1,
-              0, 1, 1, 0, 0, 1, 0,
-              1, 0, 0, 1, 0, 0, 0,
-              0, 1, 0, 0, 0, 0, 1,
-              0, 0, 0, 1, 1, 0, 1
-            };
-    int result = dlx_get_exact_cover(6,7,matrix2,solution);
-    munit_assert(result == 0);
-    munit_assert((solution[0] == 0) && (solution[1] == 0));
+test_get_multiple_row_result(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
 
-    return MUNIT_OK;
+  int row_count = 4;
+  int col_count = 3;
+  int array[] = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1};
+  int solution[] = {0, 0, 0, 0};
+
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  munit_assert(length == 3);
+  munit_assert_int(solution[0], ==, 2);
+  munit_assert_int(solution[1], ==, 1);
+  munit_assert_int(solution[2], ==, 3);
+  munit_assert_int(solution[3], ==, 0);
+
+  return MUNIT_OK;
 }
 
 static MunitResult
-test_very_simple_large_example(const MunitParameter params[], void* data) {
-    int result;
-    int *solution = malloc(VSIZE * sizeof(*solution));
-    int matrix3[9*9] =
-        {
-          1, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 1, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 1, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 1, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 1, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 1, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 1, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 1, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 1
-        };
-    result = dlx_get_exact_cover(9,9,matrix3,solution);
-    munit_assert(result == 9);
-    munit_assert((solution[0] != 0) || (solution[1] != 0));
+test_correct_zeroing_out(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
 
-    return MUNIT_OK;
+  int row_count = 4;
+  int col_count = 3;
+  int array[] = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1};
+  int solution[] = {-1, -1, -1, -1};
+
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  munit_assert(length == 3);
+  munit_assert_int(solution[0], ==, 2);
+  munit_assert_int(solution[1], ==, 1);
+  munit_assert_int(solution[2], ==, 3);
+  munit_assert_int(solution[3], ==, 0);
+
+  return MUNIT_OK;
 }
 
 static MunitResult
-test_large_example_from_csv(const MunitParameter params[], void* data) {
-    int result;
-    int *solution = malloc(VSIZE * sizeof(*solution));
+test_correct_zeroing_out_2(const MunitParameter params[], void* data) {
+  (void) params;
+  (void) data;
 
-    int matrix4[64*64];
-    char filename[] = "tests/files/con4.csv";
-    read_csv(filename, 64, 64, matrix4);
-    result = dlx_get_exact_cover(64,64,matrix4,solution);
-    munit_assert(result == 16);
-    munit_assert(solution[0] == 0);
-    munit_assert(solution[1] == 26);
-    munit_assert(solution[2] == 37);
-    munit_assert(solution[3] == 23);
-    munit_assert(solution[15] == 57);
+  int row_count = 4;
+  int col_count = 3;
+  int array[] = {0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1};
+  int solution[] = {-1, -1, -1, -1};
 
-    return MUNIT_OK;
-}
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  munit_assert(length == 2);
+  munit_assert_int(solution[0], ==, 1);
+  munit_assert_int(solution[1], ==, 3);
+  munit_assert_int(solution[2], ==, 0);
+  munit_assert_int(solution[3], ==, 0);
 
-static MunitResult
-test_large_example_from_csv_2(const MunitParameter params[], void* data) {
-    int result;
-    int *solution = malloc(VSIZE * sizeof(*solution));
-
-    int matrix5[VSIZE*HSIZE];
-    char filename2[] = "tests/files/con2.csv";
-    read_csv(filename2, VSIZE, HSIZE, matrix5);
-    result = dlx_get_exact_cover(VSIZE,HSIZE,matrix5,solution);
-    munit_assert(result == 81);
-    munit_assert(solution[0] == 11);
-    munit_assert(solution[1] == 22);
-    munit_assert(solution[2] == 28);
-    munit_assert(solution[3] == 44);
-    munit_assert(solution[80] == 725);
-
-    return MUNIT_OK;
+  return MUNIT_OK;
 }
 
 static MunitTest test_suite_tests[] = {
-  { (char*) "example_from_Knuth_paper", test_simple_example, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { (char*) "negative_example_from_Knuth_paper", test_simple_negative_example, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { (char*) "trivial_example", test_very_simple_large_example, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { (char*) "large_example_from_csv", test_large_example_from_csv, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-  { (char*) "large_example_from_csv_2", test_large_example_from_csv_2, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "one_row_problem", test_get_one_row_result, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "two_row_problem", test_get_two_row_result, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "bigger_simple_problem", test_get_multiple_row_result, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "zero_out_array_correctly", test_correct_zeroing_out, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+  { (char*) "zero_out_array_start_and_end", test_correct_zeroing_out_2, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
   { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
 
 static const MunitSuite test_suite = {
-  (char*) "legacy_dlx_tests/",
+  (char*) "test_search_for_cover/",
   test_suite_tests,
   NULL,
   1,
   MUNIT_SUITE_OPTION_NONE
 };
 
+/* This is only necessary for EXIT_SUCCESS and EXIT_FAILURE, which you
+ * *should* be using but probably aren't (no, zero and non-zero don't
+ * always mean success and failure).  I guess my point is that nothing
+ * about µnit requires it. */
+#include <stdlib.h>
+
 int main(int argc, char* argv[MUNIT_ARRAY_PARAM(argc + 1)]) {
-    return munit_suite_main(&test_suite, (void*) "µnit", argc, argv);
+  /* Finally, we'll actually run our test suite!  That second argument
+   * is the user_data parameter which will be passed either to the
+   * test or (if provided) the fixture setup function. */
+  return munit_suite_main(&test_suite, (void*) "µnit", argc, argv);
 }
-
-
