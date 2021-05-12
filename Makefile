@@ -23,9 +23,7 @@ CFLAGS = -g -Wall -Wstrict-prototypes -I $(INCLUDES_DIR)
 CFLAGS += -O0 -DDEBUG_LEVEL=0
 
 
-c_tests: run_test_quad_linked_list run_test_sparse_matrix run_munit
-
-run_munit: run_test_m_sparse_matrix run_test_m_dlx run_test_m_legacy_dlx
+c_tests: run_test_quad_linked_list run_test_sparse_matrix run_test_sparse_matrix_2 run_test_dlx run_test_legacy_dlx
 
 
 $(OBJ_DIR):
@@ -40,23 +38,23 @@ run_test_%: $(TEST_DIR)/test_%
 	$^
 
 
+$(OBJ_DIR)/munit.o: $(TEST_DIR)/munit.c $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
+
+
 $(TEST_DIR)/test_quad_linked_list: $(OBJ_DIR)/quad_linked_list.o $(TEST_DIR)/test_quad_linked_list.c $(OBJ_DIR)/munit.o
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 $(TEST_DIR)/test_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(TEST_DIR)/test_sparse_matrix.c $(OBJ_DIR)/munit.o
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
-
-$(OBJ_DIR)/munit.o: $(TEST_DIR)/munit.c $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
-
-$(TEST_DIR)/test_m_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_m_sparse_matrix.c
+$(TEST_DIR)/test_sparse_matrix_2: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_sparse_matrix_2.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
-$(TEST_DIR)/test_m_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_m_dlx.c
+$(TEST_DIR)/test_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_dlx.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
-$(TEST_DIR)/test_m_legacy_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_m_legacy_dlx.c
+$(TEST_DIR)/test_legacy_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_legacy_dlx.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 
