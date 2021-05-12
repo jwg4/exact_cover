@@ -68,10 +68,10 @@ static MunitResult test_cover_column(const MunitParameter params[], void* data)
 
     column = get_right(sparse_matrix);
     cover_column(column);
-    munit_assert_int(get_data(get_right(sparse_matrix))->data, ==, 5);              // sum for first column
-    munit_assert_int(get_data(get_left(sparse_matrix))->data, ==, 2);               // sum for last column
-    munit_assert_int(get_data(get_right(get_right(sparse_matrix)))->data, ==, 1);   // sum for second column
-    munit_assert_int(get_data(get_left(get_left(sparse_matrix)))->data, ==, 1);     // sum for 2nd-last column
+    munit_assert_int(get_data(get_right(sparse_matrix))->data, ==, 5);
+    munit_assert_int(get_data(get_left(sparse_matrix))->data, ==, 2);
+    munit_assert_int(get_data(get_right(get_right(sparse_matrix)))->data, ==, 1);
+    munit_assert_int(get_data(get_left(get_left(sparse_matrix)))->data, ==, 1);
 
     destroy_entire_grid(sparse_matrix);
     return MUNIT_OK;
@@ -106,10 +106,10 @@ static MunitResult test_cover_and_uncover_column(const MunitParameter params[], 
     cover_column(column);
     uncover_column(column);
 
-    munit_assert_int(get_data(get_right(sparse_matrix))->data, ==, 8);              // sum for first column
-    munit_assert_int(get_data(get_left(sparse_matrix))->data, ==, 5);               // sum for last column
-    munit_assert_int(get_data(get_right(get_right(sparse_matrix)))->data, ==, 9);   // sum for second column
-    munit_assert_int(get_data(get_left(get_left(sparse_matrix)))->data, ==, 5);     // sum for 2nd-last column
+    munit_assert_int(get_data(get_right(sparse_matrix))->data, ==, 8);
+    munit_assert_int(get_data(get_left(sparse_matrix))->data, ==, 5);
+    munit_assert_int(get_data(get_right(get_right(sparse_matrix)))->data, ==, 9);
+    munit_assert_int(get_data(get_left(get_left(sparse_matrix)))->data, ==, 5);
 
     destroy_entire_grid(sparse_matrix);
     return MUNIT_OK;
