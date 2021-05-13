@@ -5,11 +5,11 @@ from exact_cover.helpers import is_solution
 
 
 def test_small_sudoku_problem():
-    matrix = np.genfromtxt("tests/files/small_sudoku.csv")
+    matrix = np.genfromtxt("tests/files/small_sudoku.csv", dtype=np.int32)
     assert matrix.shape == (64, 64)
 
 
 def test_solve_small_sudoku_problem():
-    matrix = np.genfromtxt("tests/files/small_sudoku.csv")
+    matrix = np.genfromtxt("tests/files/small_sudoku.csv", dtype=np.int32)
     solution = get_exact_cover(matrix)
     assert is_solution(solution, matrix)
