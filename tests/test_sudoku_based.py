@@ -11,7 +11,7 @@ def test_small_sudoku_problem():
     col_sums = np.sum(matrix, axis=0)
     assert all(col_sums <= 4)
     row_sums = np.sum(matrix, axis=1)
-    assert all(row_sums == 0 or row_sums == 4)
+    assert np.isin(row_sums, [0, 4]).all()
 
 
 def test_solve_small_sudoku_problem():
