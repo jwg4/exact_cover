@@ -28,6 +28,7 @@ def test_reduce_with_solution(a):
     assert result.shape[1] <= a.shape[1]
 
 
+@settings(deadline=None)
 @given(array_without_solution)
 def test_reduce_without_solution(a):
     try:

@@ -6,6 +6,7 @@ from hypothesis.strategies import composite, one_of, permutations
 from hypothesis.strategies import just
 
 from exact_cover import get_exact_cover
+from exact_cover.io import load_problem
 
 
 @composite
@@ -59,7 +60,7 @@ def array_with_trivial_solution(draw):
 
 
 large_problems_with_solution = one_of(
-    just(np.genfromtxt("tests/files/pentominos_chessboard.csv", dtype=np.int32)),
+    just(load_problem("tests/files/pentominos_chessboard.csv")),
 )
 
 array_with_solution = one_of(
@@ -115,9 +116,10 @@ def exact_cover_problem_with_abc(draw):
 
 
 large_problems_without_solution = one_of(
+    # This was not saved in canonical format.
     just(np.genfromtxt("tests/files/cylinder.csv", dtype=np.int32, delimiter=",")),
-    just(np.genfromtxt("tests/files/reduced.csv", dtype=np.int32)),
-    just(np.genfromtxt("tests/files/part_reduced.csv", dtype=np.int32)),
+    just(load_problem("tests/files/reduced.csv")),
+    just(load_problem("tests/files/part_reduced.csv")),
 )
 
 
