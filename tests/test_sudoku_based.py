@@ -18,3 +18,9 @@ def test_solve_small_sudoku_problem():
     matrix = load_problem("tests/files/small_sudoku.csv")
     solution = get_exact_cover(matrix)
     assert is_solution(solution, matrix)
+
+
+def test_solve_small_empty_sudoku_problem():
+    matrix = load_problem("tests/files/small_empty_sudoku.csv")
+    solution = get_exact_cover(matrix)
+    assert is_solution(solution, matrix)

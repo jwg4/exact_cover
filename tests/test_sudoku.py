@@ -14,16 +14,6 @@ def check(con_matrix):
     return sum
 
 
-def test_solving_empty_mini_sudoku():
-    sudo = sudoku.Sudoku(4)
-    sudo._sudo = np.zeros((4, 4), dtype="int")
-    con_matrix = sudo._translate_into_constraint_matrix()
-    # A hard-coded checksum of the output.
-    # There should only be one solution,
-    # however we should ideally check the result directly
-    assert check(con_matrix) == 73786976294838206460
-
-
 def test_solving_trivial_sudoku():
     sudo = sudoku.Sudoku(9)
     sudo.read(
