@@ -64,7 +64,7 @@ def test_split_arbitrary_problem(a):
         assert True
 
 
-@given(all_problems, integers(2, 30))
+@given(all_problems, integers(2, 100))
 @settings(deadline=None)
 def test_correct_number_of_splits(a, n):
     try:
