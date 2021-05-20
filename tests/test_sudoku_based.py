@@ -24,3 +24,39 @@ def test_solve_small_empty_sudoku_problem():
     matrix = load_problem("tests/files/small_empty_sudoku.csv")
     solution = get_exact_cover(matrix)
     assert is_solution(solution, matrix)
+
+
+def test_solve_trivial_sudoku_problem():
+    matrix = load_problem("tests/files/trivial_sudoku.csv")
+    solution = get_exact_cover(matrix)
+    assert is_solution(solution, matrix)
+
+
+def test_solve_easy_sudoku_problem():
+    matrix = load_problem("tests/files/easy_sudoku.csv")
+    solution = get_exact_cover(matrix)
+    assert is_solution(solution, matrix)
+
+
+def test_solve_medium_sudoku_problem():
+    matrix = load_problem("tests/files/medium_sudoku.csv")
+    solution = get_exact_cover(matrix)
+    assert is_solution(solution, matrix)
+
+
+def test_solve_hard_sudoku_problem():
+    matrix = load_problem("tests/files/hard_sudoku.csv")
+    solution = get_exact_cover(matrix)
+    assert is_solution(solution, matrix)
+
+
+def test_solve_very_hard_sudoku_problem():
+    matrix = load_problem("tests/files/very_hard_sudoku.csv")
+    solution = get_exact_cover(matrix)
+    assert is_solution(solution, matrix)
+
+
+def test_solve_impossible_sudoku_problem():
+    matrix = load_problem("tests/files/impossible_sudoku.csv")
+    solution = get_exact_cover(matrix)
+    assert not solution
