@@ -4,6 +4,13 @@ from exact_cover import get_exact_cover
 from exact_cover.helpers import is_solution
 from exact_cover.io import load_problem
 
+# These problems were originally sudoku problems specified 
+# as values and blanks of the sudoku grid. Since this package
+# doesn't include code for manipulating or building sudoku
+# problems any more, the sudoku formulation was removed, but 
+# the underlying exact cover problems were kept, because they
+# are good tests of the algorithm.
+
 
 def test_small_sudoku_problem():
     matrix = load_problem("tests/files/small_sudoku.csv")
