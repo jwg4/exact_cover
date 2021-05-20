@@ -45,6 +45,12 @@ def test_solve_easy_sudoku_problem():
     assert is_solution(solution, matrix)
 
 
+def test_solve_easy_sudoku_problem_2():
+    matrix = load_problem("tests/files/easy_sudoku_2.csv")
+    solution = get_exact_cover(matrix)
+    assert is_solution(solution, matrix)
+
+
 def test_solve_medium_sudoku_problem():
     matrix = load_problem("tests/files/medium_sudoku.csv")
     solution = get_exact_cover(matrix)
@@ -59,6 +65,12 @@ def test_solve_hard_sudoku_problem():
 
 def test_solve_very_hard_sudoku_problem():
     matrix = load_problem("tests/files/very_hard_sudoku.csv")
+    solution = get_exact_cover(matrix)
+    assert is_solution(solution, matrix)
+
+
+def test_solve_very_hard_sudoku_problem_2():
+    matrix = load_problem("tests/files/very_hard_sudoku_2.csv")
     solution = get_exact_cover(matrix)
     assert is_solution(solution, matrix)
 
