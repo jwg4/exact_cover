@@ -50,7 +50,7 @@ def split_problem(a, n):
     while len(queue) < n:
         for sub in _split_problem_once(queue.popleft()):
             queue.append(sub)
-    return list(queue)
+    yield from queue
 
 
 def _split_problem_once(a):
