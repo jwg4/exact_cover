@@ -95,7 +95,10 @@ def test_many_splits_without_solution(a):
 @settings(deadline=None)
 def test_many_splits_with_solution(a):
     n = 1000
-    result = list(split_problem(a, n))
+    # We count a list with the same number of elements, but each
+    # is None. This is so that we don't flood our memory with
+    # more than 1000 large numpy arrays.
+    result = list(None for x in split_problem(a, n))
     assert len(result) >= n
     assert len(result) < n * a.shape[0]
 
