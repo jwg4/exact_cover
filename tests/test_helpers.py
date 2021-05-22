@@ -11,6 +11,8 @@ from .test_exact_cover_problems import (
     all_problems,
     array_with_solution,
     array_without_solution,
+    large_problems_with_solution,
+    large_problems_without_solution,
 )
 
 
@@ -75,6 +77,27 @@ def test_correct_number_of_splits(a, n):
         assert True
     except CannotSplitFurther:
         assert True
+
+
+@given(large_problems_without_solution)
+@settings(deadline=None)
+def test_many_splits_without_solution(a):
+    n = 1000
+    try:
+        result = list(split_problem(a, n))
+        assert len(result) >= n
+        assert len(result) < n * a.shape[0]
+    except NoSolution:
+        assert True
+
+
+@given(large_problems_with_solution)
+@settings(deadline=None)
+def test_many_splits_with_solution(a):
+    n = 1000
+    result = list(split_problem(a, n))
+    assert len(result) >= n
+    assert len(result) < n * a.shape[0]
 
 
 @given(all_problems, integers(2, 30))
