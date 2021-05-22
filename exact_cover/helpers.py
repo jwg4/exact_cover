@@ -1,8 +1,13 @@
+import logging
+
 from collections import deque
 
 import numpy as np
 
 from .error import NoSolution, CannotSplitFurther
+
+
+logger = logging.getLogger(__name__)
 
 
 def cut(a):
@@ -48,6 +53,7 @@ def split_problem(a, n):
     """
     queue = deque([a])
     while len(queue) < n:
+        logging.debug("Length of queue %s, splitting a problem" % (len(queue), ))
         for sub in _split_problem_once(queue.popleft()):
             queue.append(sub)
     yield from queue
