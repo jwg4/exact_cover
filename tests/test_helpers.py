@@ -1,6 +1,7 @@
 import numpy as np
 
 from hypothesis import given, settings
+from hypothesis import reproduce_failure
 from hypothesis.strategies import integers
 
 from exact_cover import get_exact_cover
@@ -79,6 +80,7 @@ def test_correct_number_of_splits(a, n):
         assert True
 
 
+@reproduce_failure('5.49.0', b'AAE=')
 @given(large_problems_without_solution)
 @settings(deadline=None)
 def test_many_splits_without_solution(a):
