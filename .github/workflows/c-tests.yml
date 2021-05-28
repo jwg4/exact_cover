@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build and Test
-      run: make c_tests
+      run: make run_c_suite
