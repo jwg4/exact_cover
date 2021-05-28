@@ -23,9 +23,6 @@ CFLAGS = -g -Wall -Wstrict-prototypes -I $(INCLUDES_DIR)
 CFLAGS += -O0 -DDEBUG_LEVEL=0
 
 
-c_tests: run_test_quad_linked_list run_test_sparse_matrix run_test_sparse_matrix_2 run_test_dlx run_test_legacy_dlx
-
-
 $(OBJ_DIR):
 	mkdir -pv $(OBJ_DIR)
 
@@ -34,28 +31,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
 
-run_test_%: $(TEST_DIR)/test_%
-	$^
-
-
 $(OBJ_DIR)/munit.o: $(TEST_DIR)/munit.c $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ -c $^
 
-
-$(TEST_DIR)/test_quad_linked_list: $(OBJ_DIR)/quad_linked_list.o $(TEST_DIR)/test_quad_linked_list.c $(OBJ_DIR)/munit.o
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
-
-$(TEST_DIR)/test_sparse_matrix: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(TEST_DIR)/test_sparse_matrix.c $(OBJ_DIR)/munit.o
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
-
-$(TEST_DIR)/test_sparse_matrix_2: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_sparse_matrix_2.c
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
-
-$(TEST_DIR)/test_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_dlx.c
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
-
-$(TEST_DIR)/test_legacy_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_legacy_dlx.c
-	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 run_c_suite: $(TEST_DIR)/test_c_suite
 	$^
@@ -69,5 +47,4 @@ all:
 
 clean:
 	rm -rf $(OBJ_DIR)/*.o $(PY_DIR)/build $(PY_DIR)/exact_cover_np.so \
-		$(TEST_DIR)/test_dlx $(TEST_DIR)/test_quad_linked_list $(TEST_DIR)/test_sparse_matrix $(TEST_DIR)/test_legacy_dlx $(TEST_DIR)/test_sparse_matrix_2 \
-		$(SRC_DIR)/*.pyc
+                $(TEST_DIR)/test_c_suite $(SRC_DIR)/*.pyc
