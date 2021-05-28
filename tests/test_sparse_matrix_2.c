@@ -132,7 +132,7 @@ static MunitTest test_suite_tests[] = {
 
 /* Now we'll actually declare the test suite.  You could do this in
  * the main function, or on the heap, or whatever you want. */
-static const MunitSuite test_suite = {
+const MunitSuite sparse_matrix_test_suite_2 = {
   (char*) "my tests",
   test_suite_tests,
   NULL,

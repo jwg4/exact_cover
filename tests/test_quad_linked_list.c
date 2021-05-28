@@ -222,7 +222,7 @@ static MunitTest test_suite_tests[] = {
 };
 
 
-static const MunitSuite test_suite = {
+const MunitSuite quad_linked_list_test_suite = {
   (char*) "test_quad_linked_list",
   test_suite_tests,
   NULL,

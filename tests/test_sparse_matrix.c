@@ -122,7 +122,7 @@ static MunitTest test_suite_tests[] = {
 };
 
 
-static const MunitSuite test_suite = {
+const MunitSuite sparse_matrix_test_suite = {
   (char*) "test_sparse_matrix",
   test_suite_tests,
   NULL,

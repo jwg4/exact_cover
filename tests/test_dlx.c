@@ -107,7 +107,7 @@ static MunitTest test_suite_tests[] = {
 };
 
 
-static const MunitSuite test_suite = {
+const MunitSuite dlx_test_suite = {
   (char*) "test_search_for_cover/",
   test_suite_tests,
   NULL,

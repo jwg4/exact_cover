@@ -142,7 +142,7 @@ static MunitTest test_suite_tests[] = {
 };
 
 
-static const MunitSuite test_suite = {
+const MunitSuite legacy_dlx_test_suite = {
   (char*) "legacy_dlx_tests/",
   test_suite_tests,
   NULL,
