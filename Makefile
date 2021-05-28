@@ -57,6 +57,11 @@ $(TEST_DIR)/test_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $
 $(TEST_DIR)/test_legacy_dlx: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_legacy_dlx.c
 	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
+run_c_suite: $(TEST_DIR)/test_c_suite
+	$^
+
+$(TEST_DIR)/test_c_suite: $(OBJ_DIR)/quad_linked_list.o $(OBJ_DIR)/sparse_matrix.o $(OBJ_DIR)/dlx.o $(OBJ_DIR)/munit.o $(TEST_DIR)/test_sparse_matrix.o $(TEST_DIR)/test_dlx.o $(TEST_DIR)/test_legacy_dlx.o $(TEST_DIR)/test_quad_linked_list.o $(TEST_DIR)/test_sparse_matrix_2.o $(TEST_DIR)/test_c_suite.o
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) -o $@ $^
 
 all:
 	echo "Make is used only for building and running C tests."
