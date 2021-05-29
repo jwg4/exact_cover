@@ -25,7 +25,11 @@ def exact_cover_problem(draw):
 @given(exact_cover_problem())
 def test_exact_cover(array_data):
     rowcount = len(array_data)
-    actual = get_exact_cover(array_data)
+    try:
+        actual = get_exact_cover(array_data)
+    except NoSolution:
+        assert True
+        return
     assert actual.size <= rowcount
     assert all(actual < rowcount)
 
