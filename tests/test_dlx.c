@@ -107,23 +107,10 @@ static MunitTest test_suite_tests[] = {
 };
 
 
-static const MunitSuite test_suite = {
+const MunitSuite dlx_test_suite = {
   (char*) "test_search_for_cover/",
   test_suite_tests,
   NULL,
   1,
   MUNIT_SUITE_OPTION_NONE
 };
-
-/* This is only necessary for EXIT_SUCCESS and EXIT_FAILURE, which you
- * *should* be using but probably aren't (no, zero and non-zero don't
- * always mean success and failure).  I guess my point is that nothing
- * about µnit requires it. */
-#include <stdlib.h>
-
-int main(int argc, char* argv[MUNIT_ARRAY_PARAM(argc + 1)]) {
-  /* Finally, we'll actually run our test suite!  That second argument
-   * is the user_data parameter which will be passed either to the
-   * test or (if provided) the fixture setup function. */
-  return munit_suite_main(&test_suite, (void*) "µnit", argc, argv);
-}

@@ -132,23 +132,10 @@ static MunitTest test_suite_tests[] = {
 
 /* Now we'll actually declare the test suite.  You could do this in
  * the main function, or on the heap, or whatever you want. */
-static const MunitSuite test_suite = {
+const MunitSuite sparse_matrix_test_suite_2 = {
   (char*) "my tests",
   test_suite_tests,
   NULL,
   1,
   MUNIT_SUITE_OPTION_NONE
 };
-
-/* This is only necessary for EXIT_SUCCESS and EXIT_FAILURE, which you
- * *should* be using but probably aren't (no, zero and non-zero don't
- * always mean success and failure).  I guess my point is that nothing
- * about µnit requires it. */
-#include <stdlib.h>
-
-int main(int argc, char* argv[MUNIT_ARRAY_PARAM(argc + 1)]) {
-  /* Finally, we'll actually run our test suite!  That second argument
-   * is the user_data parameter which will be passed either to the
-   * test or (if provided) the fixture setup function. */
-  return munit_suite_main(&test_suite, (void*) "µnit", argc, argv);
-}

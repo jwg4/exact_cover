@@ -122,15 +122,10 @@ static MunitTest test_suite_tests[] = {
 };
 
 
-static const MunitSuite test_suite = {
+const MunitSuite sparse_matrix_test_suite = {
   (char*) "test_sparse_matrix",
   test_suite_tests,
   NULL,
   1,
   MUNIT_SUITE_OPTION_NONE
 };
-
-
-int main(int argc, char* argv[MUNIT_ARRAY_PARAM(argc + 1)]) {
-  return munit_suite_main(&test_suite, (void*) "µnit", argc, argv);
-}
