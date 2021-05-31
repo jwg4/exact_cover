@@ -2,6 +2,7 @@ import pytest
 import numpy as np
 
 from exact_cover import get_exact_cover
+from exact_cover.error import NoSolution
 from exact_cover.helpers import is_solution
 from exact_cover.io import load_problem
 
