@@ -50,5 +50,5 @@ def test_complex_exact_cover_problem():
 
 @given(large_problems_without_solution)
 def test_no_solution(data):
-    actual = get_exact_cover(data)
-    assert actual.shape == (0,)
+    with pytest.raises(NoSolution):
+        get_exact_cover(data)
