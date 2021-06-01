@@ -75,6 +75,9 @@ def _split_problem_once(a):
 
 
 def is_solution(solution, problem):
-    cover = problem[solution, :]
+    try:
+        cover = problem[solution, :]
+    except IndexError:
+        return False
     count = np.sum(cover, axis=0)
     return min(count) == max(count) == 1
