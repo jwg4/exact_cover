@@ -130,7 +130,7 @@ def test_is_solution(a):
 @given(array_with_solution, integers(0, 100))
 def test_is_solution_fails_for_extra_rows(a, x):
     s = get_exact_cover(a)
-    assert not is_solution(s + [x], a)
+    assert not is_solution(list(s) + [x], a)
 
 
 @given(array_with_solution)
