@@ -75,6 +75,8 @@ def _split_problem_once(a):
 
 
 def is_solution(solution, problem):
+    if len(solution) != len(set(solution)):
+        return False
     try:
         cover = problem[solution, :]
     except IndexError:
