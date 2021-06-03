@@ -75,11 +75,20 @@ def _split_problem_once(a):
 
 
 def is_solution(solution, problem):
+    if len(solution) == 0:
+        logger.debug("No rows in solution.")
+        return False
     if len(solution) != len(set(solution)):
+        logger.debug("There are repeated row indices in the solution.")
         return False
     try:
         cover = problem[solution, :]
     except IndexError:
+        logger.debug("There are invalid row indices in the solution.")
+        return False
+    rowsums = np.sum(cover, axis=1)
+    if min(rowsums) < 1:
+        logger.debug("There are redundant (empty) rows in the solution.")
         return False
     count = np.sum(cover, axis=0)
     return min(count) == max(count) == 1
