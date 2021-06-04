@@ -60,7 +60,10 @@ def split_problem(a, n):
 
 
 def _split_problem_once(a):
-    m = np.argmax(a.sum(axis=0))
+    colsums = a.sum(axis=0)
+    if min(colsums) < 1:
+        raise NoSolution
+    m = np.argmax(colsums)
     x = a[:, m]
     if not a[x == 1].any():
         raise NoSolution
