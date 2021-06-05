@@ -70,8 +70,6 @@ def _split_problem_once(a):
         raise NoSolution
     m = np.argmax(colsums)
     x = a[:, m]
-    if not a[x == 1].any():
-        raise NoSolution
     if np.sum(x) < 2:
         raise CannotSplitFurther
     k = a.shape[0]
