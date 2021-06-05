@@ -1,7 +1,6 @@
 import numpy as np
 
 from hypothesis import given, settings
-from hypothesis import reproduce_failure
 from hypothesis.strategies import integers
 
 from exact_cover import get_exact_cover
