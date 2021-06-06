@@ -1,4 +1,7 @@
+import logging
+
 import numpy as np
+import pytest
 
 from hypothesis import given, settings
 from hypothesis.strategies import integers
@@ -91,14 +94,15 @@ def test_many_splits_without_solution(a):
         assert True
 
 
-@given(large_problems_with_solution)
+@given(array=large_problems_with_solution)
 @settings(deadline=None)
-def test_many_splits_with_solution(a):
+def test_many_splits_with_solution(caplog, array):
     n = 1000
     # We count a list with the same number of elements, but each
     # is None. This is so that we don't flood our memory with
     # more than 1000 large numpy arrays.
-    result = list(None for x in split_problem(a, n))
+    with caplog.at_level(logging.DEBUG):
+        result = list(None for x in split_problem(a, n))
     assert len(result) >= n
     assert len(result) < n * a.shape[0]
 
