@@ -55,10 +55,12 @@ def split_problem(a, n):
     while len(queue) < n:
         logging.debug("Length of queue %s, splitting a problem" % (len(queue),))
         try:
-            for sub in _split_problem_once(queue.popleft()):
-                queue.append(sub)
+            to_expand = queue.popleft()
         except IndexError:
             raise NoSolution
+        try:
+            for sub in _split_problem_once(to_expand):
+                queue.append(sub)
         except NoSolution:
             continue
     yield from queue
