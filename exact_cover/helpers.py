@@ -78,7 +78,8 @@ def _split_problem_once(a):
     for i in range(0, k):
         if a[i, m]:
             aa = a.copy()
-            aa[(x == 0) | np.identity(k, bool)[i], :] = 0
+            # Zero out all the rows with a 1 in column x, EXCEPT row i.
+            aa[(x == 1) & ~np.identity(k, bool)[i], :] = 0
             yield aa
 
 
