@@ -102,9 +102,9 @@ def test_many_splits_with_solution(caplog, array):
     # is None. This is so that we don't flood our memory with
     # more than 1000 large numpy arrays.
     with caplog.at_level(logging.DEBUG):
-        result = list(None for x in split_problem(a, n))
+        result = list(None for x in split_problem(array, n))
     assert len(result) >= n
-    assert len(result) < n * a.shape[0]
+    assert len(result) < n * array.shape[0]
 
 
 @given(all_problems, integers(2, 30))
