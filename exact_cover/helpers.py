@@ -69,6 +69,7 @@ def split_problem(a, n):
 def _split_problem_once(a):
     colsums = a.sum(axis=0)
     if min(colsums) < 1:
+        logging.debug("skipping %s because it doesn't have a solution", (colsums, ))
         raise NoSolution
     m = np.argmax(colsums)
     x = a[:, m]
