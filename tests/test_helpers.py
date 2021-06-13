@@ -101,7 +101,7 @@ def test_many_splits_with_solution(caplog, array):
     # We count a list with the same number of elements, but each
     # is None. This is so that we don't flood our memory with
     # more than 1000 large numpy arrays.
-    with caplog.at_level(logging.DEBUG):
+    with caplog.at_level(logging.INFO):
         result = list(None for x in split_problem(array, n))
     assert len(result) >= n
     assert len(result) < n * array.shape[0]
