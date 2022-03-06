@@ -1,3 +1,4 @@
+import pytest
 import numpy as np
 
 from hypothesis import given, example
@@ -6,6 +7,7 @@ from hypothesis.strategies import composite, one_of, permutations
 from hypothesis.strategies import just
 
 from exact_cover import get_exact_cover
+from exact_cover.error import NoSolution
 from exact_cover.io import load_problem
 
 
@@ -23,7 +25,11 @@ def exact_cover_problem(draw):
 @given(exact_cover_problem())
 def test_exact_cover(array_data):
     rowcount = len(array_data)
-    actual = get_exact_cover(array_data)
+    try:
+        actual = get_exact_cover(array_data)
+    except NoSolution:
+        assert True
+        return
     assert actual.size <= rowcount
     assert all(actual < rowcount)
 
@@ -132,8 +138,8 @@ array_without_solution = one_of(
 
 @given(array_without_solution)
 def test_exact_cover_without_solution(array_data):
-    actual = get_exact_cover(array_data)
-    assert actual.size == 0
+    with pytest.raises(NoSolution):
+        get_exact_cover(array_data)
 
 
 large_problems = one_of(

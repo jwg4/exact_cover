@@ -1,8 +1,10 @@
 import numpy as np
+import pytest
 
 from hypothesis import given
 
 from exact_cover import get_exact_cover
+from exact_cover.error import NoSolution
 from .helpers.polyomino_data import polyomino_problem
 from .test_exact_cover_problems import large_problems_without_solution
 
@@ -16,9 +18,8 @@ def test_exact_cover():
 
 def test_exact_cover_no_solution():
     data = np.array([[1, 0, 0], [0, 1, 0], [0, 1, 0], [0, 0, 0]], dtype=np.int32)
-    expected = np.array([])
-    actual = get_exact_cover(data)
-    np.testing.assert_array_equal(actual, expected)
+    with pytest.raises(NoSolution):
+        get_exact_cover(data)
 
 
 def test_simple_exact_cover():
@@ -49,5 +50,5 @@ def test_complex_exact_cover_problem():
 
 @given(large_problems_without_solution)
 def test_no_solution(data):
-    actual = get_exact_cover(data)
-    assert actual.shape == (0,)
+    with pytest.raises(NoSolution):
+        get_exact_cover(data)

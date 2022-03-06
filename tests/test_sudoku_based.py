@@ -1,6 +1,8 @@
+import pytest
 import numpy as np
 
 from exact_cover import get_exact_cover
+from exact_cover.error import NoSolution
 from exact_cover.helpers import is_solution
 from exact_cover.io import load_problem
 
@@ -77,5 +79,5 @@ def test_solve_very_hard_sudoku_problem_2():
 
 def test_solve_impossible_sudoku_problem():
     matrix = load_problem("tests/files/impossible_sudoku.csv")
-    solution = get_exact_cover(matrix)
-    assert solution.size == 0
+    with pytest.raises(NoSolution):
+        get_exact_cover(matrix)
