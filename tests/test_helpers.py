@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 
 from hypothesis import given, settings
@@ -11,6 +13,8 @@ from .test_exact_cover_problems import (
     all_problems,
     array_with_solution,
     array_without_solution,
+    large_problems_with_solution,
+    large_problems_without_solution,
 )
 
 
@@ -64,7 +68,7 @@ def test_split_arbitrary_problem(a):
         assert True
 
 
-@given(all_problems, integers(2, 30))
+@given(all_problems, integers(2, 100))
 @settings(deadline=None)
 def test_correct_number_of_splits(a, n):
     try:
@@ -75,6 +79,31 @@ def test_correct_number_of_splits(a, n):
         assert True
     except CannotSplitFurther:
         assert True
+
+
+@given(large_problems_without_solution)
+@settings(deadline=None)
+def test_many_splits_without_solution(a):
+    n = 1000
+    try:
+        result = list(split_problem(a, n))
+        assert len(result) >= n
+        assert len(result) < n * a.shape[0]
+    except NoSolution:
+        assert True
+
+
+@given(array=large_problems_with_solution)
+@settings(deadline=None)
+def test_many_splits_with_solution(caplog, array):
+    n = 1000
+    # We count a list with the same number of elements, but each
+    # is None. This is so that we don't flood our memory with
+    # more than 1000 large numpy arrays.
+    with caplog.at_level(logging.INFO):
+        result = list(None for x in split_problem(array, n))
+    assert len(result) >= n
+    assert len(result) < n * array.shape[0]
 
 
 @given(all_problems, integers(2, 30))
@@ -97,6 +126,18 @@ def test_solution_to_split_problem_solves_original_problem(a, n):
 def test_is_solution(a):
     s = get_exact_cover(a)
     assert is_solution(s, a)
+
+
+@given(array_with_solution)
+def test_list_is_solution(a):
+    s = list(get_exact_cover(a))
+    assert is_solution(s, a)
+
+
+@given(array_with_solution, integers(0, 100))
+def test_is_solution_fails_for_extra_rows(a, x):
+    s = get_exact_cover(a)
+    assert not is_solution(list(s) + [x], a)
 
 
 @given(array_with_solution)

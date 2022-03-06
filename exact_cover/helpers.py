@@ -1,8 +1,13 @@
+import logging
+
 from collections import deque
 
 import numpy as np
 
 from .error import NoSolution, CannotSplitFurther
+
+
+logger = logging.getLogger(__name__)
 
 
 def cut(a):
@@ -48,27 +53,52 @@ def split_problem(a, n):
     """
     queue = deque([a])
     while len(queue) < n:
-        for sub in _split_problem_once(queue.popleft()):
-            queue.append(sub)
-    return list(queue)
+        logging.debug("Length of queue %s, splitting a problem" % (len(queue),))
+        try:
+            to_expand = queue.popleft()
+        except IndexError:
+            raise NoSolution
+        try:
+            for sub in _split_problem_once(to_expand):
+                queue.append(sub)
+        except NoSolution:
+            continue
+    yield from queue
 
 
 def _split_problem_once(a):
-    m = np.argmax(a.sum(axis=0))
-    x = a[:, m]
-    if not a[x == 1].any():
+    colsums = a.sum(axis=0)
+    if min(colsums) < 1:
+        logging.debug("skipping %s because it doesn't have a solution", (colsums,))
         raise NoSolution
+    m = np.argmax(colsums)
+    x = a[:, m]
     if np.sum(x) < 2:
         raise CannotSplitFurther
     k = a.shape[0]
     for i in range(0, k):
         if a[i, m]:
             aa = a.copy()
-            aa[(x == 0) | np.identity(k, bool)[i], :] = 0
+            # Zero out all the rows with a 1 in column x, EXCEPT row i.
+            aa[(x == 1) & ~np.identity(k, bool)[i], :] = 0
             yield aa
 
 
 def is_solution(solution, problem):
-    cover = problem[solution, :]
+    if len(solution) == 0:
+        logger.debug("No rows in solution.")
+        return False
+    if len(solution) != len(set(solution)):
+        logger.debug("There are repeated row indices in the solution.")
+        return False
+    try:
+        cover = problem[solution, :]
+    except IndexError:
+        logger.debug("There are invalid row indices in the solution.")
+        return False
+    rowsums = np.sum(cover, axis=1)
+    if min(rowsums) < 1:
+        logger.debug("There are redundant (empty) rows in the solution.")
+        return False
     count = np.sum(cover, axis=0)
     return min(count) == max(count) == 1

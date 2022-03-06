@@ -136,6 +136,12 @@ def test_exact_cover_without_solution(array_data):
     assert actual.size == 0
 
 
+large_problems = one_of(
+    large_problems_with_solution,
+    large_problems_without_solution,
+)
+
+
 all_problems = one_of(
     exact_cover_problem(), array_with_solution, array_without_solution
 )
