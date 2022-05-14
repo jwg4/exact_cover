@@ -17,6 +17,7 @@ include = [
 python = "^3.7.1"
 numpy = "^1.20"
 setuptools = "^51.1.2"
+pytest-fail-slow = "^0.2.0"
 
 [tool.poetry.dev-dependencies]
 hypothesis = "^5.41.3"
@@ -29,6 +30,7 @@ script = "build.py"
 
 [tool.poetry.scripts]
 test = 'tools.run_tests:test'
+quicktest = 'tools.run_tests:quicktest'
 doctest = 'tools.run_tests:run_doctest'
 debug = 'tools.debug:run_debug'
 
