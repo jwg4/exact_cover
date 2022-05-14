@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exact_cover"
-version = "1.0.0-alpha.0"
+version = "1.0.0-alpha.1"
 description = "Solve exact cover problems"
 readme = "README.md"
 authors = ["Moy Easwaran"]
