@@ -2,7 +2,7 @@ import doctest
 
 import pytest
 
-from tests.config import GLOBAL_CONFIG
+from tests.config import GLOBAL_CONFIG  # noqa: F401
 
 
 def test():
