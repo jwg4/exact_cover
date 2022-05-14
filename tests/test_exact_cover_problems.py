@@ -10,6 +10,8 @@ from exact_cover import get_exact_cover
 from exact_cover.error import NoSolution
 from exact_cover.io import load_problem
 
+from tests.config import GLOBAL_CONFIG
+
 
 @composite
 def exact_cover_problem(draw):
@@ -23,6 +25,7 @@ def exact_cover_problem(draw):
 
 
 @given(exact_cover_problem())
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_exact_cover(array_data):
     rowcount = len(array_data)
     try:
@@ -79,6 +82,7 @@ array_with_solution = one_of(
 @example(np.array([[1, 1, 1]], dtype=np.int32))
 @example(np.array([[1, 0, 0], [0, 1, 1]], dtype=np.int32))
 @given(array_with_solution)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_exact_cover_with_solution(array_data):
     rowcount = len(array_data)
     actual = get_exact_cover(array_data)
@@ -137,6 +141,7 @@ array_without_solution = one_of(
 
 
 @given(array_without_solution)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_exact_cover_without_solution(array_data):
     with pytest.raises(NoSolution):
         get_exact_cover(array_data)
