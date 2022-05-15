@@ -1,3 +1,1 @@
-GLOBAL_CONFIG = {
-    "SKIP_SLOW": False
-}
+GLOBAL_CONFIG = {"SKIP_SLOW": False}

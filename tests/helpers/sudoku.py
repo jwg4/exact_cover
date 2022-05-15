@@ -36,8 +36,8 @@ class Sudoku:
         self._hardness = None
         self._size = size
         self._base = int(math.sqrt(size))
-        self._num_possibilities = self._size ** 3
-        self._num_constraints = 4 * self._size ** 2
+        self._num_possibilities = self._size**3
+        self._num_constraints = 4 * self._size**2
 
     def _print_usage(self):
         sys.stderr.write("Usage:\n")
@@ -102,12 +102,12 @@ class Sudoku:
         Set the constraints for each possible entry in the matrix.
         For details of these constraints please see <https://en.wikipedia.org/wiki/Exact_cover#Sudoku>.
         """
-        con_row = (row * self._size ** 2) + (col * self._size) + entry - 1
-        cell_con_col = (0 * self._size ** 2) + (row * self._size) + col
-        row_con_col = (1 * self._size ** 2) + (row * self._size) + entry - 1
-        col_con_col = (2 * self._size ** 2) + (col * self._size) + entry - 1
+        con_row = (row * self._size**2) + (col * self._size) + entry - 1
+        cell_con_col = (0 * self._size**2) + (row * self._size) + col
+        row_con_col = (1 * self._size**2) + (row * self._size) + entry - 1
+        col_con_col = (2 * self._size**2) + (col * self._size) + entry - 1
         box_con_col = (
-            (3 * self._size ** 2)
+            (3 * self._size**2)
             + self._size * (self._base * (row // self._base) + (col // self._base))
             + entry
             - 1
