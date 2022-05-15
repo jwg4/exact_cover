@@ -2,6 +2,8 @@ import logging
 
 import numpy as np
 
+import pytest
+
 from hypothesis import given, settings
 from hypothesis.strategies import integers
 
@@ -9,6 +11,7 @@ from exact_cover import get_exact_cover
 from exact_cover.helpers import reduce, split_problem, is_solution
 from exact_cover.error import NoSolution, CannotSplitFurther
 
+from .config import GLOBAL_CONFIG
 from .test_exact_cover_problems import (
     all_problems,
     array_with_solution,
@@ -26,6 +29,7 @@ def test_reduce():
 
 
 @given(array_with_solution)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_reduce_with_solution(a):
     result = reduce(a)
     assert result.shape[0] <= a.shape[0]
@@ -34,6 +38,7 @@ def test_reduce_with_solution(a):
 
 @settings(deadline=None)
 @given(array_without_solution)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_reduce_without_solution(a):
     try:
         result = reduce(a)
@@ -55,6 +60,7 @@ def test_split_problem():
 
 @given(all_problems)
 @settings(deadline=None)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_split_arbitrary_problem(a):
     try:
         result = list(split_problem(a, 2))
@@ -70,6 +76,7 @@ def test_split_arbitrary_problem(a):
 
 @given(all_problems, integers(2, 100))
 @settings(deadline=None)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_correct_number_of_splits(a, n):
     try:
         result = list(split_problem(a, n))
@@ -83,6 +90,7 @@ def test_correct_number_of_splits(a, n):
 
 @given(large_problems_without_solution)
 @settings(deadline=None)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_many_splits_without_solution(a):
     n = 1000
     try:
@@ -95,6 +103,7 @@ def test_many_splits_without_solution(a):
 
 @given(array=large_problems_with_solution)
 @settings(deadline=None)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_many_splits_with_solution(caplog, array):
     n = 1000
     # We count a list with the same number of elements, but each
@@ -108,6 +117,7 @@ def test_many_splits_with_solution(caplog, array):
 
 @given(all_problems, integers(2, 30))
 @settings(deadline=None)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_solution_to_split_problem_solves_original_problem(a, n):
     try:
         result = list(split_problem(a, n))
@@ -123,24 +133,28 @@ def test_solution_to_split_problem_solves_original_problem(a, n):
 
 
 @given(array_with_solution)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_is_solution(a):
     s = get_exact_cover(a)
     assert is_solution(s, a)
 
 
 @given(array_with_solution)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_list_is_solution(a):
     s = list(get_exact_cover(a))
     assert is_solution(s, a)
 
 
 @given(array_with_solution, integers(0, 100))
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_is_solution_fails_for_extra_rows(a, x):
     s = get_exact_cover(a)
     assert not is_solution(list(s) + [x], a)
 
 
 @given(array_with_solution)
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_is_solution_fails_for_proper_subset(a):
     s = get_exact_cover(a)
     assert not is_solution(s[:-1], a)

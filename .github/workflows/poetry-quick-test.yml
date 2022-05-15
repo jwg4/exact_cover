@@ -1,12 +1,12 @@
-name: Run Python tests
-on: pull_request
+name: Run quick Python tests
+on: push
 
 jobs:
   testing:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.7, 3.8]
+        python-version: [3.7, 3.8, 3.9]
         os: [ubuntu-18.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -19,4 +19,4 @@ jobs:
       - name: Install requirements
         run: poetry install
       - name: Test package
-        run: poetry run test
+        run: poetry run quicktest
