@@ -53,7 +53,7 @@ def split_problem(a, n):
     """
     queue = deque([a])
     while len(queue) < n:
-        logging.debug("Length of queue %s, splitting a problem" % (len(queue),))
+        logger.debug("Length of queue %s, splitting a problem" % (len(queue),))
         try:
             to_expand = queue.popleft()
         except IndexError:
@@ -69,7 +69,7 @@ def split_problem(a, n):
 def _split_problem_once(a):
     colsums = a.sum(axis=0)
     if min(colsums) < 1:
-        logging.debug("skipping %s because it doesn't have a solution", (colsums,))
+        logger.debug("skipping %s because it doesn't have a solution", (colsums,))
         raise NoSolution
     m = np.argmax(colsums)
     x = a[:, m]
