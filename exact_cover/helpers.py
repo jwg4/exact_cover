@@ -20,7 +20,7 @@ def cut(a):
     """
     sq = (np.sum(a, 0) == 1).nonzero()[0][0]
     shape = a[a[:, sq] == 1, :]
-    print(shape.nonzero())
+    logger.debug(shape.nonzero())
     d = a[:, shape[0] != 1]
     dd = d[np.sum(d, 1) == 4, :]
     return dd
@@ -35,7 +35,7 @@ def reduce(a):
             b = cut(a)
         except Exception:
             return a
-        print(b.shape)
+        logger.debug(b.shape)
         a = b
 
 
