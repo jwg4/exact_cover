@@ -14,9 +14,12 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install poetry
-        run: pip install poetry
+        run: |
+            pip install poetry
       - name: make a clean sdist
         run: |
+            poetry config virtualenvs.in-project true
+            poetry env remove python
             poetry build --format sdist
       - name: do a clean install
         run: |
