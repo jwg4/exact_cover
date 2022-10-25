@@ -19,7 +19,7 @@ jobs:
       - name: make a clean sdist
         run: |
             poetry -V
-            python -m poetry -V
+            poetry -vvv install
             poetry -vvv build --format sdist
       - name: do a clean install
         run: |
