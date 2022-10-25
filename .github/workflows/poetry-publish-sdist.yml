@@ -22,6 +22,6 @@ jobs:
       - name: Build package
         run: poetry build -f sdist
       - name: Test package
-        run: poetry run pytest
+        run: poetry run test
       - name: publish to pypi
         run: poetry publish -u __token__ -p ${{ secrets.PYPI_TOKEN }}
