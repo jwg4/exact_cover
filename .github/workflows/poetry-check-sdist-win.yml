@@ -19,8 +19,8 @@ jobs:
       - name: make a clean sdist
         run: |
             poetry -V
-            poetry -vvv install
-            poetry -vvv build --format sdist
+            poetry install
+            poetry build --format sdist
       - name: do a clean install
         run: |
             virtualenv venv
