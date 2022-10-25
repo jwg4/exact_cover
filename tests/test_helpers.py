@@ -4,7 +4,7 @@ import numpy as np
 
 import pytest
 
-from hypothesis import given, settings
+from hypothesis import given, settings, HealthCheck
 from hypothesis.strategies import integers
 
 from exact_cover import get_exact_cover
@@ -102,7 +102,7 @@ def test_many_splits_without_solution(a):
 
 
 @given(array=large_problems_with_solution)
-@settings(deadline=None)
+@settings(deadline=None, suppress_health_check=[HealthCheck.function_scoped_fixture])
 @pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_many_splits_with_solution(caplog, array):
     n = 1000
