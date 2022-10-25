@@ -22,16 +22,6 @@ PY_DIR = $(ROOT_DIR)/exact_cover_np
 CFLAGS = -g -Wall -Wstrict-prototypes -I $(INCLUDES_DIR)
 CFLAGS += -O0 -DDEBUG_LEVEL=0
 
-
-c_tests: note \
-	note_quad_linked_list run_test_quad_linked_list \
-	note_sparse_matrix run_test_sparse_matrix \
-	run_munit
-
-tests: c_tests py_tests
-
-py_tests: test_exact_cover
-
 $(OBJ_DIR):
 	mkdir -pv $(OBJ_DIR)
 
