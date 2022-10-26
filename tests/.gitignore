@@ -5,3 +5,4 @@ test_m_dlx
 test_m_sparse_matrix
 test_m_legacy_dlx
 test_debug_algo
+test_c_suite
