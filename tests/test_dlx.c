@@ -12,7 +12,7 @@ test_get_one_row_result(const MunitParameter params[], void* data) {
   char array[] = {1, 1, 1};
   int solution[] = {0};
 
-  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution, false);
   munit_assert(length == 1);
 
   return MUNIT_OK;
@@ -28,7 +28,7 @@ test_get_two_row_result(const MunitParameter params[], void* data) {
   char array[] = {1, 0, 0, 0, 1, 1};
   int solution[] = {0, 0};
 
-  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution, false);
   munit_assert(length == 2);
   munit_assert_int(solution[0], ==, 0);
   munit_assert_int(solution[1], ==, 1);
@@ -47,7 +47,7 @@ test_get_multiple_row_result(const MunitParameter params[], void* data) {
   char array[] = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1};
   int solution[] = {0, 0, 0, 0};
 
-  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution, false);
   munit_assert(length == 3);
   munit_assert_int(solution[0], ==, 2);
   munit_assert_int(solution[1], ==, 1);
@@ -67,7 +67,7 @@ test_correct_zeroing_out(const MunitParameter params[], void* data) {
   char array[] = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1};
   int solution[] = {-1, -1, -1, -1};
 
-  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution, false);
   munit_assert(length == 3);
   munit_assert_int(solution[0], ==, 2);
   munit_assert_int(solution[1], ==, 1);
@@ -87,7 +87,7 @@ test_correct_zeroing_out_2(const MunitParameter params[], void* data) {
   char array[] = {0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1};
   int solution[] = {-1, -1, -1, -1};
 
-  int length = dlx_get_exact_cover(row_count, col_count, array, solution);
+  int length = dlx_get_exact_cover(row_count, col_count, array, solution, false);
   munit_assert(length == 2);
   munit_assert_int(solution[0], ==, 1);
   munit_assert_int(solution[1], ==, 3);
