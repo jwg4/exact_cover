@@ -8,7 +8,7 @@ from hypothesis.strategies import just
 
 from exact_cover import get_exact_cover
 from exact_cover.error import NoSolution
-from exact_cover.io import load_problem
+from exact_cover.io import load_problem, DTYPE_FOR_ARRAY
 
 from tests.config import GLOBAL_CONFIG
 
@@ -21,7 +21,7 @@ def exact_cover_problem(draw):
             lists(booleans(), min_size=width, max_size=width), min_size=1, max_size=30
         )
     )
-    return np.array(data, dtype=np.int32)
+    return np.array(data, dtype=DTYPE_FOR_ARRAY)
 
 
 @given(exact_cover_problem())
@@ -56,7 +56,7 @@ def array_with_exact_cover(draw):
     cover_data = [[a == i for a in cover] for i in range(0, cover_size)]
     data = cover_data + dummy_data
     shuffled_data = draw(permutations(data))
-    return np.array(shuffled_data, dtype=np.int32)
+    return np.array(shuffled_data, dtype=DTYPE_FOR_ARRAY)
 
 
 @composite
@@ -79,8 +79,8 @@ array_with_solution = one_of(
 )
 
 
-@example(np.array([[1, 1, 1]], dtype=np.int32))
-@example(np.array([[1, 0, 0], [0, 1, 1]], dtype=np.int32))
+@example(np.array([[1, 1, 1]], dtype=DTYPE_FOR_ARRAY))
+@example(np.array([[1, 0, 0], [0, 1, 1]], dtype=DTYPE_FOR_ARRAY))
 @given(array_with_solution)
 @pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_exact_cover_with_solution(array_data):
@@ -127,7 +127,7 @@ def exact_cover_problem_with_abc(draw):
 
 large_problems_without_solution = one_of(
     # This was not saved in canonical format.
-    just(np.genfromtxt("tests/files/cylinder.csv", dtype=np.int32, delimiter=",")),
+    just(np.genfromtxt("tests/files/cylinder.csv", dtype=DTYPE_FOR_ARRAY, delimiter=",")),
     just(load_problem("tests/files/reduced.csv")),
     just(load_problem("tests/files/part_reduced.csv")),
 )
