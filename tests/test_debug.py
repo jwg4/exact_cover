@@ -1,12 +1,6 @@
 import numpy as np
-import pytest
-
-from hypothesis import given
 
 from exact_cover import get_exact_cover
-from exact_cover.error import NoSolution
-from .helpers.polyomino_data import polyomino_problem
-from .test_exact_cover_problems import large_problems_without_solution
 
 
 def test_exact_cover_debug_on():
