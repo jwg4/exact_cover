@@ -71,6 +71,8 @@ Now we can call `exact_cover`:
 This is telling us that the 0th row (i.e. A), the 2nd row (i.e. C),
 and the 3rd row (i.e. D) together form an exact cover.
 
+See the file examples.md for more detailed examples of use.
+
 
 Implementation Overview
 -----------------------

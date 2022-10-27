@@ -17,3 +17,4 @@ def quicktest():
 
 def run_doctest():
     doctest.testfile("../README.md")
+    doctest.testfile("../examples.md")
