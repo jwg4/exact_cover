@@ -127,7 +127,9 @@ def exact_cover_problem_with_abc(draw):
 
 large_problems_without_solution = one_of(
     # This was not saved in canonical format.
-    just(np.genfromtxt("tests/files/cylinder.csv", dtype=DTYPE_FOR_ARRAY, delimiter=",")),
+    just(
+        np.genfromtxt("tests/files/cylinder.csv", dtype=DTYPE_FOR_ARRAY, delimiter=",")
+    ),
     just(load_problem("tests/files/reduced.csv")),
     just(load_problem("tests/files/part_reduced.csv")),
 )
