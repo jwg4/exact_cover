@@ -5,7 +5,6 @@ Finding Exact Covers in NumPy
 ![Deploy wheels to pypi](https://github.com/jwg4/exact_cover/workflows/Deploy%20wheels%20to%20pypi/badge.svg)
 ![Run Python tests](https://github.com/jwg4/exact_cover/workflows/Run%20Python%20tests/badge.svg)
 
-
 This is a Python 3 package to solve exact cover problems using Numpy. It is based on https://github.com/moygit/exact_cover_np by Moy Easwaran. Jack Grahl ported it to Python 3, fixed some bugs and made lots of small improvements to the packaging.
 
 The original package by Moy was designed to solve sudoku. Now this package is only designed to solve exact cover problems given as boolean arrays. It can be used to solve sudoku and a variety of combinatorial problems. However the code to reduce a sudoku to an exact cover problem is no longer part of this project. It can be found at:
@@ -65,12 +64,14 @@ Now we can call `exact_cover`:
 
     >>> import numpy as np
     >>> import exact_cover as ec
-    >>> S = np.array([[1,0,0,1,0],[1,1,1,0,0],[0,1,1,0,0],[0,0,0,0,1]], dtype='int32')
+    >>> S = np.array([[1,0,0,1,0],[1,1,1,0,0],[0,1,1,0,0],[0,0,0,0,1]], dtype=np.int32)
     >>> ec.get_exact_cover(S)
     array([0, 2, 3])
 
 This is telling us that the 0th row (i.e. A), the 2nd row (i.e. C),
 and the 3rd row (i.e. D) together form an exact cover.
+
+See the file examples.md for more detailed examples of use.
 
 
 Implementation Overview
