@@ -5,7 +5,7 @@
 #include "sparse_matrix.h"
 
 int search(list, int, int, int *);
-int dlx_get_exact_cover(int, int, int [], int*);
+int dlx_get_exact_cover(int, int, char [], int*);
 
 #endif
 
