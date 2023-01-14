@@ -64,7 +64,7 @@ Now we can call `exact_cover`:
 
     >>> import numpy as np
     >>> import exact_cover as ec
-    >>> S = np.array([[1,0,0,1,0],[1,1,1,0,0],[0,1,1,0,0],[0,0,0,0,1]], dtype=np.bool_)
+    >>> S = np.array([[1,0,0,1,0],[1,1,1,0,0],[0,1,1,0,0],[0,0,0,0,1]], dtype=bool)
     >>> ec.get_exact_cover(S)
     array([0, 2, 3])
 
