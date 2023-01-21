@@ -1,0 +1,30 @@
+name: Python code quality checks
+
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: '**'
+
+jobs:
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install poetry
+      run: pip install poetry
+    - name: Install requirements
+      run: poetry install
+    - name: install valgrind
+      run: sudo apt -qq -y install valgrind
+    - name: run mem_burn with valgrind
+      run: poetry run valgrind --suppressions=tests/valgrind-python.supp --xml=yes --xml-file=valgrind_results.xml python -m tests.mem_burn 1000
+    - name: check valgrind results
+      run: poetry run parse_valgrind
