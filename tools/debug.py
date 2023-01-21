@@ -1,6 +1,9 @@
 import logging
+import sys
 
 import numpy as np
+
+from ValgrindCI.parse import ValgrindData
 
 from exact_cover import get_exact_cover
 
@@ -11,3 +14,15 @@ def run_debug():
     logging.info(data.shape)
     solution = get_exact_cover(data, True)
     logging.info(solution)
+
+
+def parse_valgrind_results():
+    data = ValgrindData()
+    data.parse('valgrind_results.xml')
+    # Output the number of errors for leaks definitely lost.
+    leak_count = data.filter_error_kind('Leak_DefinitelyLost').get_num_errors()
+    print("Definite leaks: ", leak_count) 
+    if leak_count > 0:
+        sys.exit(1)
+    else:
+        sys.exit(0)
