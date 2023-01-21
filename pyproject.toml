@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exact_cover"
-version = "1.0.1-alpha.0"
+version = "1.0.1"
 description = "Solve exact cover problems"
 readme = "README.md"
 authors = ["Moy Easwaran"]
@@ -24,6 +24,7 @@ hypothesis = "^6.56.3"
 pytest = "^6.1.2"
 flake8 = "^4.0"
 black = "^22.3.0"
+valgrindci = "^0.2.0"
 
 [tool.poetry.build]
 script = "build.py"
@@ -33,6 +34,7 @@ test = 'tools.run_tests:test'
 quicktest = 'tools.run_tests:quicktest'
 doctest = 'tools.run_tests:run_doctest'
 debug = 'tools.debug:run_debug'
+parse_valgrind = 'tools.debug:parse_valgrind_results'
 
 [build-system]
 requires = ["setuptools", "numpy>=1.19.4,<2.0", "poetry-core>=1.0.0"]
