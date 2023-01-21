@@ -10,7 +10,7 @@
 #define HSIZE 324
 
 
-void read_csv(char filename[], int rows, int cols, int array[rows*cols]) {
+void read_csv(char filename[], int rows, int cols, char array[rows*cols]) {
     FILE *file = fopen(filename, "r");
     int i, j;
     char buffer[cols*5], *ptr;
@@ -31,7 +31,7 @@ void print_array(int rows, int columns, int array[rows*columns]) {
 
 static MunitResult
 test_simple_example(const MunitParameter params[], void* data) {
-    int matrix[6*7] =  // Knuth's example
+    char matrix[6*7] =  // Knuth's example
             {
               0, 0, 1, 0, 1, 1, 0,
               1, 0, 0, 1, 0, 0, 1,
@@ -55,7 +55,7 @@ test_simple_example(const MunitParameter params[], void* data) {
 static MunitResult
 test_simple_negative_example(const MunitParameter params[], void* data) {
     int *solution = malloc(VSIZE * sizeof(*solution));
-    int matrix2[6*7] =
+    char matrix2[6*7] =
             {
               1, 0, 1, 1, 1, 1, 1,
               1, 0, 0, 1, 0, 0, 1,
@@ -75,7 +75,7 @@ static MunitResult
 test_very_simple_large_example(const MunitParameter params[], void* data) {
     int result;
     int *solution = malloc(VSIZE * sizeof(*solution));
-    int matrix3[9*9] =
+    char matrix3[9*9] =
         {
           1, 0, 0, 0, 0, 0, 0, 0, 0,
           0, 1, 0, 0, 0, 0, 0, 0, 0,
@@ -99,7 +99,7 @@ test_large_example_from_csv(const MunitParameter params[], void* data) {
     int result;
     int *solution = malloc(VSIZE * sizeof(*solution));
 
-    int matrix4[64*64];
+    char matrix4[64*64];
     char filename[] = "tests/files/con4.csv";
     read_csv(filename, 64, 64, matrix4);
     result = dlx_get_exact_cover(64,64,matrix4,solution);
@@ -118,7 +118,7 @@ test_large_example_from_csv_2(const MunitParameter params[], void* data) {
     int result;
     int *solution = malloc(VSIZE * sizeof(*solution));
 
-    int matrix5[VSIZE*HSIZE];
+    char matrix5[VSIZE*HSIZE];
     char filename2[] = "tests/files/con2.csv";
     read_csv(filename2, VSIZE, HSIZE, matrix5);
     result = dlx_get_exact_cover(VSIZE,HSIZE,matrix5,solution);

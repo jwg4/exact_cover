@@ -11,7 +11,7 @@
 
 static MunitResult test_choose_column_with_min_data(const MunitParameter params[], void* data)
 {
-    int matrix[VSIZE*HSIZE] =
+    char matrix[VSIZE*HSIZE] =
         {
  // sums: 8, 9, 8,11, 7,10, 8, 5, 5
           0, 1, 0, 1, 0, 0, 0, 1, 0,
@@ -43,7 +43,7 @@ static MunitResult test_choose_column_with_min_data(const MunitParameter params[
 
 static MunitResult test_cover_column(const MunitParameter params[], void* data)
 {
-    int matrix[VSIZE*HSIZE] =
+    char matrix[VSIZE*HSIZE] =
         {
  // sums: 8, 9, 8,11, 7,10, 8, 5, 5
           0, 1, 0, 1, 0, 0, 0, 1, 0,
@@ -79,7 +79,7 @@ static MunitResult test_cover_column(const MunitParameter params[], void* data)
 
 static MunitResult test_cover_and_uncover_column(const MunitParameter params[], void* data)
 {
-    int matrix[VSIZE*HSIZE] =
+    char matrix[VSIZE*HSIZE] =
         {
  // sums: 8, 9, 8,11, 7,10, 8, 5, 5
           0, 1, 0, 1, 0, 0, 0, 1, 0,
