@@ -18,10 +18,10 @@ def run_debug():
 
 def parse_valgrind_results():
     data = ValgrindData()
-    data.parse('valgrind_results.xml')
+    data.parse("valgrind_results.xml")
     # Output the number of errors for leaks definitely lost.
-    leak_count = data.filter_error_kind('Leak_DefinitelyLost').get_num_errors()
-    print("Definite leaks: ", leak_count) 
+    leak_count = data.filter_error_kind("Leak_DefinitelyLost").get_num_errors()
+    print("Definite leaks: ", leak_count)
     if leak_count > 0:
         sys.exit(1)
     else:

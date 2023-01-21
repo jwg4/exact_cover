@@ -3,7 +3,9 @@ import sys
 import numpy as np
 import exact_cover as ec
 
-S = np.array([[1,0,0,1,0],[1,1,1,0,0],[0,1,1,0,0],[0,0,0,0,1]], dtype=np.int32)
+S = np.array(
+    [[1, 0, 0, 1, 0], [1, 1, 1, 0, 0], [0, 1, 1, 0, 0], [0, 0, 0, 0, 1]], dtype=np.int32
+)
 
 count = int(sys.argv[1])
 
