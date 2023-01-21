@@ -33,16 +33,11 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
 {
 
     PyArrayObject *in_array;
-    PyObject      *out_array;
     npy_intp      *dims;
     int           *in_array_data, rows, cols, result;
 
     /*  Parse single numpy array argument */
     if (!PyArg_ParseTuple(args, "O!", &PyArray_Type, &in_array)) return NULL;
-
-    /*  Construct the output array, like the input array */
-    out_array = PyArray_NewLikeArray(in_array, NPY_ANYORDER, NULL, 0);
-    if (out_array == NULL) return NULL;
 
     /*  Check that we got a 2-dimensional array of dtype='int32'. */
     if (not_2d_int_array(in_array)) return NULL;
@@ -59,7 +54,8 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
     dims = malloc(nd * sizeof(*dims));
     dims[0] = result;
     PyObject *return_solution = PyArray_SimpleNewFromData(nd, dims, NPY_INT32, (void*)solution);
-    Py_INCREF(return_solution);
+    PyArray_ENABLEFLAGS((PyArrayObject*) return_solution, NPY_ARRAY_OWNDATA);
+    free(dims);
     return return_solution;
 }
 
