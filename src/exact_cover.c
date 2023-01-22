@@ -34,7 +34,8 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
 
     PyArrayObject *in_array;
     npy_intp      *dims;
-    int           *in_array_data, rows, cols, result;
+    char          *in_array_data;
+    int           rows, cols, result;
 
     /*  Parse single numpy array argument */
     if (!PyArg_ParseTuple(args, "O!", &PyArray_Type, &in_array)) return NULL;
