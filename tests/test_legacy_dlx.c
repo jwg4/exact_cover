@@ -16,11 +16,11 @@ void read_csv(char filename[], int rows, int cols, char array[rows*cols]) {
     char buffer[cols*5], *ptr;
     for ( i = 0; fgets(buffer, sizeof buffer, file); ++i )
        for ( j = 0, ptr = buffer; j < cols; ++j, ++ptr )
-          array[(i*cols)+j] = (int)strtol(ptr, &ptr, 10);
+          array[(i*cols)+j] = (char)strtol(ptr, &ptr, 10);
     fclose(file);
 }
 
-void print_array(int rows, int columns, int array[rows*columns]) {
+void print_array(int rows, int columns, char array[rows*columns]) {
     int j, k;
     for (j = 0; j < rows; ++j) {
        for ( k = 0; k < columns; ++k )
