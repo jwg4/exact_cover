@@ -42,7 +42,7 @@ int search(list sparse_matrix, int k, int max, int *solution) {
     return result;
 }
 
-int dlx_get_exact_cover(int rows, int cols, int matrix[], int *solution) {
+int dlx_get_exact_cover(int rows, int cols, char matrix[], int *solution) {
     list sparse_matrix;
     int solution_length;
 

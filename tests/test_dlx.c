@@ -9,7 +9,7 @@ test_get_one_row_result(const MunitParameter params[], void* data) {
 
   int row_count = 1;
   int col_count = 3;
-  int array[] = {1, 1, 1};
+  char array[] = {1, 1, 1};
   int solution[] = {0};
 
   int length = dlx_get_exact_cover(row_count, col_count, array, solution);
@@ -25,7 +25,7 @@ test_get_two_row_result(const MunitParameter params[], void* data) {
 
   int row_count = 2;
   int col_count = 3;
-  int array[] = {1, 0, 0, 0, 1, 1};
+  char array[] = {1, 0, 0, 0, 1, 1};
   int solution[] = {0, 0};
 
   int length = dlx_get_exact_cover(row_count, col_count, array, solution);
@@ -44,7 +44,7 @@ test_get_multiple_row_result(const MunitParameter params[], void* data) {
 
   int row_count = 4;
   int col_count = 3;
-  int array[] = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1};
+  char array[] = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1};
   int solution[] = {0, 0, 0, 0};
 
   int length = dlx_get_exact_cover(row_count, col_count, array, solution);
@@ -64,7 +64,7 @@ test_correct_zeroing_out(const MunitParameter params[], void* data) {
 
   int row_count = 4;
   int col_count = 3;
-  int array[] = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1};
+  char array[] = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1};
   int solution[] = {-1, -1, -1, -1};
 
   int length = dlx_get_exact_cover(row_count, col_count, array, solution);
@@ -84,7 +84,7 @@ test_correct_zeroing_out_2(const MunitParameter params[], void* data) {
 
   int row_count = 4;
   int col_count = 3;
-  int array[] = {0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1};
+  char array[] = {0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1};
   int solution[] = {-1, -1, -1, -1};
 
   int length = dlx_get_exact_cover(row_count, col_count, array, solution);

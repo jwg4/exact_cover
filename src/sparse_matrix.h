@@ -7,9 +7,9 @@
 
 #include "quad_linked_list.h"
 
-list create_sparse (int, int, int []);
+list create_sparse (int, int, char []);
 list create_headers_list(int);
-list populate_sparse_matrix(list, int, int, int []);
+list populate_sparse_matrix(list, int, int, char []);
 list choose_column_with_min_data(list, int);
 void print_sparse_matrix_transpose(list, int);
 void print_column(list, int);

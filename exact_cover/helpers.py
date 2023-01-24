@@ -5,7 +5,7 @@ from collections import deque
 import numpy as np
 
 from .error import NoSolution, CannotSplitFurther
-
+from .io import DTYPE_FOR_ARRAY
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +44,7 @@ def create_numpy_array(a):
     >>> create_numpy_array([[0, 1], [1, 0]])
     numpy.array([[0, 1], [1, 0]])
     """
-    return np.array(a)
+    return np.array(a, dtype=DTYPE_FOR_ARRAY)
 
 
 def split_problem(a, n):

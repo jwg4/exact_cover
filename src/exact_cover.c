@@ -10,7 +10,7 @@
 #include "dlx.h"
 
 #define _EXACT_COVER_NP_DIM_ERROR_ "get_exact_cover(...) needs a 2-dimensional (m x n) matrix."
-#define _EXACT_COVER_NP_TYPE_ERROR_ "get_exact_cover(...) needs a matrix of dtype 'int32'."
+#define _EXACT_COVER_NP_TYPE_ERROR_ "get_exact_cover(...) needs a matrix of dtype 'bool'."
 
 
 static bool not_2d_int_array(PyArrayObject *);
@@ -22,7 +22,7 @@ static bool not_2d_int_array(PyArrayObject *in_array) {
         PyErr_SetString(PyExc_ValueError, _EXACT_COVER_NP_DIM_ERROR_);
         return 1;
     }
-    if (PyArray_TYPE(in_array) != NPY_INT32) { 
+    if (PyArray_TYPE(in_array) != NPY_BOOL) { 
         PyErr_SetString(PyExc_TypeError, _EXACT_COVER_NP_TYPE_ERROR_);
         return 1;
     }
@@ -34,18 +34,19 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
 
     PyArrayObject *in_array;
     npy_intp      *dims;
-    int           *in_array_data, rows, cols, result;
+    char          *in_array_data;
+    int           rows, cols, result;
 
     /*  Parse single numpy array argument */
     if (!PyArg_ParseTuple(args, "O!", &PyArray_Type, &in_array)) return NULL;
 
-    /*  Check that we got a 2-dimensional array of dtype='int32'. */
+    /*  Check that we got a 2-dimensional array of dtype='bool'. */
     if (not_2d_int_array(in_array)) return NULL;
-
+    
     /*  Get the data. */
     dims = PyArray_DIMS(in_array);
     rows = (int) dims[0],  cols = (int) dims[1];
-    in_array_data = (int*) PyArray_DATA(in_array);
+    in_array_data = (char*) PyArray_DATA(in_array);
 
     /*  Calculate the exact cover. */
     int nd = 1, *solution = malloc(rows * sizeof(*solution));

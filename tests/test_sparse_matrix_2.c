@@ -9,7 +9,7 @@ test_make_simple_matrix(const MunitParameter params[], void* data) {
 
   int row_count = 1;
   int col_count = 3;
-  int array[] = {1, 1, 1};
+  char array[] = {1, 1, 1};
 
   list l = create_sparse(row_count, col_count, array);
   munit_assert_not_null(l);
@@ -24,7 +24,7 @@ test_check_details_of_simple_matrix(const MunitParameter params[], void* data) {
 
   int row_count = 1;
   int col_count = 3;
-  int array[] = {1, 1, 1};
+  char array[] = {1, 1, 1};
 
   list l = create_sparse(row_count, col_count, array);
 
@@ -52,7 +52,7 @@ test_check_details_empty_table(const MunitParameter params[], void* data) {
 
   int row_count = 1;
   int col_count = 0;
-  int array[] = {};
+  char array[] = {};
 
   list l = create_sparse(row_count, col_count, array);
   munit_assert_ptr_equal(l, get_right(l));
@@ -68,7 +68,7 @@ test_choose_column_with_min_data(const MunitParameter params[], void* data) {
 
   int row_count = 1;
   int col_count = 3;
-  int array[] = {1, 1, 1};
+  char array[] = {1, 1, 1};
 
   list l = create_sparse(row_count, col_count, array);
 
@@ -87,7 +87,7 @@ test_choose_column_with_min_data_2(const MunitParameter params[], void* data) {
 
   int row_count = 1;
   int col_count = 3;
-  int array[] = {0, 1, 1};
+  char array[] = {0, 1, 1};
 
   list l = create_sparse(row_count, col_count, array);
 
@@ -106,7 +106,7 @@ test_choose_column_with_min_data_empty_table(const MunitParameter params[], void
 
   int row_count = 1;
   int col_count = 0;
-  int array[] = {};
+  char array[] = {};
 
   list l = create_sparse(row_count, col_count, array);
 
