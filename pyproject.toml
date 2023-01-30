@@ -28,6 +28,7 @@ valgrindci = "^0.2.0"
 
 [tool.poetry.build]
 script = "build.py"
+generate-setup-file = true
 
 [tool.poetry.scripts]
 test = 'tools.run_tests:test'
