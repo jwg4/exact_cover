@@ -14,7 +14,7 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.7.1"
+python = ">=3.7.1,<4.0"
 numpy = ">=1.20.1"
 setuptools = ">=51.1.2"
 
