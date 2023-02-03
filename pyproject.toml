@@ -46,3 +46,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 exclude = "polyomino_data"
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules"
