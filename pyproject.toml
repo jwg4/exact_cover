@@ -41,7 +41,7 @@ debug = 'tools.debug:run_debug'
 parse_valgrind = 'tools.debug:parse_valgrind_results'
 
 [build-system]
-requires = ["setuptools", "numpy>=1.20.1", "poetry-core>=1.0.0"]
+requires = ["setuptools", "oldest-supported-numpy", "poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
