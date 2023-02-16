@@ -14,20 +14,24 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7.1"
-numpy = "^1.20"
-setuptools = "^51.1.2"
-pytest-fail-slow = "^0.2.0"
+python = ">=3.7,<4.0"
+numpy = [
+    {version = ">=1.20", python = ">=3.7,<3.10"},
+    {version = ">=1.23", python = ">=3.10"}
+]
+setuptools = ">=51.1.2"
 
 [tool.poetry.dev-dependencies]
-hypothesis = "^6.56.3"
-pytest = "^6.1.2"
-flake8 = "^4.0"
-black = "^22.3.0"
-valgrindci = "^0.2.0"
+hypothesis = ">=6.56.3"
+pytest = ">=6.1.2"
+flake8 = ">=4.0"
+black = ">=22.3.0"
+valgrindci = ">=0.2.0"
+pytest-fail-slow = ">=0.3.0"
 
 [tool.poetry.build]
 script = "build.py"
+generate-setup-file = true
 
 [tool.poetry.scripts]
 test = 'tools.run_tests:test'
@@ -37,7 +41,7 @@ debug = 'tools.debug:run_debug'
 parse_valgrind = 'tools.debug:parse_valgrind_results'
 
 [build-system]
-requires = ["setuptools", "numpy>=1.19.4,<2.0", "poetry-core>=1.0.0"]
+requires = ["setuptools", "numpy>=1.20.1", "poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
