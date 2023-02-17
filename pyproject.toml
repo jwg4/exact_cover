@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exact_cover"
-version = "1.2.0"
+version = "1.2.1a0"
 description = "Solve exact cover problems"
 readme = "README.md"
 authors = ["Moy Easwaran"]
@@ -46,3 +46,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 exclude = "polyomino_data"
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules --doctest-glob='*.md'"
