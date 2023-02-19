@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exact_cover"
-version = "1.2.1a0"
+version = "1.2.1"
 description = "Solve exact cover problems"
 readme = "README.md"
 authors = ["Moy Easwaran"]
@@ -41,7 +41,7 @@ debug = 'tools.debug:run_debug'
 parse_valgrind = 'tools.debug:parse_valgrind_results'
 
 [build-system]
-requires = ["setuptools", "numpy>=1.20.1", "poetry-core>=1.0.0"]
+requires = ["setuptools", "oldest-supported-numpy", "poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
