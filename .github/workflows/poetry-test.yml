@@ -17,6 +17,6 @@ jobs:
       - name: Install poetry
         run: pip install poetry
       - name: Install requirements
-        run: poetry install
+        run: poetry install --with wheel_builder
       - name: Test package
         run: poetry run test
