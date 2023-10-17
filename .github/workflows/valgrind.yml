@@ -23,7 +23,9 @@ jobs:
     - name: Install requirements
       run: poetry install
     - name: install valgrind
-      run: sudo apt -qq -y install valgrind
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: valgrind
     - name: run mem_burn with valgrind
       run: poetry run valgrind --suppressions=tests/valgrind-python.supp --xml=yes --xml-file=valgrind_results.xml python -m tests.mem_burn 1000
     - name: check valgrind results
