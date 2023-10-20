@@ -14,6 +14,19 @@ from tests.config import GLOBAL_CONFIG
 
 
 @composite
+def numpy_array_params(draw):
+    # Mix up the way we construct a numpy array a bit, to ensure stability.
+    order = draw(sampled_from([None, "C", "F"]))
+    dtype = draw(sampled_from([None, DTYPE_FOR_ARRAY, np.bool_, np.int8, np.int32]))
+    params = {}
+    if order is not None:
+        params['order'] = order
+    if dtype is not None:
+        params['dtype'] = dtype
+    return params
+
+    
+@composite
 def exact_cover_problem(draw):
     width = draw(integers(min_value=1, max_value=15))
     data = draw(
@@ -21,15 +34,7 @@ def exact_cover_problem(draw):
             lists(booleans(), min_size=width, max_size=width), min_size=1, max_size=30
         )
     )
-
-    # Mix up the way we construct a numpy array a bit, to ensure stability.
-    order = draw(sampled_from([None, "C", "F"]))
-    dtype = draw(sampled_from([None, DTYPE_FOR_ARRAY, np.bool_, np.int8, np.int32]))
-    params = {}
-    if ordering is not None:
-        params['order'] = order
-    if dtype is not None:
-        params['dtype'] = dtype
+    params = draw(numpy_array_params())
 
     return np.array(data, **params)
 
@@ -66,7 +71,8 @@ def array_with_exact_cover(draw):
     cover_data = [[a == i for a in cover] for i in range(0, cover_size)]
     data = cover_data + dummy_data
     shuffled_data = draw(permutations(data))
-    return np.array(shuffled_data, dtype=DTYPE_FOR_ARRAY)
+    params = draw(numpy_array_params())
+    return np.array(shuffled_data, **params)
 
 
 @composite
