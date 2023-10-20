@@ -20,12 +20,12 @@ def numpy_array_params(draw):
     dtype = draw(sampled_from([None, DTYPE_FOR_ARRAY, np.bool_, np.int8, np.int32]))
     params = {}
     if order is not None:
-        params['order'] = order
+        params["order"] = order
     if dtype is not None:
-        params['dtype'] = dtype
+        params["dtype"] = dtype
     return params
 
-    
+
 @composite
 def exact_cover_problem(draw):
     width = draw(integers(min_value=1, max_value=15))
