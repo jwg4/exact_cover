@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "exact_cover"
-version = "1.2.1"
+version = "1.2.2"
 description = "Solve exact cover problems"
 readme = "README.md"
 authors = ["Moy Easwaran"]
@@ -16,8 +16,27 @@ include = [
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
 numpy = [
-    {version = ">=1.20", python = ">=3.7,<3.10"},
-    {version = ">=1.23", python = ">=3.10"}
+    {version = ">=1.14", python = "==3.7"},
+    {version = ">=1.17", python = "==3.8"},
+    {version = ">=1.19", python = "==3.9"},
+    {version = ">=1.21", python = "==3.10"},
+    {version = ">=1.23", python = "==3.11"},
+    {version = ">=1.24", python = ">=3.12"},
+]
+setuptools = ">=51.1.2"
+
+[tool.poetry.group.wheel_builder]
+optional = true
+
+[tool.poetry.group.wheel_builder.dependencies]
+python = ">=3.7,<4.0"
+numpy = [
+    {version = "==1.14.5", python = "==3.7"},
+    {version = "==1.17.3", python = "==3.8"},
+    {version = "==1.19.3", python = "==3.9"},
+    {version = "==1.21.6", python = "==3.10"},
+    {version = "==1.23.2", python = "==3.11"},
+    {version = ">=1.24.2", python = ">=3.12"},
 ]
 setuptools = ">=51.1.2"
 
