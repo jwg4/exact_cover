@@ -4,7 +4,7 @@ import numpy as np
 from hypothesis import given, example
 from hypothesis.strategies import integers, lists, booleans
 from hypothesis.strategies import composite, one_of, permutations
-from hypothesis.strategies import just
+from hypothesis.strategies import just, sampled_from
 
 from exact_cover import get_exact_cover
 from exact_cover.error import NoSolution
@@ -21,7 +21,17 @@ def exact_cover_problem(draw):
             lists(booleans(), min_size=width, max_size=width), min_size=1, max_size=30
         )
     )
-    return np.array(data, dtype=DTYPE_FOR_ARRAY)
+
+    # Mix up the way we construct a numpy array a bit, to ensure stability.
+    order = draw(sampled_from([None, "C", "F"]))
+    dtype = draw(sampled_from([None, DTYPE_FOR_ARRAY, np.bool_, np.int8, np.int32]))
+    params = {}
+    if ordering is not None:
+        params['order'] = order
+    if dtype is not None:
+        params['dtype'] = dtype
+
+    return np.array(data, **params)
 
 
 @given(exact_cover_problem())
