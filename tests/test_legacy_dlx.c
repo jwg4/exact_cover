@@ -42,7 +42,7 @@ test_simple_example(const MunitParameter params[], void* data) {
             };
 
     int *solution = malloc(VSIZE * sizeof(*solution));
-    int result = dlx_get_exact_cover(6,7,matrix,solution);
+    int result = dlx_get_exact_cover(6,7,matrix,solution, false);
     munit_assert(result == 3);
     munit_assert(solution[0] == 3);
     munit_assert(solution[1] == 0);
@@ -64,7 +64,7 @@ test_simple_negative_example(const MunitParameter params[], void* data) {
               0, 1, 0, 0, 0, 0, 1,
               0, 0, 0, 1, 1, 0, 1
             };
-    int result = dlx_get_exact_cover(6,7,matrix2,solution);
+    int result = dlx_get_exact_cover(6,7,matrix2,solution, false);
     munit_assert(result == 0);
     munit_assert((solution[0] == 0) && (solution[1] == 0));
 
@@ -87,7 +87,7 @@ test_very_simple_large_example(const MunitParameter params[], void* data) {
           0, 0, 0, 0, 0, 0, 0, 1, 0,
           0, 0, 0, 0, 0, 0, 0, 0, 1
         };
-    result = dlx_get_exact_cover(9,9,matrix3,solution);
+    result = dlx_get_exact_cover(9,9,matrix3,solution, false);
     munit_assert(result == 9);
     munit_assert((solution[0] != 0) || (solution[1] != 0));
 
@@ -102,7 +102,7 @@ test_large_example_from_csv(const MunitParameter params[], void* data) {
     char matrix4[64*64];
     char filename[] = "tests/files/con4.csv";
     read_csv(filename, 64, 64, matrix4);
-    result = dlx_get_exact_cover(64,64,matrix4,solution);
+    result = dlx_get_exact_cover(64,64,matrix4,solution, false);
     munit_assert(result == 16);
     munit_assert(solution[0] == 0);
     munit_assert(solution[1] == 26);
@@ -121,7 +121,7 @@ test_large_example_from_csv_2(const MunitParameter params[], void* data) {
     char matrix5[VSIZE*HSIZE];
     char filename2[] = "tests/files/con2.csv";
     read_csv(filename2, VSIZE, HSIZE, matrix5);
-    result = dlx_get_exact_cover(VSIZE,HSIZE,matrix5,solution);
+    result = dlx_get_exact_cover(VSIZE,HSIZE,matrix5,solution, false);
     munit_assert(result == 81);
     munit_assert(solution[0] == 11);
     munit_assert(solution[1] == 22);

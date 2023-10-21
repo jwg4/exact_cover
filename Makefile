@@ -22,7 +22,6 @@ PY_DIR = $(ROOT_DIR)/exact_cover_np
 CFLAGS = -g -Wall -Wstrict-prototypes -I $(INCLUDES_DIR)
 CFLAGS += -O0 -DDEBUG_LEVEL=0
 
-
 $(OBJ_DIR):
 	mkdir -pv $(OBJ_DIR)
 
