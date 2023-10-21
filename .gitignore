@@ -15,3 +15,4 @@ dist/
 setup.py
 exact_cover.egg-info/
 *.so
+tests/test_c_suite
