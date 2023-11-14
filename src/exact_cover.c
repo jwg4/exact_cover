@@ -89,8 +89,6 @@ static PyObject* get_solution_count(PyObject* self, PyObject* args)
     result = dlx_get_solution_count(rows, cols, in_array_data);
 
     return PyLong_FromLong(result);
-    free(dims);
-    return return_solution;
 }
 
 static PyMethodDef ExactCoverMethods[] =
