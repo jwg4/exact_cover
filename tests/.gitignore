@@ -3,3 +3,4 @@ test_quad_linked_list
 test_sparse_matrix
 test_m_dlx
 test_m_sparse_matrix
+test_c_suite

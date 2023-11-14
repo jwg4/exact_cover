@@ -10,3 +10,7 @@ foo*
 
 
 .hypothesis/
+exact_cover.egg-info/
+dist/
+*.so
+poetry.lock
