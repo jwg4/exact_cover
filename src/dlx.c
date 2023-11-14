@@ -58,4 +58,26 @@ int dlx_get_exact_cover(int rows, int cols, char matrix[], int *solution) {
     return solution_length;
 }
 
+int dlx_get_solution_count(int rows, int cols, char matrix[]) {
+    list sparse_matrix;
+    int solution_length;
+    int solution_count = 0;
+    int *solution = malloc(rows * sizeof(*solution));
+
+    sparse_matrix = create_sparse(rows, cols, matrix);
+    while (solution_length > 0){
+        solution_count++;
+        solution_length = search(sparse_matrix, 0, rows, solution);
+    }
+    destroy_entire_grid(sparse_matrix);
+
+    while (rows > solution_length) {
+        solution[--rows] = 0;  // Zero out everything above position i.  Caller
+                               // can use this to determine if there is a solution.
+    };
+
+    free(solution);
+    return solution_count;
+}
+
 
