@@ -1,0 +1,5 @@
+poetry
+pytest
+numpy
+hypothesis
+ValgrindCI
