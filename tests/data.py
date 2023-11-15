@@ -51,3 +51,21 @@ def small_trimino_problem_from_file():
         solution1=[5, 13],
         solution_count=2,
     )
+
+# https://en.wikipedia.org/wiki/Exact_cover#Detailed_example
+def detailed_wikipedia_problem():
+    sets = [
+        {1, 4, 7},
+        {1, 4},         # <- 1
+        {4, 5, 7},
+        {3, 5, 6},      # <- 3
+        {2, 3, 6, 7},
+        {2, 7},         # <- 5
+    ]
+    return dict(
+        data=np.array(
+            [[1 if i in s else 0 for i in range(1, 8)] for s in sets], 
+            dtype=DTYPE_FOR_ARRAY),
+        solution1=[1, 3, 5],
+        solution_count=1,
+    )
