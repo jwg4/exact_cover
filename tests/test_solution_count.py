@@ -5,7 +5,7 @@ from exact_cover.io import DTYPE_FOR_ARRAY
 
 from .problems import small_trimino_problem
 from .problems import detailed_wikipedia_problem
-from .problems import bruteforce_problem1
+from .problems import bruteforce_problem1, bruteforce_problem2, bruteforce_problem3
 
 def test_solution_count():
     data = np.array([[1, 0, 0], [0, 1, 0], [0, 1, 1], [0, 0, 1]], dtype=DTYPE_FOR_ARRAY)
