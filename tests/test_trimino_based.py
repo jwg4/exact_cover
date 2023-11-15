@@ -4,7 +4,7 @@ import numpy as np
 from exact_cover import get_exact_cover
 from exact_cover.error import NoSolution
 
-from .data import (
+from .problems import (
     # the exact cover matrix built manually
     small_trimino_problem,
     # the same store in a file
