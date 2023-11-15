@@ -8,14 +8,17 @@ from .problems import (
     # the exact cover matrix built manually
     small_trimino_problem,
     # the same store in a file
-    small_trimino_problem_from_file)
+    small_trimino_problem_from_file,
+)
 
 
 def input1():
-    return small_trimino_problem()['data']
+    return small_trimino_problem()["data"]
+
 
 def input2():
-    return small_trimino_problem_from_file()['data']
+    return small_trimino_problem_from_file()["data"]
+
 
 def test_inputs_are_equal():
     m1 = input1()
@@ -36,10 +39,10 @@ def run_on_input(array, expected):
 
 
 def test_input1():
-    expected = small_trimino_problem()['solution1']
+    expected = small_trimino_problem()["solution1"]
     run_on_input(input1(), expected)
 
 
 def test_input2():
-    expected = small_trimino_problem_from_file()['solution1']
+    expected = small_trimino_problem_from_file()["solution1"]
     run_on_input(input2(), expected)
