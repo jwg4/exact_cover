@@ -3,60 +3,19 @@ import numpy as np
 
 from exact_cover import get_exact_cover
 from exact_cover.error import NoSolution
-from exact_cover.io import DTYPE_FOR_ARRAY
 
-# from exact_cover.helpers import is_solution
-
-DTYPE = dict(dtype=DTYPE_FOR_ARRAY)
-
-# from exact_cover.io import load_problem
-
-# from tests.config import GLOBAL_CONFIG
+from .data import (
+    # the exact cover matrix built manually
+    small_trimino_problem,
+    # the same store in a file
+    small_trimino_problem_from_file)
 
 
-# one specific problem that I had trouble with
-# originally based on solving the trivial problem
-# of arranging 2 identical triminos on a 3x3 board
-
-#    +--+
-#    |  |
-# +--+--+
-# |  |  |
-# +--+--+
-
-# +--+--+--+
-# |xx|  |xx|
-# +--+--+--+
-# |  |  |  |
-# +--+--+--+
-# |xx|  |  |
-# +--+--+--+
-
-
-# the exact cover matrix built manually
 def input1():
-    to_cover = [
-        [1, 0, 0, 1, 1, 0, 1, 0],
-        [1, 0, 0, 0, 1, 1, 0, 1],
-        [1, 0, 0, 0, 1, 1, 1, 0],
-        [1, 0, 1, 0, 1, 1, 0, 0],
-        [1, 0, 0, 0, 1, 0, 1, 1],
-        [1, 0, 1, 1, 1, 0, 0, 0],  # <- 5
-        [1, 0, 0, 0, 0, 1, 1, 1],
-        [0, 1, 0, 1, 1, 0, 1, 0],
-        [0, 1, 0, 0, 1, 1, 0, 1],
-        [0, 1, 0, 0, 1, 1, 1, 0],
-        [0, 1, 1, 0, 1, 1, 0, 0],
-        [0, 1, 0, 0, 1, 0, 1, 1],
-        [0, 1, 1, 1, 1, 0, 0, 0],
-        [0, 1, 0, 0, 0, 1, 1, 1],  # <- 13
-    ]
-    return np.array(to_cover, **DTYPE)
-
+    return small_trimino_problem()['data']
 
 def input2():
-    return np.load("tests/files/small_trimino_problem.npy")
-
+    return small_trimino_problem_from_file()['data']
 
 def test_inputs_are_equal():
     m1 = input1()
@@ -77,8 +36,10 @@ def run_on_input(array, expected):
 
 
 def test_input1():
-    run_on_input(input1(), [5, 13])
+    expected = small_trimino_problem()['solution1']
+    run_on_input(input1(), expected)
 
 
 def test_input2():
-    run_on_input(input2(), [5, 13])
+    expected = small_trimino_problem_from_file()['solution1']
+    run_on_input(input2(), expected)
