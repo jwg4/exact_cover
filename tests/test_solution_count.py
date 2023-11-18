@@ -14,6 +14,18 @@ def test_solution_count():
     assert result == 2
 
 
+def test_solution_count_zero_rows():
+    data = np.array([[1, 0, 0], [0, 0, 0], [0, 1, 0], [0, 1, 1], [0, 0, 0], [0, 0, 1]], dtype=DTYPE_FOR_ARRAY)
+    result = get_solution_count(data)
+    assert result == 2
+
+
+def test_solution_count_duplicate_rows():
+    data = np.array([[1, 0, 0], [0, 1, 0], [1, 0, 0], [0, 1, 1], [0, 1, 1], [0, 0, 1]], dtype=DTYPE_FOR_ARRAY)
+    result = get_solution_count(data)
+    assert result == 6
+
+
 def test_solution_count_single_solution():
     data = np.array([[1, 0, 0], [0, 1, 0], [0, 1, 1]], dtype=DTYPE_FOR_ARRAY)
     result = get_solution_count(data)
