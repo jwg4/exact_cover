@@ -18,6 +18,13 @@ def test_exact_cover():
     np.testing.assert_array_equal(actual, expected)
 
 
+def test_exact_cover_with_0_rows():
+    data = np.array([[1, 0, 0], [0, 0, 0], [0, 1, 0], [0, 1, 1], [0, 0, 0], [0, 0, 1]], dtype=DTYPE_FOR_ARRAY)
+    expected = np.array([0, 2, 5])
+    actual = get_exact_cover(data)
+    np.testing.assert_array_equal(actual, expected)
+
+
 def test_exact_cover_c_order_array():
     data = np.array(
         [[1, 0, 0], [0, 1, 0], [0, 1, 1], [0, 0, 1]], dtype=DTYPE_FOR_ARRAY, order="C"
