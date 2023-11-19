@@ -64,5 +64,3 @@ void destroy_column_unsafely (list);
 void destroy_entire_grid (list);
 
 #endif
-
-

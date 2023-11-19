@@ -100,5 +100,3 @@ int dlx_get_solution_count(int rows, int cols, char matrix[]) {
     free(solution);
     return solution_count;
 }
-
-

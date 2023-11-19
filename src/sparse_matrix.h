@@ -15,4 +15,3 @@ void print_sparse_matrix_transpose(list, int);
 void print_column(list, int);
 
 #endif
-
