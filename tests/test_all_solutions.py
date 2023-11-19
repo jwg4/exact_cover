@@ -1,7 +1,7 @@
 # xxx not yet available
 # from exact_cover_impl import get_all_solutions
 
-import problems
+from . import problems
 
 
 def normalize(solution):
