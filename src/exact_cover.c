@@ -24,11 +24,11 @@ static bool not_2d_int_array(PyArrayObject *in_array) {
         PyErr_SetString(PyExc_ValueError, _EXACT_COVER_NP_DIM_ERROR_);
         return 1;
     }
-    if (PyArray_TYPE(in_array) != NPY_BOOL) { 
+    if (PyArray_TYPE(in_array) != NPY_BOOL) {
         PyErr_SetString(PyExc_TypeError, _EXACT_COVER_NP_TYPE_ERROR_);
         return 1;
     }
-    if (!(PyArray_FLAGS(in_array) & NPY_ARRAY_C_CONTIGUOUS)) { 
+    if (!(PyArray_FLAGS(in_array) & NPY_ARRAY_C_CONTIGUOUS)) {
         PyErr_SetString(PyExc_TypeError, _EXACT_COVER_NP_ORDER_ERROR_);
         return 1;
     }
@@ -48,7 +48,7 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
 
     /*  Check that we got a 2-dimensional array of dtype='bool'. */
     if (not_2d_int_array(in_array)) return NULL;
-    
+
     /*  Get the data. */
     dims = PyArray_DIMS(in_array);
     rows = (int) dims[0],  cols = (int) dims[1];
@@ -79,7 +79,7 @@ static PyObject* get_solution_count(PyObject* self, PyObject* args)
 
     /*  Check that we got a 2-dimensional array of dtype='bool'. */
     if (not_2d_int_array(in_array)) return NULL;
-    
+
     /*  Get the data. */
     dims = PyArray_DIMS(in_array);
     rows = (int) dims[0],  cols = (int) dims[1];

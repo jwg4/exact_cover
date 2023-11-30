@@ -9,4 +9,3 @@ int dlx_get_exact_cover(int, int, char [], int*);
 int dlx_get_solution_count(int, int, char []);
 
 #endif
-

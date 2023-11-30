@@ -104,5 +104,3 @@ void print_column(list col, int row_count) {
     for (; row_num < row_count; ++row_num) printf("0,");
     putchar('\n');
 }
-
-

@@ -130,5 +130,3 @@ Acknowledgements
 Thanks very much to Moy Easwaran (https://github.com/moygit) for his inspiring work!
 
 Munit aka µnit (https://nemequ.github.io/munit/) is a wonderful unit testing framework for C code.
-
-
