@@ -89,7 +89,7 @@ int dlx_get_exact_cover(int rows, int cols, char matrix[], int *solution) {
 
 int dlx_get_solution_count(int rows, int cols, char matrix[]) {
     list sparse_matrix;
-    int solution_length;
+    // int solution_length;
     int solution_count = 0;
     int *solution = malloc(rows * sizeof(*solution));
 
