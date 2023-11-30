@@ -1,6 +1,6 @@
 import numpy as np
 
-from exact_cover_impl import get_solution_count
+from exact_cover import get_solution_count
 from exact_cover.io import DTYPE_FOR_ARRAY
 
 from .problems import small_trimino_problem
