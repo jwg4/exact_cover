@@ -71,6 +71,11 @@ Now we can call `exact_cover`:
 This is telling us that the 0th row (i.e. A), the 2nd row (i.e. C),
 and the 3rd row (i.e. D) together form an exact cover.
 
+To see the total number of distinct solutions, we can use the function get_solution_count:
+
+    >>> ec.get_solution_count(S)
+    1
+
 See the file examples.md for more detailed examples of use.
 
 

@@ -18,3 +18,8 @@ The numpy type to use is defined in the package for convenience and compatibilit
     >>> T = np.array([[1,0,0,1,0],[1,1,1,0,0],[0,1,1,0,0],[0,0,0,0,1]], dtype=DTYPE_FOR_ARRAY)
     >>> print(ec.get_exact_cover(T))
     [0 2 3]
+
+It's also possible to retrieve the total number of solutions to an exact cover problem:
+    >>> ec.get_solution_count(T)
+    1
+
