@@ -8,7 +8,7 @@
 static MunitResult test_new_list_is_empty(const MunitParameter params[], void* data)
 {
     list my_list = create_empty_list();
-    
+
     munit_assert(is_empty(my_list));
     return MUNIT_OK;
 }
@@ -17,7 +17,7 @@ static MunitResult test_add_one_item(const MunitParameter params[], void* data)
 {
     int item1 = 1;
     list my_list = create_empty_list();
-    
+
     my_list = insert_horizontally(my_list, create_node(create_data(item1, NULL)));
     munit_assert(not_empty(my_list));
     return MUNIT_OK;
@@ -27,7 +27,7 @@ static MunitResult test_can_retrieve_one_item(const MunitParameter params[], voi
 {
     int item1 = 1;
     list my_list = create_empty_list();
-   
+
     my_list = insert_horizontally(my_list, create_node(create_data(item1, NULL)));
     munit_assert(get_data(my_list)->data == 1);
     return MUNIT_OK;
@@ -37,7 +37,7 @@ static MunitResult test_quad_linked_list(const MunitParameter params[], void* da
 {
     int item1 = 1, item2 = 2, item3 = 3;
     list save_list, my_list = create_empty_list();
-    
+
     munit_assert(is_empty(my_list));
     my_list = insert_horizontally(my_list, create_node(create_data(item3, NULL)));
     // Inserted one item; list should not be empty:
@@ -125,7 +125,7 @@ static MunitResult test_quad_linked_list(const MunitParameter params[], void* da
     item1 = 1; item2 = 2; item3 = 3;
     my_list = create_empty_list();
     // New list should be empty:
-    
+
     //DEBUG_PRINT(1, "Check: emptiness.\n");
     munit_assert(is_empty(my_list));
     my_list = insert_vertically(my_list, create_node(create_data(item3, NULL)));

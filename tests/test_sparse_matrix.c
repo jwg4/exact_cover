@@ -7,7 +7,7 @@
 
 #define HSIZE 9
 #define VSIZE 15
- 
+
 
 static MunitResult test_choose_column_with_min_data(const MunitParameter params[], void* data)
 {

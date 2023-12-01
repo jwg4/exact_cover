@@ -93,7 +93,7 @@ list insert_horizontally(list orig_list, node_ptr new_node_ptr) {
         orig_list->left->right  = new_node_ptr;
         orig_list->left         = new_node_ptr;
     }
-    
+
     return new_node_ptr;
 }
 
@@ -117,7 +117,7 @@ list insert_vertically(list orig_list, node_ptr new_node_ptr) {
         orig_list->up->down = new_node_ptr;
         orig_list->up       = new_node_ptr;
     }
-    
+
     return new_node_ptr;
 }
 
@@ -242,4 +242,3 @@ void destroy_entire_grid (list grid) {
     }
     return;
 }
-
