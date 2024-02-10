@@ -93,8 +93,8 @@ static PyObject* get_all_solutions(PyObject* self, PyObject* args)
     result = dlx_get_all_solutions(rows, cols, in_array_data, max_count, solutions);
 
     dims = malloc(nd * sizeof(*dims));
-    dims[0] = rows;
-    dims[1] = result;
+    dims[0] = result;
+    dims[1] = rows;
     PyObject *return_solution = PyArray_SimpleNewFromData(nd, dims, NPY_INT32, (void*)solutions);
     PyArray_ENABLEFLAGS((PyArrayObject*) return_solution, NPY_ARRAY_OWNDATA);
     free(dims);
