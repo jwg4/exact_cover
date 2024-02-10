@@ -74,6 +74,7 @@ static PyObject* get_all_solutions(PyObject* self, PyObject* args)
     char          *in_array_data;
     int           rows, cols, result;
     int           max_count;
+    int           *solutions;
 
     /*  Parse single numpy array argument */
     if (!PyArg_ParseTuple(args, "O!I", &PyArray_Type, &in_array, &max_count)) return NULL;
@@ -87,7 +88,8 @@ static PyObject* get_all_solutions(PyObject* self, PyObject* args)
     in_array_data = (char*) PyArray_DATA(in_array);
 
     /*  Calculate the exact cover. */
-    int nd = 2, *solutions = malloc(max_count * rows * sizeof(int));
+    int nd = 2;
+    solutions = malloc(max_count * rows * sizeof(int));
     result = dlx_get_all_solutions(rows, cols, in_array_data, max_count, solutions);
 
     dims = malloc(nd * sizeof(*dims));
