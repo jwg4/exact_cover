@@ -12,7 +12,7 @@ def normalize(solution):
     """
     return frozenset(frozenset(row) for row in solution)
 
-def test_from_problem(problem):
+def make_test_from_problem(problem):
     """
     generate a test function for a problem dict
     """
