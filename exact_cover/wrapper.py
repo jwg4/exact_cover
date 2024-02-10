@@ -32,14 +32,17 @@ def get_solution_count(matrix):
     return result
 
 
-def get_all_solutions(matrix):
+def get_all_solutions(matrix, max_count=None):
     transformed = np.require(
         matrix, dtype=DTYPE_FOR_ARRAY, requirements=["C_CONTIGUOUS"]
     )
     assert (
         transformed.flags.c_contiguous
     ), "We depend on the input array being C contiguous for raw goodness."
-    count = raw_get_solution_count(transformed)
+    if max_count is None:
+        count = raw_get_solution_count(transformed)
+    else:
+        count = max_count
     result = raw_get_all_solutions(transformed, count)
     if result.size == 0:
         raise NoSolution("No solutions found by the C code.")
