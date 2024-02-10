@@ -21,6 +21,17 @@ def get_exact_cover(matrix):
     return result
 
 
+def get_solution_count(matrix):
+    transformed = np.require(
+        matrix, dtype=DTYPE_FOR_ARRAY, requirements=["C_CONTIGUOUS"]
+    )
+    assert (
+        transformed.flags.c_contiguous
+    ), "We depend on the input array being C contiguous for raw goodness."
+    result = raw_get_solution_count(transformed)
+    return result
+
+
 def get_all_solutions(matrix):
     transformed = np.require(
         matrix, dtype=DTYPE_FOR_ARRAY, requirements=["C_CONTIGUOUS"]
