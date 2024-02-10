@@ -13,9 +13,9 @@ from .test_exact_cover_problems import large_problems_without_solution
 
 def test_exact_cover():
     data = np.array([[1, 0, 0], [0, 1, 0], [0, 1, 1], [0, 0, 1]], dtype=DTYPE_FOR_ARRAY)
-    expected = np.array([[0, 1, 3], [0, 2, 0]])
+    expected = set([(0, 1, 3), (0, 2)])
     actual = get_all_solutions(data)
-    np.testing.assert_array_equal(actual, expected)
+    assert expected == actual
 
 
 def test_max_solutions():
