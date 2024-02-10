@@ -1,5 +1,4 @@
-# xxx not yet available
-# from exact_cover_impl import get_all_solutions
+from exact_cover import get_all_solutions
 
 from . import problems
 
@@ -19,8 +18,7 @@ def test_from_problem(problem):
     """
     def test():
         # xxx not yet available
-        # result = normalize(get_all_solutions(problem["data"]))
-        result = frozenset()
+        result = normalize(get_all_solutions(problem["data"]))
         expected = normalize(problem["all_solutions"])
         assert result == expected
     return test
