@@ -5,6 +5,7 @@ from hypothesis import given
 from hypothesis.strategies import sampled_from
 
 from exact_cover import get_exact_cover
+from exact_cover_impl import get_solution_count
 from exact_cover.error import NoSolution
 from exact_cover.io import DTYPE_FOR_ARRAY
 from .helpers.polyomino_data import polyomino_problem
@@ -78,6 +79,15 @@ def test_simple_exact_cover():
     expected = np.array([0, 1])
     actual = get_exact_cover(data)
     np.testing.assert_array_equal(actual, expected)
+
+
+def test_simple_solution_count():
+    """
+    ArthurKantor's 1st test case
+    """
+    data = np.array([[1, 0, 0], [0, 1, 1]], dtype=DTYPE_FOR_ARRAY)
+    actual = get_solution_count(data)
+    assert actual == 1
 
 
 def test_single_row_exact_cover():
