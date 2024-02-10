@@ -101,18 +101,30 @@ int dlx_get_solution_count(int rows, int cols, char matrix[]) {
     return solution_count;
 }
 
-int enumerate(list sparse_matrix, int k, int max, int *solution, int *solutions) {
+int enumerate(list sparse_matrix, int k, int max, int *solution, int *solutions, int offset) {
     list col, row, next;
     int result = 0;
     int c = 0;
+    int remaining = max;
+
+    if (max == 0){
+        return 0;
+    }
 
     // Base cases:
     // 1. There are no columns left; we've found a solution.
     if (get_right(sparse_matrix) == sparse_matrix) {
-	for (int i=0; i < k; i++) {
-            solutions[i] = solution[i];
+	if (remaining > 0){
+            for (int i=0; i < k; i++) {
+                solutions[i] = solution[i];
+	    }
+	    for (int i=k; i < offset; i++) {
+                solutions[i] = 0;
+	    }
+	    remaining = remaining - 1;
+	    return 1;
 	}
-	return 1;
+	return 0;
     }
     // 2. There's a column with only zeros. This branch of the search
     //    tree has no solutions and we need to backtrack.
@@ -125,9 +137,8 @@ int enumerate(list sparse_matrix, int k, int max, int *solution, int *solutions)
         solution[k] = get_data(row)->data;  // save the row number
         for (next = row; (next = get_right(next)) != row; )
             cover_column(get_data(next)->list_data);
-        result = enumerate(sparse_matrix, k+1, max, solution, solutions);
+        result = enumerate(sparse_matrix, k+1, remaining, solution, solutions + c * offset, offset);
         c += result;
-        // If result > 0 we're done, but we should still clean up.
         for (next = row; (next = get_left(next)) != row; )
             uncover_column(get_data(next)->list_data);
     }
@@ -137,13 +148,12 @@ int enumerate(list sparse_matrix, int k, int max, int *solution, int *solutions)
 
 int dlx_get_all_solutions(int rows, int cols, char matrix[], int max_count, int* solutions) {
     list sparse_matrix;
-    int solution_length;
     int solution_count = 0;
-    int *solution = malloc(rows * sizeof(*solution));
+    int *solution = malloc(rows * sizeof(int));
 
     sparse_matrix = create_sparse(rows, cols, matrix);
 
-    int count = enumerate(sparse_matrix, 0, max_count, solution, solutions);
+    int count = enumerate(sparse_matrix, 0, max_count, solution, solutions, rows);
 
     destroy_entire_grid(sparse_matrix);
 
