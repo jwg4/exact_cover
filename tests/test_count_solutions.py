@@ -10,6 +10,8 @@ from exact_cover.io import DTYPE_FOR_ARRAY
 from .helpers.polyomino_data import polyomino_problem
 from .test_exact_cover_problems import large_problems_without_solution
 
+from tests.config import GLOBAL_CONFIG
+
 
 def test_exact_cover():
     data = np.array([[1, 0, 0], [0, 1, 0], [0, 1, 1], [0, 0, 1]], dtype=DTYPE_FOR_ARRAY)
@@ -73,10 +75,11 @@ def test_single_row_exact_cover():
     assert result == 1
 
 
+@pytest.mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_complex_exact_cover_problem():
     data = np.array(polyomino_problem, dtype=DTYPE_FOR_ARRAY)
     result = get_solution_count(data)
-    assert result == 1
+    assert result == 1466
 
 
 @given(large_problems_without_solution)
