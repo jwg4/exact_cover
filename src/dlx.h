@@ -7,5 +7,6 @@
 int search(list, int, int, int *);
 int dlx_get_exact_cover(int, int, char [], int*);
 int dlx_get_solution_count(int, int, char []);
+int dlx_get_all_solutions(int, int, char [], int, int*);
 
 #endif
