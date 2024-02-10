@@ -1,5 +1,5 @@
 from exact_cover_impl import get_exact_cover as raw_get_exact_cover
-from exact_cover_impl import get_solution_count as raw_get_exact_cover
+from exact_cover_impl import get_solution_count as raw_get_solution_count
 from exact_cover_impl import get_all_solutions as raw_get_all_solutions
 
 from .error import NoSolution
