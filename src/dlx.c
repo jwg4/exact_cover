@@ -105,7 +105,6 @@ int enumerate(list sparse_matrix, int k, int max, int *solution, int *solutions,
     list col, row, next;
     int result = 0;
     int c = 0;
-    int remaining = max;
 
     // Base cases:
     // 0. we have run out of space
@@ -114,15 +113,11 @@ int enumerate(list sparse_matrix, int k, int max, int *solution, int *solutions,
     }
     // 1. There are no columns left; we've found a solution.
     if (get_right(sparse_matrix) == sparse_matrix) {
-	if (remaining > 0){
-            for (int i=0; i < k; i++) {
-                solutions[i] = solution[i];
-	    }
-	    for (int i=k; i < offset; i++) {
-                solutions[i] = 0;
-	    }
-	    remaining = remaining - 1;
-	    return 1;
+	for (int i=0; i < k; i++) {
+            solutions[i] = solution[i];
+	}
+	for (int i=k; i < solution_size; i++) {
+	    solutions[i] = 0;
 	}
 	return 1;
     }
