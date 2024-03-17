@@ -36,4 +36,4 @@ for problem_name in dir(problems):
         continue
     test_name = 'test_' + problem_name
     problem_function = getattr(problems, problem_name)
-    globals()[test_name] = test_from_problem(problem_function())
+    globals()[test_name] = make_test_from_problem(problem_function())
