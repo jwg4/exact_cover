@@ -5,7 +5,6 @@ from hypothesis import given
 from hypothesis.strategies import sampled_from
 
 from exact_cover import get_solution_count
-from exact_cover.error import NoSolution
 from exact_cover.io import DTYPE_FOR_ARRAY
 from .helpers.polyomino_data import polyomino_problem
 from .test_exact_cover_problems import large_problems_without_solution
