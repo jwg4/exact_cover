@@ -100,3 +100,59 @@ int dlx_get_solution_count(int rows, int cols, char matrix[]) {
     free(solution);
     return solution_count;
 }
+
+int enumerate(list sparse_matrix, int k, int max, int *solution, int *solutions, int solution_size) {
+    list col, row, next;
+    int result = 0;
+    int c = 0;
+
+    // Base cases:
+    // 0. we have run out of space
+    if (max < 1) {
+        return 0;
+    }
+    // 1. There are no columns left; we've found a solution.
+    if (get_right(sparse_matrix) == sparse_matrix) {
+	for (int i=0; i < k; i++) {
+            solutions[i] = solution[i];
+	}
+	for (int i=k; i < solution_size; i++) {
+	    solutions[i] = 0;
+	}
+	return 1;
+    }
+    // 2. There's a column with only zeros. This branch of the search
+    //    tree has no solutions and we need to backtrack.
+    col = choose_column_with_min_data(sparse_matrix, solution_size);
+    if (get_data(col)->data == 0) return 0;
+
+    // Main algorithm:
+    cover_column(col);
+    for (row = col; (row = get_down(row)) != col; ) {
+        solution[k] = get_data(row)->data;  // save the row number
+        for (next = row; (next = get_right(next)) != row; )
+            cover_column(get_data(next)->list_data);
+        result = enumerate(sparse_matrix, k+1, max - c, solution, solutions + c * solution_size, solution_size);
+        c += result;
+        for (next = row; (next = get_left(next)) != row; )
+            uncover_column(get_data(next)->list_data);
+    }
+    uncover_column(col);
+    return c;
+}
+
+int dlx_get_all_solutions(int rows, int cols, char matrix[], int max_count, int* solutions) {
+    list sparse_matrix;
+    int solution_count = 0;
+    int *solution = malloc(rows * sizeof(*solution));
+
+    sparse_matrix = create_sparse(rows, cols, matrix);
+
+    int count = enumerate(sparse_matrix, 0, max_count, solution, solutions, rows);
+
+    destroy_entire_grid(sparse_matrix);
+
+    free(solution);
+    return count;
+
+}

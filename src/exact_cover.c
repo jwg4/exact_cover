@@ -66,6 +66,41 @@ static PyObject* get_exact_cover(PyObject* self, PyObject* args)
     return return_solution;
 }
 
+static PyObject* get_all_solutions(PyObject* self, PyObject* args)
+{
+
+    PyArrayObject *in_array;
+    npy_intp      *dims;
+    char          *in_array_data;
+    int           rows, cols, result;
+    int           max_count;
+    int           *solutions;
+
+    /*  Parse single numpy array argument */
+    if (!PyArg_ParseTuple(args, "O!I", &PyArray_Type, &in_array, &max_count)) return NULL;
+
+    /*  Check that we got a 2-dimensional array of dtype='bool'. */
+    if (not_2d_int_array(in_array)) return NULL;
+    
+    /*  Get the data. */
+    dims = PyArray_DIMS(in_array);
+    rows = (int) dims[0],  cols = (int) dims[1];
+    in_array_data = (char*) PyArray_DATA(in_array);
+
+    /*  Calculate the exact cover. */
+    int nd = 2;
+    solutions = malloc(max_count * rows * sizeof(int));
+    result = dlx_get_all_solutions(rows, cols, in_array_data, max_count, solutions);
+
+    dims = malloc(nd * sizeof(*dims));
+    dims[0] = result;
+    dims[1] = rows;
+    PyObject *return_solution = PyArray_SimpleNewFromData(nd, dims, NPY_INT32, (void*)solutions);
+    PyArray_ENABLEFLAGS((PyArrayObject*) return_solution, NPY_ARRAY_OWNDATA);
+    free(dims);
+    return return_solution;
+}
+
 static PyObject* get_solution_count(PyObject* self, PyObject* args)
 {
 
@@ -95,6 +130,7 @@ static PyMethodDef ExactCoverMethods[] =
 {
      {"get_exact_cover", get_exact_cover, METH_VARARGS, "Calculate an exact cover of a set."},
      {"get_solution_count", get_solution_count, METH_VARARGS, "Get the number of distinct exact cover solutions."},
+     {"get_all_solutions", get_all_solutions, METH_VARARGS, "Get an array of all solutions."},
      {NULL, NULL, 0, NULL}
 };
 
