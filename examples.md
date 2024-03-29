@@ -23,3 +23,8 @@ It's also possible to retrieve the total number of solutions to an exact cover p
     >>> ec.get_solution_count(T)
     1
 
+This function (experimental) returns a set of all the solutions to a problem:
+    >>> U = np.array([[0, 1, 1, 0], [1, 0, 0, 0], [1, 1, 0, 0], [0, 0, 1, 1], [1, 0, 0, 1], [0, 0, 0, 1]])
+    >>> ec.get_all_solutions(U)
+    {(2, 3), (0, 4), (0, 1, 5)}
+
