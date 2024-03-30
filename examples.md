@@ -28,3 +28,10 @@ This function (experimental) returns a set of all the solutions to a problem:
     >>> ec.get_all_solutions(U)
     {(2, 3), (0, 4), (0, 1, 5)}
 
+You can pass in a max number of solutions that you would like the function to find.
+    >>> ec.get_all_solutions(U, 2)
+    {(0, 4), (0, 1, 5)}
+    >>> ec.get_all_solutions(U, 3)
+    {(2, 3), (0, 4), (0, 1, 5)}
+    >>> ec.get_all_solutions(U, 5)
+    {(2, 3), (0, 4), (0, 1, 5)}
