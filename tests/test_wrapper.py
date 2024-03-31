@@ -22,4 +22,3 @@ def test_solutions_array_to_set_wide():
     actual = solutions_array_to_set(input_array)
     expected = {(7, ), (8, )}
     assert actual == expected
-
