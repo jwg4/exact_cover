@@ -117,7 +117,7 @@ int enumerate(list sparse_matrix, int k, int max, int *solution, int *solutions,
             solutions[i] = solution[i];
 	}
 	for (int i=k; i < solution_size; i++) {
-	    solutions[i] = 0;
+	    solutions[i] = -1;
 	}
 	return 1;
     }
