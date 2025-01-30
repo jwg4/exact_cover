@@ -24,7 +24,7 @@ jobs:
       - name: Install poetry
         run: pip install poetry
       - name: Install requirements
-        run: poetry install --with wheel_builder
+        run: poetry install
       - name: Build package
         run: poetry build -f wheel
       - name: Test package
