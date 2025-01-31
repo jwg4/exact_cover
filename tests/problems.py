@@ -193,6 +193,6 @@ def trailing_zero_row_problem():
             {7, 3},
             {7, 0},
             {1, 10},
-            {7, 8}
+            {7, 8},
         ],
     )
