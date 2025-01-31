@@ -32,15 +32,16 @@ def get_solution_count(matrix):
     return result
 
 
-def _solutions_array_to_set(a):
+def solutions_array_to_set(a):
     def truncate(row):
         if all(x == 0 for x in row):
             return [0]
         else:
-            if row[-1] == 0:
-                return truncate(row[:-1])
-            else:
-                return row
+            i = 0
+            while row[i - 1] == 0:
+                i = i - 1
+            if i < 0:
+                return row[:i]
 
     return set([tuple(truncate(row)) for row in a])
 
@@ -59,4 +60,4 @@ def get_all_solutions(matrix, max_count=None):
     result = raw_get_all_solutions(transformed, count)
     if result.size == 0:
         raise NoSolution("No solutions found by the C code.")
-    return _solutions_array_to_set(result)
+    return solutions_array_to_set(result)
