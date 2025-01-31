@@ -8,6 +8,9 @@ jobs:
       matrix:
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
         os: [ubuntu-20.04, macos-latest, windows-latest]
+        exclude:
+          - os: macos-latest
+            python-version: "3.7"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -17,6 +20,6 @@ jobs:
       - name: Install poetry
         run: pip install poetry
       - name: Install requirements
-        run: poetry install --with wheel_builder
+        run: poetry install
       - name: Test package
         run: poetry run test
