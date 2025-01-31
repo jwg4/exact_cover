@@ -20,6 +20,8 @@ exact_cover_impl = Extension(
 def build(setup_kwargs):
     setup_kwargs.update(
         {
+            # Doubtful that we need to specify packages here?
+            # Poetry could probably get this right using pyproject.toml
             "packages": ["exact_cover"],
             "ext_modules": [exact_cover_impl],
         }
