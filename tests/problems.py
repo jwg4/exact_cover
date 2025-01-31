@@ -174,3 +174,35 @@ def bruteforce_problem3():
             {9, 10, 11},
         ],
     )
+
+
+def trailing_zero_row_problem():
+    tc = (
+        (1, 1, 0),
+        (1, 0, 1),
+        (1, 0, 1),
+        (1, 1, 0),
+        (1, 1, 0),
+        (0, 0, 0),
+        (0, 0, 0),
+        (0, 0, 1),
+        (1, 1, 0),
+        (1, 0, 1),
+        (0, 1, 0),
+        (1, 0, 0),
+    )
+    return dict(
+        data=np.array(tc, dtype=DTYPE_FOR_ARRAY),
+        solution1=[0, 1, 2],
+        solution_count=8,
+        all_solutions=[
+            {9, 10},
+            {7, 4},
+            {2, 10},
+            {7, 11, 10},
+            {7, 3},
+            {7, 0},
+            {1, 10},
+            {7, 8},
+        ],
+    )

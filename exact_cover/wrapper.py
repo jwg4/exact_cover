@@ -34,14 +34,10 @@ def get_solution_count(matrix):
 
 def solutions_array_to_set(a):
     def truncate(row):
-        if all(x == 0 for x in row):
-            return [0]
-        else:
-            i = 0
-            while row[i - 1] == 0:
-                i = i - 1
-            if i < 0:
-                return row[:i]
+        i = 0
+        while row[i - 1] == -1:
+            i = i - 1
+        return row[:i]
 
     return set([tuple(truncate(row)) for row in a])
 
