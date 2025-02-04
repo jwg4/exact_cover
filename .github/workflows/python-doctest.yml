@@ -1,0 +1,26 @@
+name: Check code samples in docs
+
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: '**'
+
+jobs:
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4.5.0
+      with:
+        python-version: 3.9
+    - name: Install poetry
+      run: pip install poetry
+    - name: Install requirements
+      run: poetry install --with testing
+    - name: Check examples in README
+      run: poetry run doctest
