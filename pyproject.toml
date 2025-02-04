@@ -29,6 +29,7 @@ setuptools = ">=51.1.2"
 hypothesis = ">=6.56.3"
 pytest = ">=6.1.2"
 pytest-fail-slow = ">=0.3.0"
+exact-cover-samples = "^0.0.8"
 
 [tool.poetry.group.testing]
 optional = true
