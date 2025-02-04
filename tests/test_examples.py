@@ -13,7 +13,7 @@ def test_exact_cover_solve(problem):
     data = problem["data"]
     try:
         set_result = get_all_solutions(data)
-        result = [tuple(a) for a in set_result]
+        result = [tuple(sorted(int(x) for x in a)) for a in set_result]
     except NoSolution:
         result = []
     assert sorted(result) == sorted(problem["solutions"])  
