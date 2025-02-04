@@ -72,3 +72,4 @@ exclude = "polyomino_data"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules --doctest-glob='*.md'"
+testpaths = ["tests"]
