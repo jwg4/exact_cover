@@ -21,7 +21,7 @@ jobs:
     - name: Install poetry
       run: pip install poetry
     - name: Install requirements
-      run: poetry install
+      run: poetry install --with linting
     - name: Lint with flake8
       run: poetry run flake8
     - name: Lint with black
