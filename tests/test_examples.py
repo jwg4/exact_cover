@@ -12,7 +12,8 @@ SAMPLE_PROBLEMS = [problems[name]() for name in problems]
 def test_exact_cover_solve(problem):
     data = problem["data"]
     try:
-        result = get_all_solutions(data)
+        set_result = get_all_solutions(data)
+        result = [tuple(a) for a in set_result]
     except NoSolution:
         result = []
-    assert result == problem["solutions"]  
+    assert result.sorted() == problem["solutions"].sorted()  
