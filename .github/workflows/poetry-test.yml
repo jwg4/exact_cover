@@ -18,8 +18,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install poetry
-        run: pip install poetry --with testing
+        run: pip install poetry
       - name: Install requirements
-        run: poetry install
+        run: poetry install --with testing
       - name: Test package
         run: poetry run test
