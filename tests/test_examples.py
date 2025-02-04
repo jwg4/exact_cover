@@ -16,4 +16,4 @@ def test_exact_cover_solve(problem):
         result = [tuple(a) for a in set_result]
     except NoSolution:
         result = []
-    assert result.sorted() == problem["solutions"].sorted()  
+    assert sorted(result) == sorted(problem["solutions"])  
