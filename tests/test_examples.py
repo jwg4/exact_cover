@@ -17,6 +17,7 @@ SAMPLE_PROBLEMS = [problems[name]() for name in problems]
 
 @mark.parametrize("problem", SAMPLE_PROBLEMS)
 @mark.skipif(not RUN_SAMPLES, reason="Not running exact-cover-samples")
+@mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_exact_cover_solve(problem):
     data = problem["data"]
 
