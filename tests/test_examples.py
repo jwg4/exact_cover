@@ -7,6 +7,7 @@ try:
     from exact_cover_samples import problems, canonical
     RUN_SAMPLES = True
 except ImportError:
+    problems = []
     RUN_SAMPLES = False
 
 
