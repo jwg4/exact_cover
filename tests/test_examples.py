@@ -3,6 +3,8 @@ from exact_cover.error import NoSolution
 
 from pytest import mark
 
+from tests.config import GLOBAL_CONFIG
+
 try:
     from exact_cover_samples import problems, canonical
 
