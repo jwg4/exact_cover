@@ -7,13 +7,21 @@ from pytest import mark
 
 SAMPLE_PROBLEMS = [problems[name]() for name in problems]
 
-@mark.parametrize( "problem",  
+@mark.parametrize("problem",  
     SAMPLE_PROBLEMS,)  
 def test_exact_cover_solve(problem):
+
     data = problem["data"]
     try:
         set_result = get_all_solutions(data)
         result = [tuple(sorted(int(x) for x in a)) for a in set_result]
     except NoSolution:
         result = []
-    assert sorted(result) == sorted(problem["solutions"])  
+    
+    expected = problem["solutions"]
+    try:
+        expected = expected.tolist()
+    except AttributeError:
+        pass
+
+    assert sorted(result) == sorted(expected)
