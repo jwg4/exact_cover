@@ -15,9 +15,10 @@ except ImportError:
 
 
 SAMPLE_PROBLEMS = [problems[name]() for name in problems]
+PROBLEM_IDS = [p["shortname"] for p in SAMPLE_PROBLEMS]
 
 
-@mark.parametrize("problem", SAMPLE_PROBLEMS)
+@mark.parametrize("problem", SAMPLE_PROBLEMS, ids=PROBLEM_IDS)
 @mark.skipif(not RUN_SAMPLES, reason="Not running exact-cover-samples")
 @mark.skipif(GLOBAL_CONFIG["SKIP_SLOW"], reason="Skipping slow tests")
 def test_exact_cover_solve(problem):
