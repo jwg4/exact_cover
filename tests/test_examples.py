@@ -21,6 +21,7 @@ def test_exact_cover_solve(problem):
     expected = problem["solutions"]
     try:
         expected = expected.tolist()
+        expected = [tuple(sorted(int(x) for x in a)) for a in expected]
     except AttributeError:
         pass
 
