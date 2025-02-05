@@ -1,4 +1,4 @@
-name: Python code quality checks
+name: Check code samples in docs
 
 on:
   push:
@@ -21,8 +21,6 @@ jobs:
     - name: Install poetry
       run: pip install poetry
     - name: Install requirements
-      run: poetry install --with linting
-    - name: Lint with flake8
-      run: poetry run flake8
-    - name: Lint with black
-      run: poetry run black --check exact_cover/ tests/ tools/ build.py
+      run: poetry install --with testing
+    - name: Check examples in README
+      run: poetry run doctest

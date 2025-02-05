@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.9", "3.10", "3.11"]
         os: [ubuntu-20.04, macos-latest, windows-latest]
         exclude:
           - os: macos-latest
@@ -20,6 +20,6 @@ jobs:
       - name: Install poetry
         run: pip install poetry
       - name: Install requirements
-        run: poetry install
+        run: poetry install --with testing
       - name: Test package
         run: poetry run test

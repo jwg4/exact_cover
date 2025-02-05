@@ -25,13 +25,27 @@ numpy = [
 ]
 setuptools = ">=51.1.2"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.testing.dependencies]
 hypothesis = ">=6.56.3"
 pytest = ">=6.1.2"
+pytest-fail-slow = ">=0.3.0"
+exact-cover-samples = { version = "0.0.8", python = ">=3.10" }
+
+[tool.poetry.group.testing]
+optional = true
+
+[tool.poetry.group.linting.dependencies]
 flake8 = ">=4.0"
 black = ">=22.3.0"
+
+[tool.poetry.group.linting]
+optional = true
+
+[tool.poetry.group.memcheck.dependencies]
 valgrindci = ">=0.2.0"
-pytest-fail-slow = ">=0.3.0"
+
+[tool.poetry.group.memcheck]
+optional = true
 
 [tool.poetry.build]
 script = "build.py"
@@ -58,3 +72,4 @@ exclude = "polyomino_data"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules --doctest-glob='*.md'"
+testpaths = ["tests"]
