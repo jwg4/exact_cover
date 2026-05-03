@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-from tests.config import GLOBAL_CONFIG  # noqa: F401
+from tests.config import GLOBAL_CONFIG  # noqa: F401, F824
 
 
 def test():
