@@ -2,6 +2,7 @@ build
 *.[oa]
 *.exe
 *.pyc
+*.pyd
 *.html
 *~
 .*~
