@@ -1,9 +1,11 @@
+# flake8: noqa
+
 import doctest
 import sys
 
 import pytest
 
-from tests.config import GLOBAL_CONFIG  # noqa: F401
+from tests.config import GLOBAL_CONFIG
 
 
 def test():
